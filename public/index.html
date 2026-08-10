@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeerVault AI - Edition 1: Signaling Server & LAN Discovery</title>
+  <!-- Google Fonts: Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Socket.io Client SDK -->
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-globes">
+    <div class="globe globe-1"></div>
+    <div class="globe globe-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>PeerVault <span class="badge-ai">AI</span></h1>
+          <p class="subtitle">LAN P2P E2EE File Transfer Engine</p>
+        </div>
+      </div>
+      <div class="edition-pill">
+        <span class="pulse-dot active"></span>
+        Edition 1: Signaling & LAN Discovery
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="dashboard-grid">
+      <!-- Left Column: Status & Room Controls -->
+      <section class="card status-card">
+        <h2>Connection & Network Status</h2>
+        <div class="status-indicator-box" id="statusBox">
+          <div class="status-icon-glow" id="statusGlow"></div>
+          <div class="status-info">
+            <span class="status-label">Socket Status</span>
+            <span class="status-value" id="socketStatusText">Connecting...</span>
+          </div>
+        </div>
+
+        <div class="network-info-grid">
+          <div class="info-item">
+            <span class="info-label">Your Socket ID</span>
+            <code class="info-code" id="yourSocketId">Not connected</code>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Active Room</span>
+            <code class="info-code highlight" id="activeRoomName">None</code>
+          </div>
+        </div>
+
+        <div class="room-control-section">
+          <h3>Room Management</h3>
+          <div class="input-group">
+            <input type="text" id="peerNameInput" placeholder="Your Codenames (e.g. Cyber-Falcon)" value="">
+          </div>
+          <div class="input-group room-input-row">
+            <input type="text" id="roomIdInput" placeholder="Enter Room Code (e.g. lan-room-1)">
+            <button id="btnJoinRoom" class="btn btn-primary">Join Room</button>
+          </div>
+          <button id="btnGenerateRoom" class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+            </svg>
+            Generate Random Room Code
+          </button>
+        </div>
+      </section>
+
+      <!-- Right Column: Discovered Peers Radar -->
+      <section class="card peers-card">
+        <div class="card-header-row">
+          <h2>Discovered Peers in Room</h2>
+          <span class="peer-count-badge" id="peerCountBadge">0 Peers</span>
+        </div>
+
+        <div class="peers-radar-container">
+          <div class="radar-pulse"></div>
+          <div class="peers-list" id="peersList">
+            <div class="empty-peers">
+              <div class="empty-icon">📡</div>
+              <p>Join or create a room to discover local LAN peers in your network.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Column: Signaling Logs -->
+      <section class="card console-card">
+        <div class="card-header-row">
+          <h2>Signaling Server Console Log</h2>
+          <button id="btnClearLog" class="btn-text">Clear Console</button>
+        </div>
+        <div class="console-box" id="consoleLog">
+          <div class="log-entry system">[SYSTEM] Socket.io client initialized. Waiting for signaling handshake...</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>PeerVault AI &bull; 4th Year CSE Capstone Project &bull; Architecture Milestone: Edition 1</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
