@@ -1,25 +1,25 @@
 /* ============================================================
    PeerVault AI — Complete Edition CSS
-   Dark glassmorphism theme + tabs + progress + badges
+   Pitch Black + Neon Red + Neon Gold + Neon White theme
    ============================================================ */
 
 /* ---- CSS Variables & Design Tokens ---- */
 :root {
-  --bg-dark: #0a0d14;
-  --bg-card: rgba(18, 24, 38, 0.75);
-  --bg-card-hover: rgba(26, 35, 56, 0.85);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-highlight: rgba(0, 240, 255, 0.3);
+  --bg-dark: #000000;
+  --bg-card: rgba(10, 10, 10, 0.85);
+  --bg-card-hover: rgba(20, 20, 20, 0.95);
+  --border-color: rgba(255, 255, 255, 0.07);
+  --border-highlight: rgba(255, 30, 30, 0.4);
 
-  --primary-cyan: #00f0ff;
-  --primary-violet: #8a2be2;
-  --accent-green: #00ff88;
-  --accent-red: #ff3366;
-  --accent-yellow: #ffb703;
+  --primary-cyan: #ff1a1a;        /* neon red  — primary accent  */
+  --primary-violet: #ffd700;      /* neon gold — secondary accent */
+  --accent-green: #ffffff;        /* neon white — success/active  */
+  --accent-red: #ff1a1a;          /* neon red  — errors/warnings  */
+  --accent-yellow: #ffd700;       /* neon gold — info highlights  */
 
-  --text-main: #f0f4fc;
-  --text-muted: #8c9ba5;
-  --text-code: #00e5ff;
+  --text-main: #ffffff;
+  --text-muted: #888888;
+  --text-code: #ffd700;
 
   --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -77,7 +77,7 @@ body {
 
 .globe-3 {
   width: 350px; height: 350px;
-  background: #00ff88;
+  background: #ffd700;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0.06;
@@ -125,7 +125,7 @@ body {
   align-items: center;
   justify-content: center;
   color: #fff;
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 20px rgba(255, 26, 26, 0.4);
   flex-shrink: 0;
 }
 
@@ -170,16 +170,16 @@ body {
 }
 
 .p2p-badge {
-  background: rgba(255, 51, 102, 0.1);
-  border-color: rgba(255, 51, 102, 0.4);
+  background: rgba(255, 26, 26, 0.1);
+  border-color: rgba(255, 26, 26, 0.4);
   color: var(--accent-red);
 }
 
 .p2p-badge.connected {
-  background: rgba(0, 255, 136, 0.1);
-  border-color: rgba(0, 255, 136, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
   color: var(--accent-green);
-  box-shadow: 0 0 12px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
 }
 
 .badge-dot {
@@ -195,17 +195,17 @@ body {
 }
 
 .e2ee-badge {
-  background: rgba(255, 51, 102, 0.08);
-  border-color: rgba(255, 51, 102, 0.3);
+  background: rgba(255, 26, 26, 0.08);
+  border-color: rgba(255, 26, 26, 0.3);
   color: var(--accent-red);
   font-size: 0.8rem;
 }
 
 .e2ee-badge.active {
-  background: rgba(0, 255, 136, 0.1);
-  border-color: rgba(0, 255, 136, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
   color: var(--accent-green);
-  box-shadow: 0 0 12px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
 }
 
 .edition-pill {
@@ -214,7 +214,7 @@ body {
   gap: 8px;
   font-size: 0.82rem;
   font-weight: 500;
-  background: rgba(0, 240, 255, 0.08);
+  background: rgba(255, 26, 26, 0.08);
   border: 1px solid var(--border-highlight);
   color: var(--primary-cyan);
   padding: 7px 14px;
@@ -234,9 +234,9 @@ body {
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 136, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
 }
 
 /* ---- Tab Navigation ---- */
@@ -276,10 +276,10 @@ body {
 }
 
 .tab-btn.active {
-  background: rgba(0, 240, 255, 0.12);
+  background: rgba(255, 26, 26, 0.12);
   color: var(--primary-cyan);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(255, 26, 26, 0.25);
+  box-shadow: 0 0 14px rgba(255, 26, 26, 0.1);
 }
 
 /* ---- Tab Panels ---- */
@@ -440,7 +440,7 @@ input[type="text"], textarea {
 
 input[type="text"]:focus, textarea:focus {
   border-color: var(--primary-cyan);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+  box-shadow: 0 0 10px rgba(255, 26, 26, 0.2);
 }
 
 /* ---- Buttons ---- */
@@ -463,12 +463,12 @@ input[type="text"]:focus, textarea:focus {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary-cyan), #00a8ff);
-  color: #050b14;
+  color: #000000;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 4px 18px rgba(255, 26, 26, 0.4);
 }
 
 .btn-primary:disabled {
@@ -489,14 +489,14 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .btn-danger {
-  background: rgba(255, 51, 102, 0.12);
-  border: 1px solid rgba(255, 51, 102, 0.3);
+  background: rgba(255, 26, 26, 0.12);
+  border: 1px solid rgba(255, 26, 26, 0.3);
   color: var(--accent-red);
 }
 
 .btn-danger:hover {
-  background: rgba(255, 51, 102, 0.22);
-  box-shadow: 0 4px 14px rgba(255, 51, 102, 0.2);
+  background: rgba(255, 26, 26, 0.22);
+  box-shadow: 0 4px 14px rgba(255, 26, 26, 0.2);
 }
 
 .btn-text {
@@ -514,9 +514,9 @@ input[type="text"]:focus, textarea:focus {
 
 /* ---- Peers Radar ---- */
 .peer-count-badge {
-  background: rgba(138, 43, 226, 0.15);
-  border: 1px solid rgba(138, 43, 226, 0.4);
-  color: #c77dff;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: #ffd700;
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.78rem;
@@ -576,7 +576,7 @@ input[type="text"]:focus, textarea:focus {
 
 .peer-item:hover {
   border-color: var(--primary-cyan);
-  background: rgba(0, 240, 255, 0.05);
+  background: rgba(255, 26, 26, 0.05);
 }
 
 .peer-avatar-name { display: flex; align-items: center; gap: 12px; }
@@ -604,9 +604,9 @@ input[type="text"]:focus, textarea:focus {
 
 .peer-ready-tag {
   font-size: 0.72rem;
-  background: rgba(0, 255, 136, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--accent-green);
-  border: 1px solid rgba(0, 255, 136, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 3px 10px;
   border-radius: 10px;
 }
@@ -642,16 +642,16 @@ input[type="text"]:focus, textarea:focus {
 
 .chat-msg.sent {
   align-self: flex-end;
-  background: rgba(0, 240, 255, 0.12);
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: rgba(255, 26, 26, 0.12);
+  border: 1px solid rgba(255, 26, 26, 0.2);
   color: var(--primary-cyan);
 }
 
 .chat-msg.received {
   align-self: flex-start;
-  background: rgba(138, 43, 226, 0.12);
-  border: 1px solid rgba(138, 43, 226, 0.2);
-  color: #c77dff;
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  color: #ffd700;
 }
 
 .chat-msg.system-msg {
@@ -685,19 +685,19 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .drop-zone {
-  border: 2px dashed rgba(0, 240, 255, 0.25);
+  border: 2px dashed rgba(255, 26, 26, 0.25);
   border-radius: var(--radius-md);
   padding: 32px;
   text-align: center;
   cursor: pointer;
   transition: all var(--transition);
-  background: rgba(0, 240, 255, 0.02);
+  background: rgba(255, 26, 26, 0.02);
 }
 
 .drop-zone:hover, .drop-zone.drag-over {
   border-color: var(--primary-cyan);
-  background: rgba(0, 240, 255, 0.07);
-  box-shadow: 0 0 24px rgba(0, 240, 255, 0.1);
+  background: rgba(255, 26, 26, 0.07);
+  box-shadow: 0 0 24px rgba(255, 26, 26, 0.1);
 }
 
 .drop-zone-inner { display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -720,8 +720,8 @@ input[type="text"]:focus, textarea:focus {
 
 /* Selected file info */
 .selected-file-info {
-  background: rgba(0, 240, 255, 0.05);
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: rgba(255, 26, 26, 0.05);
+  border: 1px solid rgba(255, 26, 26, 0.2);
   border-radius: var(--radius-md);
   padding: 14px 18px;
 }
@@ -773,9 +773,9 @@ input[type="text"]:focus, textarea:focus {
 
 .progress-bar-track {
   height: 10px;
-  background: rgba(0, 240, 255, 0.08);
+  background: rgba(255, 26, 26, 0.08);
   border-radius: 10px;
-  border: 1px solid rgba(0, 240, 255, 0.15);
+  border: 1px solid rgba(255, 26, 26, 0.15);
   overflow: hidden;
   position: relative;
 }
@@ -785,7 +785,7 @@ input[type="text"]:focus, textarea:focus {
   background: linear-gradient(90deg, var(--primary-cyan), #00a8ff);
   border-radius: 10px;
   transition: width 0.3s ease;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.5);
   position: relative;
 }
 
@@ -822,20 +822,20 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .xfer-status-badge.sending {
-  background: rgba(0, 240, 255, 0.1);
-  border-color: rgba(0, 240, 255, 0.3);
+  background: rgba(255, 26, 26, 0.1);
+  border-color: rgba(255, 26, 26, 0.3);
   color: var(--primary-cyan);
 }
 
 .xfer-status-badge.receiving {
-  background: rgba(138, 43, 226, 0.1);
-  border-color: rgba(138, 43, 226, 0.3);
-  color: #c77dff;
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+  color: #ffd700;
 }
 
 .xfer-status-badge.done {
-  background: rgba(0, 255, 136, 0.1);
-  border-color: rgba(0, 255, 136, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
   color: var(--accent-green);
 }
 
@@ -855,8 +855,8 @@ input[type="text"]:focus, textarea:focus {
   align-items: center;
   justify-content: space-between;
   padding: 10px 14px;
-  background: rgba(0, 255, 136, 0.05);
-  border: 1px solid rgba(0, 255, 136, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-sm);
   gap: 10px;
 }
@@ -878,16 +878,16 @@ input[type="text"]:focus, textarea:focus {
   align-items: center;
   gap: 16px;
   padding: 18px;
-  background: rgba(255, 51, 102, 0.07);
-  border: 1px solid rgba(255, 51, 102, 0.25);
+  background: rgba(255, 26, 26, 0.07);
+  border: 1px solid rgba(255, 26, 26, 0.25);
   border-radius: var(--radius-md);
   transition: all var(--transition);
 }
 
 .e2ee-status-block.active {
-  background: rgba(0, 255, 136, 0.07);
-  border-color: rgba(0, 255, 136, 0.3);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 .e2ee-icon-big { font-size: 2rem; }
@@ -996,9 +996,9 @@ input[type="text"]:focus, textarea:focus {
 .ai-card { }
 
 .ai-badge {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 240, 255, 0.1));
-  border: 1px solid rgba(138, 43, 226, 0.4);
-  color: #c77dff;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 26, 26, 0.1));
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: #ffd700;
   padding: 4px 12px;
   border-radius: 10px;
   font-size: 0.78rem;
@@ -1038,7 +1038,7 @@ input[type="text"]:focus, textarea:focus {
 
 .ai-result-section {
   background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(0, 240, 255, 0.15);
+  border: 1px solid rgba(255, 26, 26, 0.15);
   border-radius: var(--radius-md);
   padding: 18px;
   display: flex;
@@ -1086,7 +1086,7 @@ input[type="text"]:focus, textarea:focus {
 
 .ai-spinner {
   width: 20px; height: 20px;
-  border: 2px solid rgba(0, 240, 255, 0.2);
+  border: 2px solid rgba(255, 26, 26, 0.2);
   border-top-color: var(--primary-cyan);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -1096,8 +1096,8 @@ input[type="text"]:focus, textarea:focus {
 
 .ai-error {
   padding: 12px 14px;
-  background: rgba(255, 51, 102, 0.08);
-  border: 1px solid rgba(255, 51, 102, 0.25);
+  background: rgba(255, 26, 26, 0.08);
+  border: 1px solid rgba(255, 26, 26, 0.25);
   border-radius: var(--radius-sm);
   color: var(--accent-red);
   font-size: 0.85rem;
@@ -1123,7 +1123,7 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .console-box {
-  background: #050810;
+  background: #000000;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 14px;
@@ -1143,7 +1143,7 @@ input[type="text"]:focus, textarea:focus {
 .log-entry.success { color: var(--accent-green); }
 .log-entry.warn { color: var(--accent-yellow); }
 .log-entry.error { color: var(--accent-red); }
-.log-entry.webrtc { color: #c77dff; }
+.log-entry.webrtc { color: #ffd700; }
 .log-entry.crypto { color: #00ffcc; }
 
 /* ---- Footer ---- */
@@ -1162,7 +1162,7 @@ input[type="text"]:focus, textarea:focus {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:hover { background: rgba(0, 240, 255, 0.3); }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 26, 26, 0.3); }
 
 /* ---- Responsive ---- */
 @media (max-width: 900px) {
