@@ -430,7 +430,9 @@
     logEvent(`Peer left: ${peer.peerName} (${peer.socketId})`, 'warn');
     delete currentPeers[peer.socketId];
     renderPeersList();
+    // Only close P2P if the disconnected peer was our active connected peer
     if (peer.socketId === remotePeerId) {
+      logEvent('Active P2P peer disconnected. Closing connection.', 'warn');
       closePeerConnection();
     }
   });
@@ -794,7 +796,6 @@
     recvChunks = [];
     recvChunkCount = 0;
     recvBytesReceived = 0;
-    recvBytesReceived = 0;
 
     logEvent(`File "${fileName}" (${formatBytes(fileSize)}) saved. Auto-download triggered.`, 'success');
   }
@@ -954,8 +955,8 @@
         return;
       }
 
-      // Throttle if buffer is filling up (backpressure)
-      while (fileChannel.bufferedAmount > 16 * 1024 * 1024) {
+      // Throttle if buffer is filling up (backpressure) — 4MB limit for mobile safety
+      while (fileChannel.bufferedAmount > 4 * 1024 * 1024) {
         await new Promise((r) => setTimeout(r, 50));
       }
 
@@ -1010,7 +1011,7 @@
     peerIds.forEach((id) => {
       const peer = currentPeers[id];
       const letter = (peer.peerName || 'P').charAt(0).toUpperCase();
-      const isConnected = id === remotePeerId && peerConnection && peerConnection.connectionState === 'connected';
+      const isConnected = id === remotePeerId && !!peerConnection && peerConnection.connectionState === 'connected';
 
       const item = document.createElement('div');
       item.className = 'peer-item';
@@ -1091,7 +1092,7 @@
       });
 
       aiMeta.textContent = `${data.inputLength || '?'} chars → ${sentences.length} key sentence${sentences.length !== 1 ? 's' : ''} extracted · ${data.algorithm || 'TF-IDF Extractive'}`;
-      logEvent(`AI summarization complete. ${(data.summary || []).length} sentences extracted.`, 'success');
+      logEvent(`AI summarization complete. ${sentences.length} sentence${sentences.length !== 1 ? 's' : ''} extracted.`, 'success');
     } catch (err) {
       aiLoading.style.display = 'none';
       aiError.style.display = '';
