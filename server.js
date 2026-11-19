@@ -218,20 +218,24 @@ io.on('connection', (socket) => {
 
   // ── Edition 2 — WebRTC Signaling relay ──────────────────────────────────
   socket.on('signal-offer', (data) => {
-    const { targetSocketId, offer } = data;
+    const { targetSocketId, offer, sdp } = data;
+    const payload = offer || sdp; // accept both keys for compatibility
     console.log(`${ts()} [SIGNAL] Offer: ${socket.id} → ${targetSocketId}`);
     io.to(targetSocketId).emit('signal-offer', {
       senderSocketId: socket.id,
-      offer,
+      sdp: payload,
+      offer: payload,
     });
   });
 
   socket.on('signal-answer', (data) => {
-    const { targetSocketId, answer } = data;
+    const { targetSocketId, answer, sdp } = data;
+    const payload = answer || sdp; // accept both keys for compatibility
     console.log(`${ts()} [SIGNAL] Answer: ${socket.id} → ${targetSocketId}`);
     io.to(targetSocketId).emit('signal-answer', {
       senderSocketId: socket.id,
-      answer,
+      sdp: payload,
+      answer: payload,
     });
   });
 

@@ -506,7 +506,9 @@
     if (!remotePeerId) remotePeerId = data.senderSocketId;
 
     await initiatePeerConnection(false);
-    await peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
+    // Accept both 'sdp' and 'offer' keys from server for compatibility
+    const remoteSDP = data.sdp || data.offer;
+    await peerConnection.setRemoteDescription(new RTCSessionDescription(remoteSDP));
     const answer = await peerConnection.createAnswer();
     await peerConnection.setLocalDescription(answer);
     socket.emit('signal-answer', { targetSocketId: data.senderSocketId, sdp: answer });
@@ -516,7 +518,9 @@
   socket.on('signal-answer', async (data) => {
     logEvent(`Received SDP Answer from: ${data.senderSocketId}`, 'webrtc');
     if (peerConnection) {
-      await peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
+      // Accept both 'sdp' and 'answer' keys from server for compatibility
+      const remoteSDP = data.sdp || data.answer;
+      await peerConnection.setRemoteDescription(new RTCSessionDescription(remoteSDP));
     }
   });
 
@@ -636,7 +640,7 @@
 
         if (msg.type === 'file-meta') {
           receivingFile = true;
-          recvMeta = { name: msg.name, size: msg.size, totalChunks: msg.totalChunks };
+          recvMeta = { name: msg.name, size: msg.size, totalChunks: msg.totalChunks, encrypted: msg.encrypted };
           recvChunks = new Array(msg.totalChunks);
           recvChunkCount = 0;
           recvBytesReceived = 0;
@@ -663,7 +667,7 @@
 
         try {
           let chunkData;
-          if (sharedAESKey && keyExchangeDone) {
+          if (sharedAESKey && keyExchangeDone && recvMeta.encrypted) {
             chunkData = await decryptChunk(event.data);
           } else {
             chunkData = event.data;
@@ -701,9 +705,14 @@
   }
 
   async function reassembleFile() {
-    logEvent(`All ${recvMeta.totalChunks} chunks received. Reassembling "${recvMeta.name}"...`, 'success');
+    // Capture meta before resetting state
+    const fileName = recvMeta.name;
+    const fileSize = recvMeta.size;
+    const totalChunks = recvMeta.totalChunks;
+    const wasEncrypted = recvMeta.encrypted;
 
-    // Collect all received arrayBuffers
+    logEvent(`All ${totalChunks} chunks received. Reassembling "${fileName}"...`, 'success');
+
     const validChunks = recvChunks.slice(0, recvChunkCount).filter(Boolean);
     const blob = new Blob(validChunks);
     const url = URL.createObjectURL(blob);
@@ -711,7 +720,7 @@
     // Auto-trigger download
     const a = document.createElement('a');
     a.href = url;
-    a.download = recvMeta.name;
+    a.download = fileName;
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
@@ -723,8 +732,8 @@
     item.className = 'received-file-item';
     item.innerHTML = `
       <span>✅</span>
-      <a href="${url}" download="${recvMeta.name}">${recvMeta.name}</a>
-      <span style="font-size:0.78rem;color:var(--text-muted);font-family:var(--font-mono);">${formatBytes(recvMeta.size)}</span>
+      <a href="${url}" download="${fileName}">${fileName}</a>
+      <span style="font-size:0.78rem;color:var(--text-muted);font-family:var(--font-mono);">${formatBytes(fileSize)} ${wasEncrypted ? '🔒' : ''}</span>
     `;
     receivedFilesList.appendChild(item);
 
@@ -733,12 +742,14 @@
     progressPct.textContent = '100%';
     progressBarFill.style.width = '100%';
 
+    // Now reset state
     receivingFile = false;
     recvMeta = null;
     recvChunks = [];
     recvChunkCount = 0;
+    recvBytesReceived = 0;
 
-    logEvent(`File "${blob.size > 0 ? recvMeta?.name || 'file' : 'file'}" saved. Auto-download triggered.`, 'success');
+    logEvent(`File "${fileName}" (${formatBytes(fileSize)}) saved. Auto-download triggered.`, 'success');
   }
 
   /* =============================================
@@ -816,8 +827,10 @@
       logEvent('File transfer channel not ready. Ensure P2P is connected.', 'warn'); return;
     }
     if (sendingFile) { logEvent('Transfer already in progress.', 'warn'); return; }
+
+    // If key exchange not done yet, send without encryption (plain binary)
     if (!keyExchangeDone) {
-      logEvent('E2EE key exchange not complete yet. Wait for P2P + key exchange.', 'warn'); return;
+      logEvent('⚠️ E2EE key exchange not complete — sending without encryption. Connect P2P first for encrypted transfer.', 'warn');
     }
     sendFile(selectedFile);
   });
@@ -825,18 +838,20 @@
   async function sendFile(file) {
     sendingFile = true;
     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+    const isEncrypted = keyExchangeDone && sharedAESKey;
 
-    logEvent(`Starting file send: "${file.name}" (${formatBytes(file.size)}, ${totalChunks} chunks, E2EE)`, 'info');
+    logEvent(`Starting file send: "${file.name}" (${formatBytes(file.size)}, ${totalChunks} chunks, ${isEncrypted ? 'E2EE ON' : 'No Encryption'})`, 'info');
 
     xferStatusBadge.textContent = 'Sending...';
     xferStatusBadge.className = 'xfer-status-badge sending';
 
-    // Send metadata header
+    // Send metadata header — also tell receiver if encrypted
     fileChannel.send(JSON.stringify({
       type: 'file-meta',
       name: file.name,
       size: file.size,
       totalChunks,
+      encrypted: isEncrypted,
     }));
 
     progressFilename.textContent = file.name;
@@ -855,10 +870,10 @@
       const end = Math.min(start + CHUNK_SIZE, file.size);
       const chunk = arrayBuffer.slice(start, end);
 
-      // Encrypt chunk
+      // Encrypt chunk only if key is ready
       let payload;
       try {
-        payload = await encryptChunk(chunk);
+        payload = isEncrypted ? await encryptChunk(chunk) : chunk;
       } catch (e) {
         logEvent(`Encryption failed on chunk ${i}: ${e.message}`, 'error');
         sendingFile = false;
