@@ -25,12 +25,15 @@
      ============================================= */
   const $ = (id) => document.getElementById(id);
 
-  // Navbar badges
+  // Navbar badges & audio toggle
   const p2pBadge = $('p2pBadge');
   const p2pBadgeText = $('p2pBadgeText');
   const e2eeBadge = $('e2eeBadge');
   const e2eeBadgeIcon = $('e2eeBadgeIcon');
   const e2eeBadgeText = $('e2eeBadgeText');
+  const btnSoundToggle = $('btnSoundToggle');
+  const soundToggleIcon = $('soundToggleIcon');
+  const soundToggleText = $('soundToggleText');
 
   // Connection tab
   const statusGlow = $('statusGlow');
@@ -41,6 +44,7 @@
   const roomIdInput = $('roomIdInput');
   const btnJoinRoom = $('btnJoinRoom');
   const btnLeaveRoom = $('btnLeaveRoom');
+  const btnShareRoom = $('btnShareRoom');
   const btnGenerateRoom = $('btnGenerateRoom');
   const peersListEl = $('peersList');
   const peerCountBadge = $('peerCountBadge');
@@ -82,6 +86,7 @@
   const aiTextInput = $('aiTextInput');
   const aiCharCount = $('aiCharCount');
   const btnSummarize = $('btnSummarize');
+  const btnLoadSample = $('btnLoadSample');
   const btnClearAI = $('btnClearAI');
   const aiResultSection = $('aiResultSection');
   const aiResultBox = $('aiResultBox');
@@ -90,10 +95,108 @@
   const aiLoading = $('aiLoading');
   const aiError = $('aiError');
 
-  // Console tab
+  // Console tab & toasts
   const consoleLog = $('consoleLog');
   const btnClearLog = $('btnClearLog');
   const consoleEntryCount = $('consoleEntryCount');
+  const toastContainer = $('toastContainer');
+
+  /* =============================================
+     WEB AUDIO SYNTHESIZER & SOUND FX
+     ============================================= */
+  let soundEnabled = localStorage.getItem('peervault_sound') !== 'false';
+  let audioCtx = null;
+
+  function updateSoundUI() {
+    if (soundEnabled) {
+      btnSoundToggle.classList.remove('muted');
+      soundToggleIcon.textContent = '🔊';
+      soundToggleText.textContent = 'Audio';
+    } else {
+      btnSoundToggle.classList.add('muted');
+      soundToggleIcon.textContent = '🔇';
+      soundToggleText.textContent = 'Muted';
+    }
+  }
+
+  btnSoundToggle.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem('peervault_sound', soundEnabled ? 'true' : 'false');
+    updateSoundUI();
+    showToast(`Audio cues ${soundEnabled ? 'enabled' : 'muted'}.`, 'info');
+    if (soundEnabled) playTone('click');
+  });
+
+  updateSoundUI();
+
+  function playTone(type = 'click') {
+    if (!soundEnabled) return;
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      const now = audioCtx.currentTime;
+
+      if (type === 'peer') {
+        // High-tech two-tone chime (440Hz -> 880Hz)
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.14);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.36);
+      } else if (type === 'transfer') {
+        // High-tech success chord
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.08);
+        osc.frequency.setValueAtTime(783.99, now + 0.16);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        osc.start(now);
+        osc.stop(now + 0.46);
+      } else {
+        // Crisp subtle click
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, now);
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.06);
+      }
+    } catch (_) {}
+  }
+
+  /* =============================================
+     TOAST NOTIFICATIONS
+     ============================================= */
+  function showToast(message, type = 'gold') {
+    if (!toastContainer) return;
+    const toast = document.createElement('div');
+    toast.className = `toast-item ${type}`;
+
+    let icon = '⚡';
+    if (type === 'success') icon = '✅';
+    if (type === 'red') icon = '⚠️';
+    if (type === 'crypto') icon = '🛡️';
+
+    toast.innerHTML = `<span style="font-size:1.1rem;">${icon}</span><span>${message}</span>`;
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 3800);
+  }
 
   /* =============================================
      LOGGING UTILITY
@@ -266,6 +369,7 @@
   }
 
   function setE2EEActive(active) {
+    const cryptoVerifiedBadge = $('cryptoVerifiedBadge');
     if (active) {
       e2eeBadge.classList.add('active');
       e2eeBadgeIcon.textContent = '🔒';
@@ -274,6 +378,8 @@
       e2eeIconBig.textContent = '🔒';
       e2eeTitleText.textContent = '🔒 E2EE Active';
       e2eeDescText.textContent = 'AES-GCM-256 encryption is active. All file chunks are encrypted end-to-end.';
+      if (cryptoVerifiedBadge) cryptoVerifiedBadge.style.display = 'flex';
+      showToast('E2EE Active: AES-GCM-256 session established', 'crypto');
     } else {
       e2eeBadge.classList.remove('active');
       e2eeBadgeIcon.textContent = '🔓';
@@ -282,6 +388,7 @@
       e2eeIconBig.textContent = '🔓';
       e2eeTitleText.textContent = 'E2EE Not Active';
       e2eeDescText.textContent = 'Establish a P2P connection to enable AES-GCM-256 encryption.';
+      if (cryptoVerifiedBadge) cryptoVerifiedBadge.style.display = 'none';
     }
   }
 
@@ -381,6 +488,7 @@
     if (activeRoom) {
       socket.emit('leave-room', { roomId: activeRoom });
       logEvent(`Left room "${activeRoom}".`, 'warn');
+      showToast(`Left room "${activeRoom}"`, 'info');
     }
     activeRoom = null;
     activeRoomNameEl.textContent = 'None';
@@ -388,14 +496,32 @@
     renderPeersList();
     closePeerConnection();
     btnLeaveRoom.style.display = 'none';
+    btnShareRoom.style.display = 'none';
     btnJoinRoom.style.display = '';
     roomIdInput.value = '';
+  });
+
+  btnShareRoom.addEventListener('click', () => {
+    if (!activeRoom) return;
+    const shareUrl = `${window.location.origin}${window.location.pathname}?room=${encodeURIComponent(activeRoom)}`;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showToast('📋 Room link copied to clipboard!', 'success');
+      playTone('click');
+      btnShareRoom.textContent = '✅ Copied!';
+      setTimeout(() => {
+        btnShareRoom.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Copy Invite Link`;
+      }, 2000);
+    }).catch(() => {
+      prompt('Copy this room URL:', shareUrl);
+    });
   });
 
   btnGenerateRoom.addEventListener('click', () => {
     const r = 'pvault-' + Math.random().toString(36).substring(2, 8);
     roomIdInput.value = r;
     logEvent(`Generated room code: ${r}`, 'info');
+    showToast(`Generated code: ${r}`, 'info');
+    playTone('click');
   });
 
   socket.on('room-joined', (data) => {
@@ -403,6 +529,7 @@
     activeRoom = roomId;
     activeRoomNameEl.textContent = roomId;
     logEvent(`Joined room "${roomId}". Peers already here: ${peers.length}`, 'success');
+    showToast(`Connected to room: ${roomId}`, 'gold');
 
     currentPeers = {};
     peers.forEach((p) => { currentPeers[p.socketId] = p; });
@@ -410,6 +537,7 @@
 
     btnJoinRoom.style.display = 'none';
     btnLeaveRoom.style.display = '';
+    btnShareRoom.style.display = '';
 
     // If there's already a peer in room, initiate WebRTC as offerer
     if (peers.length > 0) {
@@ -421,6 +549,8 @@
 
   socket.on('user-joined', (peer) => {
     logEvent(`Peer joined: ${peer.peerName} (${peer.socketId})`, 'success');
+    showToast(`Peer discovered: ${peer.peerName}`, 'success');
+    playTone('peer');
     currentPeers[peer.socketId] = peer;
     renderPeersList();
 
@@ -433,6 +563,7 @@
 
   socket.on('user-disconnected', (peer) => {
     logEvent(`Peer left: ${peer.peerName} (${peer.socketId})`, 'warn');
+    showToast(`Peer disconnected: ${peer.peerName}`, 'red');
     delete currentPeers[peer.socketId];
     renderPeersList();
     // Only close P2P if the disconnected peer was our active connected peer
@@ -792,6 +923,8 @@
 
     xferStatusBadge.textContent = 'Received ✓';
     xferStatusBadge.className = 'xfer-status-badge done';
+    showToast(`File received: ${fileName} (${formatBytes(fileSize)})`, 'success');
+    playTone('transfer');
     progressPct.textContent = '100%';
     progressBarFill.style.width = '100%';
 
@@ -993,6 +1126,8 @@
 
     const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
     logEvent(`File "${file.name}" sent in ${totalTime}s. All ${totalChunks} chunks ${isEncrypted ? 'encrypted &' : ''} transferred.`, 'success');
+    showToast(`File "${file.name}" sent successfully (${totalTime}s)!`, 'success');
+    playTone('transfer');
   }
 
   /* =============================================
@@ -1118,10 +1253,32 @@
     });
   });
 
+  if (btnLoadSample) {
+    btnLoadSample.addEventListener('click', () => {
+      const sampleText = `Decentralized peer-to-peer file transmission systems eliminate single points of failure and surveillance risks associated with centralized cloud storage. By leveraging WebRTC RTCDataChannel protocols over SCTP and UDP, direct browser-to-browser pipes achieve maximum local network throughput without routing data through third-party intermediate relays. To ensure absolute data confidentiality, cryptographic key exchange is conducted via Elliptic Curve Diffie-Hellman (ECDH) on the NIST P-256 curve, deriving an ephemeral 256-bit AES-GCM session key independently on both client terminals. Binary files are fragmented into 64-kilobyte chunks, where each chunk is authenticated and encrypted using a cryptographically random 12-byte initialization vector to prevent replay attacks and side-channel leakage. Furthermore, adaptive backpressure flow control dynamically throttles transmission according to client buffer capacity, preventing browser memory exhaustion during gigabyte-scale transfers. In conclusion, the PeerVault AI architecture successfully guarantees zero-knowledge end-to-end encryption, high-throughput local network synchronization, and resilient NAT traversal.`;
+      aiTextInput.value = sampleText;
+      aiCharCount.textContent = `${sampleText.length} characters`;
+      showToast('Sample technical abstract loaded!', 'info');
+      playTone('click');
+    });
+  }
+
   /* =============================================
-     INITIAL RENDER
+     INITIAL RENDER & URL INVITE DETECTION
      ============================================= */
   renderPeersList();
   logEvent('PeerVault AI — All 8 Editions ready. Generating ECDH keys...', 'system');
+
+  // Auto-fill and auto-join if invite link was clicked (?room=...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const queryRoom = urlParams.get('room');
+  if (queryRoom) {
+    roomIdInput.value = queryRoom;
+    logEvent(`URL invite detected for room: "${queryRoom}". Joining automatically...`, 'info');
+    showToast(`Invite detected for room: ${queryRoom}`, 'gold');
+    setTimeout(() => {
+      joinRoom();
+    }, 700);
+  }
 
 })();

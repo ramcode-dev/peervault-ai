@@ -598,6 +598,46 @@ input[type="text"]:focus, textarea:focus {
   box-shadow: 0 4px 16px rgba(255, 42, 75, 0.3);
 }
 
+.btn-gold {
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #fbbf24;
+}
+
+.btn-gold:hover {
+  background: rgba(251, 191, 36, 0.22);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+  transform: translateY(-1px);
+}
+
+.sound-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.sound-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.sound-toggle-btn.muted {
+  opacity: 0.6;
+  border-style: dashed;
+}
+
 .btn-text {
   background: none;
   border: none;
@@ -626,30 +666,81 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .peers-radar-container {
-  min-height: 220px;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   border-radius: var(--radius-md);
   background: var(--bg-well);
   padding: 16px;
   border: 1px solid var(--border-subtle);
+  overflow: hidden;
 }
 
-.radar-pulse {
-  position: absolute;
-  top: 14px; right: 14px;
-  width: 9px; height: 9px;
+/* Cyber Radar Visualizer */
+.radar-scope {
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: var(--neon-red);
-  box-shadow: 0 0 10px var(--neon-red);
-  animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  margin: 10px auto 16px auto;
+  position: relative;
+  background: radial-gradient(circle, rgba(255, 42, 75, 0.05) 0%, rgba(0, 0, 0, 0.9) 70%);
+  border: 1px solid rgba(255, 42, 75, 0.25);
+  box-shadow: 0 0 24px rgba(255, 42, 75, 0.15), inset 0 0 20px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-@keyframes radarPing {
-  0% { transform: scale(1); opacity: 0.9; }
-  100% { transform: scale(3.5); opacity: 0; }
+.radar-ring {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(251, 191, 36, 0.2);
+  pointer-events: none;
+}
+
+.radar-ring.ring-1 { width: 33%; height: 33%; }
+.radar-ring.ring-2 { width: 66%; height: 66%; border-style: solid; border-color: rgba(255, 255, 255, 0.08); }
+.radar-ring.ring-3 { width: 100%; height: 100%; border-color: rgba(255, 42, 75, 0.3); }
+
+.radar-crosshair-h {
+  position: absolute;
+  width: 100%; height: 1px;
+  top: 50%; left: 0;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.radar-crosshair-v {
+  position: absolute;
+  height: 100%; width: 1px;
+  left: 50%; top: 0;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.radar-beam {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(255, 42, 75, 0.45) 360deg);
+  animation: radarBeamRotate 3.2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes radarBeamRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-center-blip {
+  position: absolute;
+  width: 6px; height: 6px;
+  background: var(--neon-gold);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px var(--neon-gold);
 }
 
 .empty-peers {
@@ -1298,6 +1389,105 @@ input[type="text"]:focus, textarea:focus {
   padding: 14px 0;
   border-top: 1px solid var(--border-subtle);
   letter-spacing: 0.02em;
+}
+
+/* ---- Micro Metrics & Badges ---- */
+.transfer-micro-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.micro-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--bg-well);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.chip-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--neon-gold);
+  box-shadow: 0 0 6px var(--neon-gold);
+}
+
+.crypto-verified-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  color: var(--neon-gold);
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.verified-icon {
+  font-size: 1.1rem;
+}
+
+/* ---- Floating Toast Notifications ---- */
+.toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  max-width: 360px;
+}
+
+.toast-item {
+  background: rgba(14, 14, 18, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 4px solid var(--neon-gold);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(251, 191, 36, 0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-family: var(--font-main);
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+  animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1), toastFadeOut 0.4s ease 3.2s forwards;
+}
+
+.toast-item.success {
+  border-left-color: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.toast-item.red {
+  border-left-color: var(--neon-red);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 42, 75, 0.25);
+}
+
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(40px) scale(0.95); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes toastFadeOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(40px); }
 }
 
 /* ---- Sleek Custom Scrollbar ---- */
