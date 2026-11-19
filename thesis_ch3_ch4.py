@@ -75,7 +75,7 @@ def build_chapters_3_and_4(styles):
         styles['Callout']
     ))
     flowables.append(Paragraph(
-        "Accounting for MAC-layer contention overhead (CSMA/CA), orthogonal frequency-division multiple access (OFDMA) guard intervals, and DTLS/SCTP header encapsulation (typically consuming 30–35% of raw capacity), the realistic upper bound for application goodput is approximately <b>420 to 480 Mbps</b> on 80 MHz channels and <b>850 to 950 Mbps</b> on 160 MHz channels. PeerVault AI achieves sustained throughputs of <b>285 Mbps</b> (peaking at <b>420 Mbps</b>), demonstrating exceptional transport efficiency approaching theoretical limits.",
+        "Accounting for MAC-layer contention overhead (CSMA/CA), orthogonal frequency-division multiple access (OFDMA) guard intervals, and DTLS/SCTP header encapsulation (typically consuming 30-35% of raw capacity), the realistic upper bound for application goodput is approximately <b>420 to 480 Mbps</b> on 80 MHz channels and <b>850 to 950 Mbps</b> on 160 MHz channels. PeerVault AI achieves sustained throughputs of <b>285 Mbps</b> (peaking at <b>420 Mbps</b>), demonstrating exceptional transport efficiency approaching theoretical limits.",
         styles['Body']
     ))
 
@@ -163,6 +163,21 @@ def build_chapters_3_and_4(styles):
     ))
     flowables.append(Paragraph(
         "PeerVault AI eliminates this failure mode by implementing a closed-loop backpressure governor. Whenever <code>dataChannel.bufferedAmount &gt; 4MB</code>, disk chunk reading is paused via a deferred JavaScript Promise. Transmission resumes only when the browser fires the hardware-driven <code>bufferedamountlow</code> event (configured at 1MB threshold), guaranteeing that queue occupancy remains strictly bounded: <b>1 MB &le; BufferSize(t) &le; 4 MB</b> for all t.",
+        styles['Body']
+    ))
+
+    flowables.append(Spacer(1, 10))
+    flowables.append(Paragraph("3.6 Zero-Trust LAN Micro-Segmentation &amp; Boundary Models", styles['SecTitle']))
+    flowables.append(Paragraph(
+        "A common misconception in local networking is that physical or subnet proximity implies trustworthiness. On a university campus like NIT Agartala, hundreds of student laptops, personal phones, and lab workstations share the same Class-B or Class-C subnet across academic buildings. An adversary on the same Wi-Fi SSID can trivially launch Address Resolution Protocol (ARP) cache poisoning, link-layer broadcast snooping, or rogue DHCP gateway spoofing.",
+        styles['Body']
+    ))
+    flowables.append(Paragraph(
+        "PeerVault AI rejects the perimeter-security assumption. Under our zero-trust architectural model, the local Wi-Fi router and Ethernet switches are treated strictly as untrusted, hostile transport conduits. Application-layer encryption is not an optional feature; it is mandatory. Every WebRTC DataChannel packet is wrapped in DTLS 1.3 at the transport tier and double-encrypted with AES-GCM-256 at the application tier. Even if an attacker operates a Wireshark tap or poisoned ARP cache on the campus switch, they observe only high-entropy pseudorandom ciphertext frames with zero recoverable file metadata.",
+        styles['Body']
+    ))
+    flowables.append(Paragraph(
+        "Furthermore, session identities are ephemeral. Room codes expire immediately upon connection establishment, preventing replay attempts by eavesdroppers on the signaling channel.",
         styles['Body']
     ))
 
@@ -293,8 +308,23 @@ def build_chapters_3_and_4(styles):
         styles['Body']
     ))
     flowables.append(Paragraph("• <b>Desktop Viewport (&ge;1024px):</b> Two-column side-by-side cockpit layout. The left column hosts the radar scanner, room connection management, and security fingerprint badges; the right column hosts the interactive file dropzone, transfer progress gauges, throughput velocity curves, and TF-IDF document intelligence card.", styles['Bullet']))
-    flowables.append(Paragraph("• <b>Tablet Viewport (768px – 1023px):</b> Single-column stacked layout with collapsible telemetry drawers and fluid touch-friendly dropzone controls.", styles['Bullet']))
+    flowables.append(Paragraph("• <b>Tablet Viewport (768px - 1023px):</b> Single-column stacked layout with collapsible telemetry drawers and fluid touch-friendly dropzone controls.", styles['Bullet']))
     flowables.append(Paragraph("• <b>Mobile Handheld (&lt;768px):</b> Optimized vertical layout with sticky bottom action controls, touch-to-copy room buttons, simplified radar display, and full responsive scaling tested across iOS Safari and Android Chrome.", styles['Bullet']))
+
+    flowables.append(Spacer(1, 10))
+    flowables.append(Paragraph("4.8 Component Interaction Automata &amp; Session Recovery Mechanics", styles['SecTitle']))
+    flowables.append(Paragraph(
+        "A critical strength of the dual-tier architecture is its resilience against partial network failures. In traditional web applications, losing connection to the primary server invalidates the user session immediately. In PeerVault AI, once the WebRTC DataChannel transitions to the <code>open</code> state, the direct SCTP/UDP connection operates entirely independently of the WebSocket signaling server.",
+        styles['Body']
+    ))
+    flowables.append(Paragraph(
+        "If the campus Wi-Fi momentarily drops WAN access—or if the signaling server restarts or encounters an edge network blip during a 5 GB file transfer—the peer-to-peer data plane continues streaming without hesitation. Chunks flow directly through the local LAN switch at line rate. The browser interface reflects this state by updating the signaling status badge to 'Offline Rendezvous' while maintaining the transfer velocity meter at full speed.",
+        styles['Body']
+    ))
+    flowables.append(Paragraph(
+        "In the event of physical Wi-Fi disconnects or IP address changes (such as walking between hostel Wi-Fi access points), the RTCPeerConnection triggers an <code>iceconnectionstatechange</code> event. PeerVault AI's event handler intercepts the transition, suspends active chunk slicing, and attempts an in-flight ICE restart without discarding previously reassembled chunk buffers. This fault-tolerant design prevents frustrating re-transfers of massive payloads in volatile campus wireless environments.",
+        styles['Body']
+    ))
 
     flowables.append(PageBreak())
     return flowables

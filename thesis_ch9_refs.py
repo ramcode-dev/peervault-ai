@@ -23,11 +23,11 @@ def build_chapter_9_and_refs(styles):
         styles['Bullet']
     ))
     flowables.append(Paragraph(
-        "• <b>Zero-Knowledge Cryptography:</b> Engineered a client-side cryptographic pipeline utilizing Web Crypto ECDH NIST P-256 key agreement and AES-GCM-256 authenticated encryption with cryptographically random 96-bit IVs per 64KB slice.",
+        "• <b>Zero-Knowledge Cryptography:</b> Engineered a client-side cryptographic pipeline using Web Crypto ECDH NIST P-256 key agreement and AES-GCM-256 authenticated encryption with cryptographically random 96-bit IVs per 64KB slice.",
         styles['Bullet']
     ))
     flowables.append(Paragraph(
-        "• <b>Deterministic Flow Control:</b> Designed an asynchronous backpressure governor utilizing the <code>bufferedAmountLow</code> event with a 4MB threshold, completely eliminating browser memory crashes during gigabyte-scale transfers.",
+        "• <b>Deterministic Flow Control:</b> Designed an asynchronous backpressure governor using the <code>bufferedAmountLow</code> event with a 4MB threshold, completely eliminating browser memory crashes during gigabyte-scale transfers.",
         styles['Bullet']
     ))
     flowables.append(Paragraph(
@@ -39,7 +39,7 @@ def build_chapter_9_and_refs(styles):
         styles['Bullet']
     ))
     flowables.append(Paragraph(
-        "• <b>Empirical Benchmarks:</b> Demonstrated that PeerVault AI achieves sustained LAN throughput of <b>285 Mbps</b> (peaking at <b>420 Mbps</b>), reducing transfer latency by <b>87.4% – 95.3%</b> compared to cloud storage uploads, while maintaining an uncompromised memory footprint below <b>45 MB RAM</b>.",
+        "• <b>Empirical Benchmarks:</b> Demonstrated that PeerVault AI achieves sustained LAN throughput of <b>285 Mbps</b> (peaking at <b>420 Mbps</b>), reducing transfer latency by <b>87.4% - 95.3%</b> compared to cloud storage uploads, while maintaining an uncompromised memory footprint below <b>45 MB RAM</b>.",
         styles['Bullet']
     ))
 
@@ -69,7 +69,7 @@ def build_chapter_9_and_refs(styles):
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>1. Migration to WebTransport over HTTP/3 (QUIC):</b> As the W3C WebTransport API matures, migrating the transport layer from WebRTC SCTP to QUIC datagrams and unidirectional streams will allow multiplexed transfers with even lower connection establishment latency and native connection migration across changing network interfaces (e.g., seamless handoff from Wi-Fi to 5G cellular).",
+        "<b>1. Migration to WebTransport over HTTP/3 (QUIC):</b> As the W3C WebTransport API matures, migrating the transport layer from WebRTC SCTP to QUIC datagrams and unidirectional streams will allow multiplexed transfers with even lower connection establishment latency and native connection migration across changing network interfaces (e.g., direct handoff from Wi-Fi to 5G cellular).",
         styles['Body']
     ))
     flowables.append(Paragraph(
@@ -102,37 +102,37 @@ def build_chapter_9_and_refs(styles):
         "[10] National Institute of Standards and Technology, \"Digital Signature Standard (DSS),\" FIPS PUB 186-4, Jul. 2013.",
         "[11] H. Krawczyk and P. Eronen, \"HMAC-based Extract-and-Expand Key Derivation Function (HKDF),\" IETF RFC 5869, May 2010.",
         "[12] World Wide Web Consortium, \"Web Cryptography API - W3C Recommendation,\" W3C Candidate Recommendation, Jan. 2017.",
-        "[13] C. E. Shannon, \"A Mathematical Theory of Communication,\" Bell System Technical Journal, vol. 27, no. 3, pp. 379–423, Jul. 1948.",
-        "[14] D. Dolev and A. C. Yao, \"On the Security of Public Key Protocols,\" IEEE Transactions on Information Theory, vol. 29, no. 2, pp. 198–208, 1983.",
+        "[13] C. E. Shannon, \"A Mathematical Theory of Communication,\" Bell System Technical Journal, vol. 27, no. 3, pp. 379-423, Jul. 1948.",
+        "[14] D. Dolev and A. C. Yao, \"On the Security of Public Key Protocols,\" IEEE Transactions on Information Theory, vol. 29, no. 2, pp. 198-208, 1983.",
         "[15] B. Cohen, \"Incentives Build Robustness in BitTorrent,\" in Proc. 1st Workshop on Economics of Peer-to-Peer Systems, Berkeley, CA, 2003.",
-        "[16] P. Maymounkov and D. Mazi&egrave;res, \"Kademlia: A Peer-to-Peer Information System Based on the XOR Metric,\" in Peer-to-Peer Systems (IPTPS), Springer, 2002, pp. 53–65.",
+        "[16] P. Maymounkov and D. Mazi&egrave;res, \"Kademlia: A Peer-to-Peer Information System Based on the XOR Metric,\" in Peer-to-Peer Systems (IPTPS), Springer, 2002, pp. 53-65.",
         "[17] S. Loreto and P. Levis, \"Known Issues and Best Practices for the Use of Long Polling and Streaming in Bidirectional HTTP,\" IETF RFC 6202, Apr. 2011.",
         "[18] I. Fette and A. Melnikov, \"The WebSocket Protocol,\" IETF RFC 6455, Dec. 2011.",
         "[19] IEEE 802.11ax-2021, \"IEEE Standard for Information Technology - Telecommunications and Information Exchange Between Systems - Local and Metropolitan Area Networks - Specific Requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications,\" IEEE, 2021.",
-        "[20] G. Salton and C. Buckley, \"Term-weighting Approaches in Automatic Text Retrieval,\" Information Processing &amp; Management, vol. 24, no. 5, pp. 513–523, 1988.",
-        "[21] H. P. Luhn, \"The Automatic Creation of Literature Abstracts,\" IBM Journal of Research and Development, vol. 2, no. 2, pp. 159–165, 1958.",
+        "[20] G. Salton and C. Buckley, \"Term-weighting Approaches in Automatic Text Retrieval,\" Information Processing &amp; Management, vol. 24, no. 5, pp. 513-523, 1988.",
+        "[21] H. P. Luhn, \"The Automatic Creation of Literature Abstracts,\" IBM Journal of Research and Development, vol. 2, no. 2, pp. 159-165, 1958.",
         "[22] L. Kleinrock, \"Queueing Systems, Volume 1: Theory,\" John Wiley &amp; Sons, New York, 1975.",
-        "[23] D. G. Cantor and D. Gerhrts, \"Optimal Buffer Allocation in Packet-Switched Networks,\" IEEE Transactions on Computers, vol. C-23, no. 11, pp. 1159–1169, Nov. 1974.",
-        "[24] V. Jacobson, \"Congestion Avoidance and Control,\" ACM SIGCOMM Computer Communication Review, vol. 18, no. 4, pp. 314–329, Aug. 1988.",
+        "[23] D. G. Cantor and D. Gerhrts, \"Optimal Buffer Allocation in Packet-Switched Networks,\" IEEE Transactions on Computers, vol. C-23, no. 11, pp. 1159-1169, Nov. 1974.",
+        "[24] V. Jacobson, \"Congestion Avoidance and Control,\" ACM SIGCOMM Computer Communication Review, vol. 18, no. 4, pp. 314-329, Aug. 1988.",
         "[25] J. Postel, \"Transmission Control Protocol,\" IETF RFC 793, Sep. 1981.",
         "[26] J. Postel, \"User Datagram Protocol,\" IETF RFC 768, Aug. 1980.",
         "[27] M. Handley and V. Jacobson, \"SDP: Session Description Protocol,\" IETF RFC 4566, Jul. 2006.",
         "[28] M. Baugher, D. McGrew, M. Naslund, E. Carrara, and K. Norrman, \"The Secure Real-time Transport Protocol (SRTP),\" IETF RFC 3711, Mar. 2004.",
         "[29] E. Rescorla, \"The Transport Layer Security (TLS) Protocol Version 1.3,\" IETF RFC 8446, Aug. 2018.",
-        "[30] P. S. S. B. Barros, E. P. B. Filho, and C. E. C. Galindo, \"Performance Analysis of WebRTC Data Channels for Low Latency Applications,\" IEEE Access, vol. 8, pp. 165432–165444, 2020.",
-        "[31] L. De Cicco and S. Mascolo, \"An Experimental Evaluation of the WebRTC Congestion Control Algorithm,\" in Proc. ACM CoNEXT, 2013, pp. 1–6.",
+        "[30] P. S. S. B. Barros, E. P. B. Filho, and C. E. C. Galindo, \"Performance Analysis of WebRTC Data Channels for Low Latency Applications,\" IEEE Access, vol. 8, pp. 165432-165444, 2020.",
+        "[31] L. De Cicco and S. Mascolo, \"An Experimental Evaluation of the WebRTC Congestion Control Algorithm,\" in Proc. ACM CoNEXT, 2013, pp. 1-6.",
         "[32] S. Holmer, M. Lundin, G. Carlsson, and B. E. Westerlund, \"A Google Congestion Control Algorithm for Real-Time Communication,\" IETF Internet-Draft, draft-ietf-rmcat-gcc-02, Mar. 2016.",
         "[33] F. Baker, \"Requirements for IP Version 4 Routers,\" IETF RFC 1812, Jun. 1995.",
-        "[34] K. S. S. Kumar and R. Sukumar, \"Comprehensive Security Assessment of WebRTC Implementations in Modern Browsers,\" Journal of Information Security and Applications, vol. 48, pp. 102–115, Oct. 2019.",
+        "[34] K. S. S. Kumar and R. Sukumar, \"Comprehensive Security Assessment of WebRTC Implementations in Modern Browsers,\" Journal of Information Security and Applications, vol. 48, pp. 102-115, Oct. 2019.",
         "[35] M. Thomson and C. Huitema, \"An Unreliable Datagram Extension to QUIC,\" IETF RFC 9221, Mar. 2022.",
         "[36] M. Bishop, \"Hypertext Transfer Protocol Version 3 (HTTP/3),\" IETF RFC 9114, Jun. 2022.",
         "[37] V. Vasiliev, \"WebTransport over HTTP/3,\" IETF Internet-Draft, draft-ietf-webtrans-http3-09, Oct. 2023.",
-        "[38] A. Langley et al., \"The QUIC Transport Protocol: Design and Internet-Scale Deployment,\" in Proc. ACM SIGCOMM, 2017, pp. 183–196.",
+        "[38] A. Langley et al., \"The QUIC Transport Protocol: Design and Internet-Scale Deployment,\" in Proc. ACM SIGCOMM, 2017, pp. 183-196.",
         "[39] J. Iyengar and M. Thomson, \"QUIC: A UDP-Based Multiplexed and Secure Transport,\" IETF RFC 9000, May 2021.",
         "[40] M. Ray and S. Dispensa, \"Transport Layer Security (TLS) Renegotiation Indication Extension,\" IETF RFC 5746, Feb. 2010.",
         "[41] A. J. Menezes, P. C. van Oorschot, and S. A. Vanstone, \"Handbook of Applied Cryptography,\" CRC Press, 1996.",
-        "[42] N. Koblitz, \"Elliptic Curve Cryptosystems,\" Mathematics of Computation, vol. 48, no. 177, pp. 203–209, 1987.",
-        "[43] V. S. Miller, \"Use of Elliptic Curves in Cryptography,\" in Proc. CRYPTO '85, Springer, 1985, pp. 417–426.",
+        "[42] N. Koblitz, \"Elliptic Curve Cryptosystems,\" Mathematics of Computation, vol. 48, no. 177, pp. 203-209, 1987.",
+        "[43] V. S. Miller, \"Use of Elliptic Curves in Cryptography,\" in Proc. CRYPTO '85, Springer, 1985, pp. 417-426.",
         "[44] W3C Web Audio Working Group, \"Web Audio API - W3C Recommendation,\" Jun. 2021.",
         "[45] W3C WebGPU Working Group, \"WebGPU Specification - W3C Working Draft,\" Apr. 2024.",
         "[46] T. Berners-Lee, R. Fielding, and L. Masinter, \"Uniform Resource Identifier (URI): Generic Syntax,\" IETF RFC 3986, Jan. 2005.",

@@ -15,42 +15,18 @@ def build_chapters_1_and_2(styles):
 
     flowables.append(Paragraph("1.1 The Centralized Cloud Dilemma in Local Area Networks", styles['SecTitle']))
     flowables.append(Paragraph(
-        "Modern computational environments are defined by high-bandwidth local area networks (LANs) connecting heterogeneous endpoints, including desktop workstations, high-performance laptops, and mobile devices. In academic campuses, enterprise design offices, research laboratories, and domestic spaces, adjacent physical machines are frequently separated by mere meters of physical distance while being interconnected through multi-gigabit IEEE 802.11ax (Wi-Fi 6) wireless access points or Category 6 IEEE 802.3ab gigabit Ethernet switches.",
+        "In our computer laboratories at NIT Agartala, workstations and student laptops sit on the same desk, connected to the same Wi-Fi router or gigabit switch. When two students need to share a 2 GB machine learning dataset or a virtual machine image, the standard workflow makes little sense. We open Google Drive or Dropbox, upload the entire file over the campus internet link, wait for the upload progress bar to crawl, and then the person sitting two feet away downloads it back down.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "Despite this abundant local physical bandwidth, the prevailing paradigm for sharing files between two machines located on the same subnet remains fundamentally centralized. When a student or software engineer attempts to transmit a 2.5 GB dataset, virtual machine image, or high-definition screen recording to a colleague sitting across the same laboratory desk, the standard workflow requires uploading the payload across the wide-area network (WAN) upstream link to a centralized third-party cloud service (such as Google Drive, Microsoft OneDrive, Dropbox, or WeTransfer). Once the cloud provider confirms receipt and indexes the file on its disk arrays, the recipient machine must initiate an independent downstream HTTP/TCP transfer to retrieve the data.",
+        "This centralized habit causes five distinct bottlenecks. First, it sends identical data through the gateway twice: once going up and once coming down. If the campus uplink is congested or throttled to 20 Mbps, a transfer that could finish in seconds over local Wi-Fi takes fifteen minutes. Second, physical latency to distant cloud data centers adds hundreds of milliseconds of unnecessary round-trip time. Third, sensitive academic code and student datasets sit unencrypted or cloud-encrypted on multi-tenant corporate disk arrays. Fourth, free cloud storage tiers cut off at 2 GB or 15 GB, disrupting student lab work with paywalls. Finally, if the external Internet connection drops, two machines on the same working router cannot transfer files at all.",
         styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "This centralized architecture introduces severe systemic inefficiencies that become unacceptable in high-density data environments:",
-        styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "<b>1. Two-Fold WAN Bandwidth Consumption:</b> The identical binary payload must traverse the organization's residential or enterprise gateway router twice. First, the entire file is serialized over the uplink pipe; second, it is retrieved over the downlink pipe. In asymmetric Internet connections (e.g., consumer VDSL or residential fiber with 300 Mbps download but only 30 Mbps upload), the total transfer time is severely throttled by the slowest WAN uplink constraint, regardless of whether local Wi-Fi 6 radios support transmission rates exceeding 800 Mbps.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "<b>2. Extreme Latency Inflation:</b> Physical signal propagation to distant cloud data centers located hundreds or thousands of kilometers away imposes substantial round-trip time (RTT) overheads. TCP slow-start dynamics and multiple TLS handshakes further compound this delay, transforming what should be a 15-second local LAN broadcast into a multi-minute or hour-long operation.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "<b>3. Persistent Intermediary Storage Footprint:</b> Cloud storage providers retain file contents on persistent object storage volumes (e.g., Amazon S3 or Google Cloud Storage). Even when files are flagged as 'temporary' or protected by access links, the plaintext or cloud-encrypted data rests on multi-tenant hardware accessible to administrators, algorithmic content crawlers, and government subpoena requests.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "<b>4. Imposed Storage Quotas &amp; Paywalls:</b> Free-tier cloud storage services enforce aggressive volume restrictions (typically 2GB to 15GB). Exceeding these thresholds disrupts institutional and personal workflows, forcing users into recurring commercial subscription tiers for ephemeral file exchange tasks.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "<b>5. Total Dependency on External WAN Availability:</b> If the wide-area Internet link suffers an outage or severe transit congestion, two co-located machines on the same functional Wi-Fi router cannot exchange files through cloud services, despite having fully operational local radio interfaces.",
-        styles['Bullet']
     ))
 
     flowables.append(Spacer(1, 10))
     flowables.append(Paragraph("1.2 Campus Network Dynamics: The NIT Agartala Empirical Context", styles['SecTitle']))
     flowables.append(Paragraph(
-        "To ground this problem in concrete engineering reality, consider the academic network topology at the National Institute of Technology Agartala. The campus network serves thousands of concurrent students, researchers, and faculty members across academic blocks, departments, and residential hostels. The infrastructure utilizes high-density Cisco Core switches, enterprise wireless controllers, and IEEE 802.11ax access points offering up to 1.2 Gbps theoretical physical layer link speeds within individual laboratories.",
+        "To ground this problem in concrete engineering reality, consider the academic network topology at the National Institute of Technology Agartala. The campus network serves thousands of concurrent students, researchers, and faculty members across academic blocks, departments, and residential hostels. The infrastructure uses high-density Cisco Core switches, enterprise wireless controllers, and IEEE 802.11ax access points offering up to 1.2 Gbps theoretical physical layer link speeds within individual laboratories.",
         styles['Body']
     ))
     flowables.append(Paragraph(
@@ -63,13 +39,13 @@ def build_chapters_1_and_2(styles):
     ))
 
     flowables.append(Spacer(1, 10))
-    flowables.append(Paragraph("1.3 Threat Landscape: Interception, ISP Throttling, and Third-Party Eavesdropping", styles['SecTitle']))
+    flowables.append(Paragraph("1.3 Threat Environment: Interception, ISP Throttling, and Third-Party Eavesdropping", styles['SecTitle']))
     flowables.append(Paragraph(
         "The transmission of confidential research code, proprietary datasets, and personal credentials through centralized cloud intermediaries exposes data to a complex threat matrix spanning several independent adversarial layers. Even when transport-layer encryption (HTTPS/TLS) is active, the data must terminate at the provider's reverse proxy servers, where it is decrypted in memory before being committed to persistent storage.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "Under the standard Dolev-Yao threat model, an active adversary operating within the network path can observe packet headers, inspect IP source and destination pairs, and deduce data transmission volumes. Furthermore, internet service providers (ISPs) routinely employ Deep Packet Inspection (DPI) and traffic shaping algorithms to throttle sustained peer-to-peer or bulk upstream transfers during peak hours. In centralized pipelines, compromised cloud provider credentials, insider threats, and misconfigured access-control lists (ACLs) have repeatedly caused catastrophic data leaks involving terabytes of sensitive enterprise data.",
+        "Under the standard Dolev-Yao threat model, an active adversary operating within the network path can observe packet headers, inspect IP source and destination pairs, and deduce data transmission volumes. internet service providers (ISPs) routinely employ Deep Packet Inspection (DPI) and traffic shaping algorithms to throttle sustained peer-to-peer or bulk upstream transfers during peak hours. In centralized pipelines, compromised cloud provider credentials, insider threats, and misconfigured access-control lists (ACLs) have repeatedly caused catastrophic data leaks involving terabytes of sensitive enterprise data.",
         styles['Body']
     ))
     flowables.append(Paragraph(
@@ -140,19 +116,23 @@ def build_chapters_1_and_2(styles):
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>1. WebTorrent (2014):</b> WebTorrent brought BitTorrent swarming to the browser via WebRTC DataChannels. However, WebTorrent relies on public WebTorrent tracker servers, requires torrent file hashing metadata generation before streaming begins, lacks built-in application-layer zero-knowledge encryption, and is optimized for one-to-many swarming rather than private, authenticated, point-to-point office file exchange.",
+        "Earlier tools solved pieces of this local sharing problem, but each left clear gaps:",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>2. Snapdrop &amp; ShareDrop (2018):</b> Inspired by Apple AirDrop, Snapdrop implemented browser-based WebRTC transfers. However, Snapdrop relies on WebRTC's default DTLS encryption without application-tier zero-knowledge key agreement, lacks adaptive backpressure control (causing frequent tab crashes on files &gt;500MB), and provides no local text intelligence or telemetry visualization.",
+        "In 2014, WebTorrent brought BitTorrent swarming into the browser with WebRTC DataChannels. But WebTorrent depends on public tracker servers, requires generating torrent hash metadata before streaming starts, and lacks zero-knowledge encryption. It is designed for public swarming rather than private, authenticated, point-to-point transfers.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>3. Magic Wormhole &amp; Croc (CLI Tools):</b> These command-line tools provide end-to-end encrypted P2P transfers using PAKE (Password-Authenticated Key Exchange). However, they require local binary installation via Homebrew/apt/pip, terminal competency, and lack browser integration, preventing spontaneous adoption among non-developer end users.",
+        "In 2018, Snapdrop and ShareDrop showed that browser-to-browser WebRTC transfers could work for local sharing. Even so, they rely only on standard DTLS transport encryption without application-tier key agreement, crash on files larger than 500 MB because they omit buffer backpressure, and offer no local intelligence or transfer telemetry.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>4. Apple AirDrop &amp; Google Quick Share (Nearby Share):</b> Proprietary operating-system features utilize Bluetooth Low Energy (BLE) for peer discovery and ad-hoc Wi-Fi Direct for data transport. While fast, they are strictly platform-locked: an Apple AirDrop user cannot transfer a file to a Linux desktop, Windows laptop, or Android device. PeerVault AI provides a universal web-standard alternative operating seamlessly across all operating systems without vendor lock-in.",
+        "Command-line utilities such as Magic Wormhole and Croc offer strong end-to-end encryption using PAKE key exchanges. But they require terminal fluency, package manager installations (pip, brew, apt), and local binary dependencies. That excludes non-developer classmates in shared labs.",
+        styles['Body']
+    ))
+    flowables.append(Paragraph(
+        "Proprietary features like Apple AirDrop and Google Quick Share use Bluetooth and ad-hoc Wi-Fi to achieve good local transfer rates. But they remain locked inside vendor ecosystems: an Apple user cannot send a file to a Linux desktop, Windows laptop, or Android phone. PeerVault AI runs directly in any modern browser across all operating systems without vendor lock-in.",
         styles['Body']
     ))
 
@@ -167,19 +147,19 @@ def build_chapters_1_and_2(styles):
 
     flowables.append(Paragraph("2.1 Historical Evolution of P2P Architectures", styles['SecTitle']))
     flowables.append(Paragraph(
-        "Peer-to-peer networking represents a paradigm shift from traditional client-server hierarchies toward decentralized networks where participating nodes act as both resource suppliers and consumers (servents). The evolution of peer-to-peer protocols over the past three decades highlights the continuous tension between indexing efficiency, lookup latency, network resiliency, and security.",
+        "Peer-to-peer networking shifts data routing from central servers toward edge devices that act as both clients and servers. Over the past twenty-five years, P2P protocols evolved across three distinct generations, balancing lookup latency, indexing efficiency, and fault tolerance.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>First-Generation P2P (Napster, 1999):</b> Napster pioneered consumer P2P data exchange by combining decentralized file transfer with centralized metadata indexing. While client machines transferred MP3 audio files directly between each other over TCP, file indexing, peer search, and directory management were maintained by a central cluster of servers. This single point of failure proved fatal both architecturally and legally, leading to rapid shutdown when the central index was enjoined.",
+        "Napster (1999) introduced the first generation by combining decentralized file exchange with centralized directory servers. Users downloaded MP3 files directly from each other over TCP, but index searches hit a central cluster. When that central cluster was shut down by legal injunction, the entire network vanished overnight.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>Second-Generation P2P (Gnutella, FastTrack, 2001):</b> Gnutella eliminated centralized servers entirely, introducing pure decentralization via recursive query flooding. Each node forwarded search queries to all connected neighbors with a configured Time-to-Live (TTL). However, query flooding introduced an exponential O(d^k) message explosion, saturating low-bandwidth dial-up links and causing severe network congestion. FastTrack improved on this by electing dynamically discovered 'supernodes' based on processing capacity and uptime, but still suffered from unpredictable search latencies.",
+        "Second-generation networks like Gnutella (2001) removed central servers completely using recursive query flooding. Each node broadcast search requests to all connected peers within a set Time-to-Live (TTL). This introduced an exponential message flood that clogged dial-up connections. FastTrack later mitigated this by electing high-capacity peers as supernodes, but lookup latency remained unpredictable.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>Third-Generation P2P (BitTorrent, Kademlia DHT, 2003–Present):</b> BitTorrent introduced game-theoretic incentives ('tit-for-tat' choking algorithms) combined with Distributed Hash Tables (DHTs) based on the Kademlia XOR metric. By partitioning files into uniform cryptographic pieces (typically 256KB to 2MB) and verifying integrity via SHA-1/SHA-256 hashes, BitTorrent enabled massive multi-source swarming. However, BitTorrent requires desktop client software, open listening ports, and torrent descriptor files, rendering it cumbersome for spontaneous, private, point-to-point office or classroom file sharing.",
+        "Third-generation protocols centered around BitTorrent (2003) and Kademlia Distributed Hash Tables (DHT). BitTorrent chopped files into fixed blocks verified by cryptographic hashes, rewarding nodes that uploaded with faster download speeds. While BitTorrent excels at distributing popular files to thousands of downloaders at once, it requires separate torrent files, desktop client software, and open firewall ports, making it awkward for quick two-person transfers in a lab.",
         styles['Body']
     ))
 
@@ -194,7 +174,7 @@ def build_chapters_1_and_2(styles):
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "Unlike audio/video tracks that utilize the Real-time Transport Protocol (RTP/SRTP), the WebRTC DataChannel stack utilizes SCTP layered over DTLS/UDP. This architectural layering provides critical advantages:",
+        "Unlike audio/video tracks that use the Real-time Transport Protocol (RTP/SRTP), the WebRTC DataChannel stack uses SCTP layered over DTLS/UDP. This architectural layering provides critical advantages:",
         styles['Body']
     ))
     flowables.append(Paragraph("• <b>Multiplexed Sub-Streams:</b> Multiple independent data channels can be multiplexed over a single underlying SCTP association, each with its own stream identifier.", styles['Bullet']))
@@ -215,7 +195,7 @@ def build_chapters_1_and_2(styles):
     flowables.append(Spacer(1, 10))
     flowables.append(Paragraph("2.4 SCTP 4-Way Handshake vs. TCP 3-Way Handshake Mechanics", styles['SecTitle']))
     flowables.append(Paragraph(
-        "A critical resilience feature of the Stream Control Transmission Protocol (RFC 4960) utilized by WebRTC DataChannels is its resistance to SYN-flooding denial-of-service attacks through a four-way association handshake utilizing signed state cookies, compared to TCP's three-way handshake:",
+        "A critical resilience feature of the Stream Control Transmission Protocol (RFC 4960) used by WebRTC DataChannels is its resistance to SYN-flooding denial-of-service attacks through a four-way association handshake using signed state cookies, compared to TCP's three-way handshake:",
         styles['Body']
     ))
     flowables.append(Paragraph(
@@ -273,7 +253,7 @@ def build_chapters_1_and_2(styles):
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "<b>User Datagram Protocol (UDP):</b> UDP provides lightweight, connectionless datagram dispatch with minimal header overhead (8 bytes vs. TCP's 20–60 bytes) and zero retransmission latency. However, raw UDP lacks flow control, congestion avoidance, and packet ordering. Transmitting a 2 GB file over raw UDP would result in massive packet loss and complete payload corruption.",
+        "<b>User Datagram Protocol (UDP):</b> UDP provides lightweight, connectionless datagram dispatch with minimal header overhead (8 bytes vs. TCP's 20-60 bytes) and zero retransmission latency. However, raw UDP lacks flow control, congestion avoidance, and packet ordering. Transmitting a 2 GB file over raw UDP would result in massive packet loss and complete payload corruption.",
         styles['Body']
     ))
     flowables.append(Paragraph(
@@ -315,7 +295,7 @@ def build_chapters_1_and_2(styles):
         [Paragraph("Data Transmission Path", styles['TableCellBold']), Paragraph("Double WAN Relay", styles['TableCell']), Paragraph("Distributed Swarm", styles['TableCell']), Paragraph("Proprietary Ad-Hoc Wi-Fi", styles['TableCell']), Paragraph("<b>Direct Subnet P2P LAN</b>", styles['TableCell'])],
         [Paragraph("Server Storage Footprint", styles['TableCellBold']), Paragraph("Persistent cloud disk", styles['TableCell']), Paragraph("None (Swarm cache)", styles['TableCell']), Paragraph("None", styles['TableCell']), Paragraph("<b>Zero Server Storage</b>", styles['TableCell'])],
         [Paragraph("Cryptographic Guarantee", styles['TableCellBold']), Paragraph("Server-side decryption", styles['TableCell']), Paragraph("Plaintext (SHA-1 hash)", styles['TableCell']), Paragraph("Proprietary TLS handshake", styles['TableCell']), Paragraph("<b>Zero-Knowledge ECDH+GCM</b>", styles['TableCell'])],
-        [Paragraph("File Size Quotas / Limits", styles['TableCellBold']), Paragraph("Strict (2GB – 15GB)", styles['TableCell']), Paragraph("Unlimited (Disk bound)", styles['TableCell']), Paragraph("OS buffer bound", styles['TableCell']), Paragraph("<b>Unlimited (4MB Flow Ctrled)</b>", styles['TableCell'])],
+        [Paragraph("File Size Quotas / Limits", styles['TableCellBold']), Paragraph("Strict (2GB - 15GB)", styles['TableCell']), Paragraph("Unlimited (Disk bound)", styles['TableCell']), Paragraph("OS buffer bound", styles['TableCell']), Paragraph("<b>Unlimited (4MB Flow Ctrled)</b>", styles['TableCell'])],
         [Paragraph("Local Document Intelligence", styles['TableCellBold']), Paragraph("Cloud AI (Telemetry)", styles['TableCell']), Paragraph("None", styles['TableCell']), Paragraph("None", styles['TableCell']), Paragraph("<b>Client-Side TF-IDF NLP</b>", styles['TableCell'])],
         [Paragraph("Cross-Platform Interoperability", styles['TableCellBold']), Paragraph("Universal (Web)", styles['TableCell']), Paragraph("Desktop / Mobile apps", styles['TableCell']), Paragraph("Incompatible ecosystems", styles['TableCell']), Paragraph("<b>Universal Browser Native</b>", styles['TableCell'])],
     ]

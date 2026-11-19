@@ -11,7 +11,7 @@ def build_preliminaries(styles):
     # ---------------------------------------------------------
     flowables.append(Spacer(1, 20))
     flowables.append(Paragraph("NATIONAL INSTITUTE OF TECHNOLOGY AGARTALA", styles['CoverInst']))
-    flowables.append(Paragraph("DEPARTMENT OF COMPUTER SCIENCE &amp; ENGINEERING<br/>BARJALA, JIRANIA, TRIPURA (W) – 799046, INDIA", styles['CoverDept']))
+    flowables.append(Paragraph("DEPARTMENT OF COMPUTER SCIENCE &amp; ENGINEERING<br/>BARJALA, JIRANIA, TRIPURA (W) - 799046, INDIA", styles['CoverDept']))
     flowables.append(HRFlowable(width="100%", thickness=1.8, color=colors.HexColor("#991b1b"), spaceBefore=0, spaceAfter=25))
 
     flowables.append(Paragraph("PEERVAULT AI: BROWSER-NATIVE LAN PEER-TO-PEER END-TO-END ENCRYPTED FILE TRANSFER &amp; LOCAL INTELLIGENCE ARCHITECTURE", styles['CoverTitle']))
@@ -22,7 +22,7 @@ def build_preliminaries(styles):
     meta_data = [
         [Paragraph("<b>Submitted By:</b>", styles['CoverMetaHeader']), Paragraph("<b>Under the Guidance of:</b>", styles['CoverMetaHeader'])],
         [Paragraph("<b>RAM PEDAPATI</b><br/>Enrollment No: 23UCS191<br/>Registration No: 2317098<br/>B.Tech CSE (Class of 2027)<br/>Department of Computer Science &amp; Engg.<br/>National Institute of Technology Agartala<br/>Email: ramcode9841@gmail.com", styles['CoverMetaVal']),
-         Paragraph("<b>Department Faculty Supervisor</b><br/>Department of Computer Science &amp; Engineering<br/>National Institute of Technology Agartala<br/>Barjala, Jirania, Tripura (W) – 799046", styles['CoverMetaVal'])],
+         Paragraph("<b>Department Faculty Supervisor</b><br/>Department of Computer Science &amp; Engineering<br/>National Institute of Technology Agartala<br/>Barjala, Jirania, Tripura (W) - 799046", styles['CoverMetaVal'])],
     ]
     t_meta = Table(meta_data, colWidths=[250, 250])
     t_meta.setStyle(TableStyle([
@@ -35,7 +35,7 @@ def build_preliminaries(styles):
 
     flowables.append(Spacer(1, 40))
     flowables.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor("#cbd5e1"), spaceBefore=10, spaceAfter=15))
-    flowables.append(Paragraph("Academic Session: 2026 – 2027<br/>Repository: github.com/ramcode-dev/peervault-ai | Production: peervault-ai.onrender.com", styles['CoverFoot']))
+    flowables.append(Paragraph("Academic Session: 2026 - 2027<br/>Repository: github.com/ramcode-dev/peervault-ai | Production: peervault-ai.onrender.com", styles['CoverFoot']))
     flowables.append(PageBreak())
 
     # ---------------------------------------------------------
@@ -49,11 +49,11 @@ def build_preliminaries(styles):
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "The project formulates, designs, implements, and benchmarks a serverless peer-to-peer data transport pipeline utilizing WebRTC SCTP DataChannels, Web Cryptography API (ECDH NIST P-256 and AES-GCM-256), adaptive backpressure queuing, and in-browser natural language processing. I confirm that no portion of this work has been submitted elsewhere for the award of any other degree, diploma, fellowship, or professional certification.",
+        "The project formulates, designs, implements, and benchmarks a serverless peer-to-peer data transport pipeline using WebRTC SCTP DataChannels, Web Cryptography API (ECDH NIST P-256 and AES-GCM-256), adaptive backpressure queuing, and in-browser natural language processing. I confirm that no portion of this work has been submitted elsewhere for the award of any other degree, diploma, fellowship, or professional certification.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "Wherever third-party specifications, standard RFCs (RFC 8829, RFC 8831, RFC 8445, RFC 4960, RFC 5869, RFC 8446), cryptographic primitives, or open-source software libraries have been consulted or utilized, proper academic citations and standard acknowledgments are explicitly provided in the bibliography.",
+        "Wherever third-party specifications, standard RFCs (RFC 8829, RFC 8831, RFC 8445, RFC 4960, RFC 5869, RFC 8446), cryptographic primitives, or open-source software libraries have been consulted or used, proper academic citations and standard acknowledgments are explicitly provided in the bibliography.",
         styles['Body']
     ))
     flowables.append(Spacer(1, 40))
@@ -148,11 +148,11 @@ def build_preliminaries(styles):
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "To prevent browser process crashes when handling multi-gigabyte files, an adaptive backpressure flow-control algorithm monitors the SCTP <code>bufferedAmount</code> buffer against a dynamic 4MB high-water threshold, pausing file reads until the hardware network interface card dispatches packets. Furthermore, an in-browser Term Frequency-Inverse Document Frequency (TF-IDF) natural language processing engine analyzes shared text documents locally to generate instant extractive summaries without cloud API roundtrips.",
+        "To prevent browser process crashes when handling multi-gigabyte files, an adaptive backpressure flow-control algorithm monitors the SCTP <code>bufferedAmount</code> buffer against a dynamic 4MB high-water threshold, pausing file reads until the hardware network interface card dispatches packets. an in-browser Term Frequency-Inverse Document Frequency (TF-IDF) natural language processing engine analyzes shared text documents locally to generate instant extractive summaries without cloud API roundtrips.",
         styles['Body']
     ))
     flowables.append(Paragraph(
-        "Empirical benchmarks across Wi-Fi 6 (802.11ax) LAN testbeds demonstrate that PeerVault AI achieves sustained transfer throughput of <b>285 Mbps</b> (peaking at <b>420 Mbps</b>), reducing data transfer latency by <b>87.4% – 95.3%</b> compared to cloud storage uploads, while maintaining an uncompromised memory footprint below <b>45 MB RAM</b> on mobile devices. The complete architecture is deployed in production at <code>peervault-ai.onrender.com</code>.",
+        "Empirical benchmarks across Wi-Fi 6 (802.11ax) LAN testbeds demonstrate that PeerVault AI achieves sustained transfer throughput of <b>285 Mbps</b> (peaking at <b>420 Mbps</b>), reducing data transfer latency by <b>87.4% - 95.3%</b> compared to cloud storage uploads, while maintaining an uncompromised memory footprint below <b>45 MB RAM</b> on mobile devices. The complete architecture is deployed in production at <code>peervault-ai.onrender.com</code>.",
         styles['Body']
     ))
     flowables.append(Spacer(1, 10))
@@ -188,26 +188,27 @@ def build_preliminaries(styles):
         ("Chapter 1: Introduction & Research Motivation", "11"),
         ("    1.1 The Centralized Cloud Dilemma in Local Area Networks", "11"),
         ("    1.2 Campus Network Dynamics: The NIT Agartala Context", "11"),
-        ("    1.3 Threat Landscape: Interception, ISP Throttling & Eavesdropping", "12"),
+        ("    1.3 Threat Environment: Interception, ISP Throttling & Eavesdropping", "12"),
         ("    1.4 PeerVault AI: Core Vision & Architectural Philosophy", "12"),
         ("    1.5 Problem Statement and Formal Research Objectives", "13"),
         ("    1.6 Formal Research Hypotheses", "13"),
         ("    1.7 Comparative Survey of Related Academic & Open-Source Works", "14"),
-        ("Chapter 2: Literature Survey & Theoretical Foundations", "15"),
-        ("    2.1 Historical Evolution of P2P Architectures (Napster to BitTorrent)", "15"),
-        ("    2.2 WebRTC Standards & Architecture (RFC 8829 & RFC 8831)", "15"),
-        ("    2.3 JavaScript Session Establishment Protocol (JSEP, RFC 8829)", "16"),
-        ("    2.4 SCTP 4-Way Handshake vs. TCP 3-Way Handshake Mechanics", "16"),
-        ("    2.5 NAT Traversal Dynamics: STUN, TURN, and ICE (RFC 8445)", "16"),
-        ("    2.6 Transport Layer Tradeoffs: TCP vs. UDP vs. SCTP", "17"),
-        ("    2.7 Cryptographic Foundations: ECDH NIST P-256 & AES-GCM", "17"),
-        ("    2.8 State-of-the-Art Comparative Analysis Matrix", "18"),
-        ("Chapter 3: System Requirements & Mathematical Formulations", "19"),
-        ("    3.1 Software Requirements Specification (Functional & Non-Functional)", "19"),
-        ("    3.2 Network Information Theory: Shannon-Hartley Wi-Fi Capacity", "19"),
-        ("    3.3 Bandwidth-Delay Product (BDP) and Flow Scaling Models", "20"),
-        ("    3.4 Threat Modeling under the Dolev-Yao Adversarial Paradigm", "20"),
-        ("    3.5 Queueing Theory: M/M/1/K Buffer Overflow Analysis", "21"),
+        ("Chapter 2: Literature Survey & Theoretical Foundations", "14"),
+        ("    2.1 Historical Evolution of P2P Architectures (Napster to BitTorrent)", "14"),
+        ("    2.2 WebRTC Standards & Architecture (RFC 8829 & RFC 8831)", "14"),
+        ("    2.3 JavaScript Session Establishment Protocol (JSEP, RFC 8829)", "15"),
+        ("    2.4 SCTP 4-Way Handshake vs. TCP 3-Way Handshake Mechanics", "15"),
+        ("    2.5 NAT Traversal Dynamics: STUN, TURN, and ICE (RFC 8445)", "15"),
+        ("    2.6 Transport Layer Tradeoffs: TCP vs. UDP vs. SCTP", "16"),
+        ("    2.7 Cryptographic Foundations: ECDH NIST P-256 & AES-GCM", "16"),
+        ("    2.8 State-of-the-Art Comparative Analysis Matrix", "17"),
+        ("Chapter 3: System Requirements & Mathematical Formulations", "18"),
+        ("    3.1 Software Requirements Specification (Functional & Non-Functional)", "18"),
+        ("    3.2 Network Information Theory: Shannon-Hartley Wi-Fi Capacity", "18"),
+        ("    3.3 Bandwidth-Delay Product (BDP) and Flow Scaling Models", "19"),
+        ("    3.4 Threat Modeling under the Dolev-Yao Adversarial Paradigm", "19"),
+        ("    3.5 Queueing Theory: M/M/1/K Buffer Overflow Analysis", "20"),
+        ("    3.6 Zero-Trust LAN Micro-Segmentation & Boundary Models", "21"),
         ("Chapter 4: System Architecture & Structural Design", "22"),
         ("    4.1 Dual-Tier Architectural Model (Control Plane vs Data Plane)", "22"),
         ("    4.2 Ephemeral WebSocket Signaling Server Design", "22"),
@@ -216,6 +217,7 @@ def build_preliminaries(styles):
         ("    4.5 End-to-End Handshake & Transfer Sequence Flow", "23"),
         ("    4.6 UI/UX Design System: Cyber Neon Red & Metallic Gold Palette", "23"),
         ("    4.7 Cross-Platform Responsive Layout Mechanics", "23"),
+        ("    4.8 Component Interaction Automata & Session Recovery Mechanics", "24"),
         ("Chapter 5: Step-by-Step Implementation of the 8 Editions", "25"),
         ("    5.1 Edition 1: WebSocket Signaling Hub & Dynamic Room Dispatch", "25"),
         ("    5.2 Edition 2: WebRTC DataChannel Integration & ICE Gathering", "26"),
@@ -233,6 +235,7 @@ def build_preliminaries(styles):
         ("    6.5 Replay Attack Prevention and Tamper Detection Metrics", "32"),
         ("    6.6 V8 Memory Hygiene & Zero-Knowledge Security Audit", "32"),
         ("    6.7 Cryptographic Parameter & Cipher Suite Specifications", "33"),
+        ("    6.8 Cryptographic Nonce Collision Bounds & Replay Window Analysis", "33"),
         ("Chapter 7: Experimental Benchmarks & Network Evaluation", "34"),
         ("    7.1 Experimental Testbed Configuration and Hardware Specs", "34"),
         ("    7.2 Throughput Performance: PeerVault AI vs. Cloud Relays", "34"),

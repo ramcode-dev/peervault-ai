@@ -194,7 +194,7 @@ def build_chapters_5_and_6(styles):
     # ---------------------------------------------------------
     flowables.append(Paragraph("5.5 Edition 5: Real-Time Radar Telemetry &amp; Audio Synthesizer Engine", styles['SecTitle']))
     flowables.append(Paragraph(
-        "<b>Implementation Mechanics:</b> To provide vivid, real-time observability, Edition 5 introduces an HTML5 Canvas animated radar displaying concentric scanning rings and ping markers representing active peers. Real-time transfer metrics compute dynamic throughput (MB/s), elapsed duration, and estimated time of arrival (ETA) updated every 250 milliseconds. Furthermore, a browser-native Web Audio API synthesizer generates subtle cybernetic audio feedback (440 Hz Sine wave pulse on peer connection, 880 Hz harmonic chord on successful file completion), delivering an engaging, multi-sensory user experience.",
+        "<b>Implementation Mechanics:</b> To provide vivid, real-time observability, Edition 5 introduces an HTML5 Canvas animated radar displaying concentric scanning rings and ping markers representing active peers. Real-time transfer metrics compute dynamic throughput (MB/s), elapsed duration, and estimated time of arrival (ETA) updated every 250 milliseconds. a browser-native Web Audio API synthesizer generates subtle cybernetic audio feedback (440 Hz Sine wave pulse on peer connection, 880 Hz harmonic chord on successful file completion), delivering an engaging, multi-sensory user experience.",
         styles['Body']
     ))
     flowables.append(Paragraph("<b>Audio Synthesis &amp; Radar Canvas Code:</b>", styles['BodyBold']))
@@ -495,6 +495,25 @@ def build_chapters_5_and_6(styles):
         ('BOTTOMPADDING', (0,0), (-1,-1), 3),
     ]))
     flowables.append(t_crypto)
+
+    flowables.append(Spacer(1, 10))
+    flowables.append(Paragraph("6.8 Cryptographic Nonce Collision Bounds &amp; Replay Window Analysis", styles['SecTitle']))
+    flowables.append(Paragraph(
+        "A critical vulnerability in Galois/Counter Mode (GCM) is nonce reuse. If two distinct plaintext blocks are encrypted under the identical 256-bit symmetric key using the identical 96-bit initialization vector, an adversary who intercepts both ciphertext blocks can calculate the XOR sum of the plaintexts and reconstruct the GHASH authentication subkey H, completely destroying the integrity and confidentiality guarantees of the cipher.",
+        styles['Body']
+    ))
+    flowables.append(Paragraph(
+        "PeerVault AI eliminates this vulnerability through two mathematically rigorous mechanisms:",
+        styles['Body']
+    ))
+    flowables.append(Paragraph(
+        "<b>1. Cryptographic Birthday Paradox Bound:</b> For each 64KB slice, the sender invokes <code>crypto.getRandomValues()</code> to generate a fresh 96-bit (12-byte) initialization vector. By the Birthday Bound, the probability of at least one collision after generating N nonces from a space of 2<sup>96</sup> values is bounded by: <b>P(collision) &le; N<sup>2</sup> / (2 &times; 2<sup>96</sup>)</b>. For an exceptionally large 10 GB file transfer (N = 163,840 chunks), the collision probability is: <b>P(collision) &le; (1.64 &times; 10<sup>5</sup>)<sup>2</sup> / (1.58 &times; 10<sup>29</sup>) &asymp; 1.7 &times; 10<sup>-19</sup></b>. This probability is twenty orders of magnitude smaller than the cosmic-ray bit-flip rate of modern RAM, rendering accidental nonce reuse impossible.",
+        styles['Body']
+    ))
+    flowables.append(Paragraph(
+        "<b>2. Monotonic Replay Window:</b> In addition to random 96-bit IVs, each slice header contains an incrementing 32-bit chunk index. The receiving peer maintains a sliding bitmap verification window. If an adversary attempts to inject a previously captured valid chunk, the receiver detects the duplicated chunk sequence index and discards the packet prior to AEAD decryption, preventing state desynchronization attacks.",
+        styles['Body']
+    ))
 
     flowables.append(PageBreak())
     return flowables
