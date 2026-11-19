@@ -69,7 +69,7 @@ class LaTeXNumberedCanvas(canvas.Canvas):
             self.line(72, 735, 540, 735)
             self.setFont("Times-Italic", 9.5)
             # Top header text
-            self.drawRightString(540, 742, "PEERVAULT AI: B.TECH CAPSTONE THESIS")
+            self.drawRightString(540, 742, "SECURE LAN PEER-TO-PEER FILE SHARING SYSTEM")
             
             # Bottom Center Arabic Page Number
             self.setFont("Times-Roman", 10)

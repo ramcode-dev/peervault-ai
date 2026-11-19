@@ -8,7 +8,7 @@ os.makedirs("assets/rendered_prelims", exist_ok=True)
 IMG_W, IMG_H = 2550, 3300 # 8.5 x 11 inches at 300 DPI
 
 try:
-    font_title = ImageFont.truetype("timesbd.ttf", 62)
+    font_title = ImageFont.truetype("timesbd.ttf", 64)
     font_head = ImageFont.truetype("timesbd.ttf", 52)
     font_bold = ImageFont.truetype("timesbd.ttf", 42)
     font_italic = ImageFont.truetype("timesi.ttf", 38)
@@ -28,19 +28,17 @@ def render_cover_1():
     img = Image.new("RGB", (IMG_W, IMG_H), "white")
     draw = ImageDraw.Draw(img)
 
-    y = 200
-    y = draw_centered_text(draw, y, "PeerVault AI: Browser-Native End-to-End Encrypted", font_title) + 15
-    y = draw_centered_text(draw, y, "P2P LAN File Transfer & Local Intelligence", font_title) + 15
-    y = draw_centered_text(draw, y, "Architecture", font_title) + 50
+    y = 240
+    y = draw_centered_text(draw, y, "Secure Lan Peer-to-Peer", font_title) + 20
+    y = draw_centered_text(draw, y, "File Sharing System", font_title) + 60
 
     # Draw emblem
     try:
         logo = Image.open("assets/nita_logo.png")
-        # Resize maintaining aspect
         lw, lh = 600, int(600 * (logo.height / logo.width))
         logo = logo.resize((lw, lh), Image.Resampling.LANCZOS)
         img.paste(logo, ((IMG_W - lw) // 2, y), mask=logo if logo.mode == 'RGBA' else None)
-        y += lh + 60
+        y += lh + 70
     except Exception as e:
         print("Emblem error:", e)
         y += 400
@@ -49,7 +47,7 @@ def render_cover_1():
     y = draw_centered_text(draw, y, "RAM PEDAPATI (23UCS191)", font_bold) + 15
     y = draw_centered_text(draw, y, "TERLI JOGISWARA PRABHAS (23UCS180)", font_bold) + 15
     y = draw_centered_text(draw, y, "UNNAVADA NIKHILESH KUMAR (23UCS177)", font_bold) + 15
-    y = draw_centered_text(draw, y, "SITHALAM HARI KRISHNA SAI DURGA PRASAD (23UCS178)", font_bold) + 120
+    y = draw_centered_text(draw, y, "SITHALAM HARI KRISHNA SAI DURGA PRASAD (23UCS178)", font_bold) + 130
 
     y = draw_centered_text(draw, y, "COMPUTER SCIENCE & ENGINEERING DEPARTMENT", font_bold) + 15
     y = draw_centered_text(draw, y, "NATIONAL INSTITUTE OF TECHNOLOGY, AGARTALA", font_bold) + 15
@@ -65,10 +63,9 @@ def render_cover_2():
     img = Image.new("RGB", (IMG_W, IMG_H), "white")
     draw = ImageDraw.Draw(img)
 
-    y = 180
-    y = draw_centered_text(draw, y, "PeerVault AI: Browser-Native End-to-End Encrypted", font_title) + 15
-    y = draw_centered_text(draw, y, "P2P LAN File Transfer & Local Intelligence", font_title) + 15
-    y = draw_centered_text(draw, y, "Architecture", font_title) + 40
+    y = 200
+    y = draw_centered_text(draw, y, "Secure Lan Peer-to-Peer", font_title) + 18
+    y = draw_centered_text(draw, y, "File Sharing System", font_title) + 45
 
     y = draw_centered_text(draw, y, "Report submitted to", font_italic) + 10
     y = draw_centered_text(draw, y, "National Institute of Technology, Agartala", font_bold) + 10
@@ -127,17 +124,16 @@ def render_approval():
     y += 100
 
     text_lines = [
-        "This report entitled “PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File",
-        "Transfer & Local Intelligence Architecture”, by Ram Pedapati (23UCS191), Terli Jogiswara",
-        "Prabhas (23UCS180), Unnavada Nikhilesh Kumar (23UCS177), and Sithalam Hari Krishna Sai",
-        "Durga Prasad (23UCS178) is approved in partial fulfilment of the requirements for the award",
-        "of Bachelor of Technology in Computer Science & Engineering."
+        "This report entitled “Secure Lan Peer-to-Peer File Sharing System”, by Ram Pedapati",
+        "(23UCS191), Terli Jogiswara Prabhas (23UCS180), Unnavada Nikhilesh Kumar (23UCS177),",
+        "and Sithalam Hari Krishna Sai Durga Prasad (23UCS178) is approved in partial fulfilment",
+        "of the requirements for the award of Bachelor of Technology in Computer Science & Engineering."
     ]
     for line in text_lines:
         draw.text((250, y), line, fill="black", font=font_body)
         y += 65
 
-    y += 350
+    y += 380
     # 2 Supervisor Signatures
     col1_x = 350
     col2_x = 1450
@@ -175,12 +171,11 @@ def render_declaration():
     y += 90
 
     text_lines = [
-        "We declare that the work presented in this report titled “PeerVault AI: Browser-Native End-to-End",
-        "Encrypted P2P LAN File Transfer & Local Intelligence Architecture”, submitted to the Computer",
-        "Science and Engineering Department, National Institute of Technology, Agartala, for the award of",
-        "the Bachelor of Technology degree in Computer Science & Engineering, represents our ideas",
-        "in our own words and where others' ideas or words have been included, we have adequately cited",
-        "and referenced the original sources.",
+        "We declare that the work presented in this report titled “Secure Lan Peer-to-Peer File Sharing",
+        "System”, submitted to the Computer Science and Engineering Department, National Institute of",
+        "Technology, Agartala, for the award of the Bachelor of Technology degree in Computer Science",
+        "& Engineering, represents our ideas in our own words and where others' ideas or words have",
+        "been included, we have adequately cited and referenced the original sources.",
         "",
         "We also declare that we have adhered to all principles of academic honesty and integrity and have",
         "not misrepresented or fabricated or falsified any idea, data, fact, or source in our submission.",
@@ -225,10 +220,10 @@ def render_certificate():
     y += 100
 
     text_lines = [
-        "It is certified that the work contained in the report titled “PeerVault AI: Browser-Native End-to-End",
-        "Encrypted P2P LAN File Transfer & Local Intelligence Architecture”, by Ram Pedapati (23UCS191),",
-        "Terli Jogiswara Prabhas (23UCS180), Unnavada Nikhilesh Kumar (23UCS177), and Sithalam Hari",
-        "Krishna Sai Durga Prasad (23UCS178) has been carried out under our supervision.",
+        "It is certified that the work contained in the report titled “Secure Lan Peer-to-Peer File Sharing",
+        "System”, by Ram Pedapati (23UCS191), Terli Jogiswara Prabhas (23UCS180), Unnavada",
+        "Nikhilesh Kumar (23UCS177), and Sithalam Hari Krishna Sai Durga Prasad (23UCS178) has been",
+        "carried out under our supervision.",
         "",
         "This work has not been submitted elsewhere for a degree."
     ]
