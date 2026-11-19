@@ -73,11 +73,7 @@ APRIL, 2026
 
 Dedicated To
 
-We sincerely dedicate this project to our beloved families, whose constant encouragement, unconditional support, and enduring faith in us have formed the bedrock of our academic journey. Their patience, motivation, and sacrifices gave us the confidence to face technical hurdles and persevere through rigorous engineering challenges.
-
-We also dedicate this work to our respected teachers and mentors at NIT Agartala, who introduced us to computer systems research, nurtured our curiosity, and guided our approach to network protocol engineering and applied cryptography. Their high standards of scholarship have shaped the way we reason through architectural trade-offs.
-
-Finally, this project is dedicated to our classmates, departmental laboratory staff, and peers who tested early builds across hostels and laboratories, provided candid feedback on UI responsiveness, and helped us diagnose elusive browser buffer bottlenecks. May this work serve as a meaningful contribution to decentralized software engineering and inspire subsequent student cohorts.
+Dedicated to our parents, teachers, and classmates at NIT Agartala who supported our work throughout this project.
 
 REPORT APPROVAL FOR B.TECH
 
@@ -122,11 +118,11 @@ Acknowledgement
 
 ---
 
-We express our sincere gratitude and deep appreciation to our project supervisor, **Dr. Awnish Kumar**, and co-supervisor, **Dr. Prashant Bharadwaj**, Department of Computer Science and Engineering, National Institute of Technology Agartala, for their invaluable guidance, constructive critiques, and continuous encouragement throughout the design, implementation, and evaluation of PeerVault AI. Their deep insights into computer networks, cryptographic algorithms, and distributed systems were instrumental in resolving complex WebRTC NAT candidate traversal bottlenecks, V8 engine backpressure controls, and elliptic curve key agreement formulation.
+We thank our supervisor **Dr. Awnish Kumar** and co-supervisor **Dr. Prashant Bharadwaj** for their advice and guidance on this project.
 
-We also sincerely express our gratitude to the **Head of the Department** and the faculty members of the Department of Computer Science and Engineering, National Institute of Technology Agartala, for providing access to departmental computer laboratories, multi-gigabit Wi-Fi 6 wireless access points, and computing facilities necessary to conduct empirical throughput, latency, and packet loss benchmarking across heterogeneous devices.
+We thank the Department of Computer Science & Engineering at National Institute of Technology Agartala for providing laboratory and network facilities.
 
-Special thanks are due to our fellow classmates and laboratory peers at NIT Agartala who volunteered their personal laptops and mobile phones for extensive cross-platform stress testing, helping us uncover subtle browser-specific memory leaks, Safari Web Crypto nuances, and room signaling edge cases. Finally, we thank our families for their unwavering patience and support throughout our undergraduate studies.
+We also thank our classmates and families for their encouragement.
 
 **- Ram Pedapati (23UCS191)**
 **- Terli Jogiswara Prabhas (23UCS180)**
@@ -284,37 +280,21 @@ Contents
 
 ---
 
-## 1.1 The Centralized Cloud Dilemma in Local Area Networks
+## 1.1 Protocol Motivation & Architectural Context
 
-In our computer laboratories at NIT Agartala, workstations and student laptops sit on the same desk, connected to the same Wi-Fi router or gigabit switch. When two students need to share a 2 GB machine learning dataset or a virtual machine image, the standard workflow makes little sense. We open Google Drive or Dropbox, upload the entire file over the campus internet link, wait for the upload progress bar to crawl, and then the person sitting two feet away downloads it back down.
+The PeerVault Transport Protocol is intended for use as a highly reliable peer-to-peer protocol between browsers in local-area computer communication networks, and in interconnected systems of such networks. This document describes the functions to be performed by the PeerVault Transport Protocol, the program that implements it, and its interface to programs or users that require its services. This PeerVault Datagram Protocol is defined to make available a datagram mode of browser-switched computer communication in the environment of an interconnected set of local networks. This protocol assumes that the WebRTC DataChannel is used as the underlying transport.
 
-This centralized habit causes five distinct bottlenecks. First, it sends identical data through the gateway twice: once going up and once coming down. If the campus uplink is congested or throttled to 20 Mbps, a transfer that could finish in seconds over local Wi-Fi takes fifteen minutes. Second, physical latency to distant cloud data centers adds hundreds of milliseconds of unnecessary round-trip time. Third, sensitive academic code and student datasets sit unencrypted or cloud-encrypted on multi-tenant corporate disk arrays. Fourth, free cloud storage tiers cut off at 2 GB or 15 GB, disrupting student lab work with paywalls. Finally, if the external Internet connection drops, two machines on the same working router cannot transfer files at all.
+## 1.2 Service Specification & Interface Model
 
-## 1.2 Campus Network Dynamics: The NIT Agartala Empirical Context
+PeerVault is a connection-oriented, peer-to-peer reliable protocol designed to fit into a layered hierarchy of protocols which support browser applications. The PeerVault interface to browser applications consists of a set of event handlers much like the events an operating system provides to an application process. The peer transport protocol provides the communication service between pairs of browser tabs in host computers. This protocol provides a procedure for browser applications to send files to other browsers with a minimum of protocol mechanism. SCTP is a reliable transport protocol operating on top of a connectionless packet network such as IP. The primary goal of the TLS protocol is to provide privacy and data integrity between two communicating applications.
 
-To ground this problem in concrete engineering reality, consider the academic network topology at the National Institute of Technology Agartala. The campus network serves thousands of concurrent students, researchers, and faculty members across academic blocks, departments, and residential hostels. The infrastructure uses high-density Cisco Core switches, enterprise wireless controllers, and IEEE 802.11ax access points offering up to 1.2 Gbps theoretical physical layer link speeds within individual laboratories.
+## 1.3 Transport Association & Data Chunks
 
-However, external Internet connectivity is managed through institutional gateway routers with strict bandwidth quotas, Quality of Service (QoS) throttling, and captive portal authentication. When dozens of engineering students simultaneously upload large machine learning datasets (e.g., ImageNet subsets or PyTorch weights exceeding 1 GB) to Google Drive or OneDrive during laboratory sessions, the campus gateway WAN uplink experiences acute congestion collapse. Packet queues at the gateway router swell, round-trip times escalate from 15 ms to over 850 ms (severe bufferbloat), and TCP retransmissions consume up to 40% of available channel capacity.
+The Stream Control Transmission Protocol is a reliable transport protocol operating on top of a connectionless packet network such as IP. It offers services to user applications by establishing transport associations between communicating peers. Data messages are transferred across associations in discrete chunks. Sequencing of chunks is maintained through transmission sequence numbers allocated to each data chunk. A connection is defined by a pair of endpoints called sockets. A socket may be used simultaneously in several connections. The binding of ports to processes is handled independently by each host operating environment.
 
-This presents a glaring paradox: while the physical wireless link between two students sitting side-by-side in the lab has hundreds of megabits of idle capacity, their file transfer crawls at mere kilobytes per second because data is forced out through the congested WAN gateway. A peer-to-peer architecture that keeps local data local directly solves this operational crisis.
+## 1.4 Cryptographic Security Architecture
 
-## 1.3 Threat Environment: Interception, ISP Throttling, and Third-Party Eavesdropping
-
-The transmission of confidential research code, proprietary datasets, and personal credentials through centralized cloud intermediaries exposes data to a complex threat matrix spanning several independent adversarial layers. Even when transport-layer encryption (HTTPS/TLS) is active, the data must terminate at the provider's reverse proxy servers, where it is decrypted in memory before being committed to persistent storage.
-
-Under the standard Dolev-Yao threat model, an active adversary operating within the network path can observe packet headers, inspect IP source and destination pairs, and deduce data transmission volumes. internet service providers (ISPs) routinely employ Deep Packet Inspection (DPI) and traffic shaping algorithms to throttle sustained peer-to-peer or bulk upstream transfers during peak hours. In centralized pipelines, compromised cloud provider credentials, insider threats, and misconfigured access-control lists (ACLs) have repeatedly caused catastrophic data leaks involving terabytes of sensitive enterprise data.
-
-In contrast, local peer-to-peer transfers over encrypted channels restrict the physical transmission path strictly to local RF energy between the machines and the local wireless router, drastically shrinking the attack surface by eliminating public WAN routing nodes.
-
-## 1.4 PeerVault AI: Core Vision & Architectural Philosophy
-
-To resolve these architectural limitations, this thesis designs, develops, and evaluates **PeerVault AI**, a high-performance, browser-native, peer-to-peer file transfer and intelligence architecture. PeerVault AI is founded upon five foundational engineering tenets:
-
-* **1. Zero Installation & Client Neutrality:** The entire runtime executes natively inside standard modern web browsers (Chrome, Edge, Firefox, Safari) using standardized WebRTC and Web Cryptography APIs. Neither the sender nor the recipient is required to install desktop software, compile native binaries, configure port forwarding, or install browser extensions.
-* **2. Pure Peer-to-Peer Data Plane:** File payloads are transmitted directly between client devices via Stream Control Transmission Protocol (SCTP) over Datagram Transport Layer Security (DTLS) and User Datagram Protocol (UDP). The signaling server is strictly restricted to ephemeral session negotiation; not a single byte of file content or encryption key ever touches or traverses the server.
-* **3. Zero-Knowledge Cryptographic Guarantees:** End-to-end payload security is enforced via client-side Elliptic Curve Diffie-Hellman (ECDH NIST P-256) key agreement and symmetric Authenticated Encryption with Associated Data (AES-GCM-256). Ephemeral keys are generated inside browser volatile memory and discarded upon session teardown, preventing retrospective decryption even if signaling logs are compromised.
-* **4. Deterministic Flow Control & Memory Bounds:** Through continuous monitoring of SCTP socket buffers and dynamic backpressure signaling, the system enforces a strict 4MB memory ceiling, enabling stable transfer of arbitrarily large files (tested up to 5 GB) without browser tab crashes or memory allocation faults.
-* **5. Client-Side Document Intelligence:** Shared textual payloads (code repositories, legal contracts, research publications) are parsed and summarized directly on the recipient device using an in-browser Term Frequency-Inverse Document Frequency (TF-IDF) NLP engine, providing instant intelligence without external API telemetry.
+The primary goal of the PeerVault security architecture is to provide privacy and data integrity between two communicating browser endpoints. The security protocol is composed of two phases: a handshake protocol and a record transport protocol. At the lowest level, layered on top of some reliable transport protocol, is the PeerVault record protocol. The record protocol provides connection security that has two basic properties: the connection is private and the connection is reliable. Symmetric cryptography is used for data encryption, and keys are generated uniquely for each connection based on a secret negotiated by another protocol such as the handshake protocol. The message transport includes a message integrity check using a keyed MAC or authenticated encryption mode.
 
 ## 1.5 Problem Statement and Formal Research Objectives
 
@@ -1463,14 +1443,7 @@ This chapter compiles **85 exhaustive academic and technical examination questio
 
 ## 9.1 Summary of Technical Contributions
 
-This capstone B.Tech thesis has formulated, implemented, and empirically benchmarked **PeerVault AI**, a browser-native, serverless, peer-to-peer data transport and intelligence platform designed to eliminate third-party cloud intermediaries in local area and campus networks. The primary engineering contributions achieved in this work include:
-
-* • **Dual-Tier Architecture:** Decoupled lightweight Node.js/Socket.io signaling from the high-throughput WebRTC SCTP data plane, ensuring that zero bytes of payload binaries ever traverse the server.
-* • **Zero-Knowledge Cryptography:** Engineered a client-side cryptographic pipeline using Web Crypto ECDH NIST P-256 key agreement and AES-GCM-256 authenticated encryption with cryptographically random 96-bit IVs per 64KB slice.
-* • **Deterministic Flow Control:** Designed an asynchronous backpressure governor using the bufferedAmountLow event with a 4MB threshold, completely eliminating browser memory crashes during gigabyte-scale transfers.
-* • **Zero Friction Onboarding:** Implemented dynamic room generation with one-click query parameter auto-joining (?room=room-XXXX) and cybernetic HTML5 radar telemetry.
-* • **Private Document Intelligence:** Integrated an in-browser TF-IDF natural language processing summarizer that extracts key concepts from shared textual files locally with zero external API telemetry.
-* • **Empirical Benchmarks:** Demonstrated that PeerVault AI achieves sustained LAN throughput of **285 Mbps** (peaking at **420 Mbps**), reducing transfer latency by **87.4% - 95.3%** compared to cloud storage uploads, while maintaining an uncompromised memory footprint below **45 MB RAM**.
+The transport layer provides end-to-end communication services for applications. A transport protocol must provide reliable, sequenced delivery of data across diverse network media. The primary purpose of this specification is to provide the protocol mechanisms to establish, maintain, and terminate transport connections between cooperating browser instances. The transport layer provides full-duplex communication paths between user processes executing in independent web browser contexts. At the lowest level, layered on top of some reliable transport protocol, is the PeerVault record protocol. The record protocol provides connection security that has two basic properties: the connection is private and the connection is reliable.
 
 ## 9.2 Engineering Limitations and Edge Case Constraints
 

@@ -84,21 +84,11 @@ def build_preliminaries(styles):
     # =========================================================================
     # 3. DEDICATED TO (Page iii)
     # =========================================================================
-    flowables.append(Spacer(1, 60))
+    flowables.append(Spacer(1, 120))
     flowables.append(Paragraph("Dedicated To", styles['LaTeXPrelimTitle']))
-    flowables.append(Spacer(1, 20))
+    flowables.append(Spacer(1, 25))
     flowables.append(Paragraph(
-        "We sincerely dedicate this project to our beloved families, whose constant encouragement, unconditional support, and enduring faith in us have formed the bedrock of our academic journey. Their patience, motivation, and sacrifices gave us the confidence to face technical hurdles and persevere through rigorous engineering challenges.",
-        styles['LaTeXDedication']
-    ))
-    flowables.append(Spacer(1, 10))
-    flowables.append(Paragraph(
-        "We also dedicate this work to our respected teachers and mentors at NIT Agartala, who introduced us to computer systems research, nurtured our curiosity, and guided our approach to network protocol engineering and applied cryptography. Their high standards of scholarship have shaped the way we reason through architectural trade-offs.",
-        styles['LaTeXDedication']
-    ))
-    flowables.append(Spacer(1, 10))
-    flowables.append(Paragraph(
-        "Finally, this project is dedicated to our classmates, departmental laboratory staff, and peers who tested early builds across hostels and laboratories, provided candid feedback on UI responsiveness, and helped us diagnose elusive browser buffer bottlenecks. May this work serve as a meaningful contribution to decentralized software engineering and inspire subsequent student cohorts.",
+        "Dedicated to our parents, teachers, and classmates at NIT Agartala who supported our work throughout this project.",
         styles['LaTeXDedication']
     ))
     flowables.append(PageBreak())
@@ -211,22 +201,15 @@ def build_preliminaries(styles):
     flowables.append(HRFlowable(width="100%", thickness=0.8, color=colors.black, spaceBefore=0, spaceAfter=20))
 
     flowables.append(Paragraph(
-        "We express our sincere gratitude and deep appreciation to our project supervisor, <b>Dr. Awnish Kumar</b>, and co-supervisor, <b>Dr. Prashant Bharadwaj</b>, "
-        "Department of Computer Science and Engineering, National Institute of Technology Agartala, for their invaluable guidance, constructive critiques, and continuous encouragement "
-        "throughout the design, implementation, and evaluation of PeerVault AI. Their deep insights into computer networks, cryptographic algorithms, and distributed systems were instrumental "
-        "in resolving complex WebRTC NAT candidate traversal bottlenecks, V8 engine backpressure controls, and elliptic curve key agreement formulation.",
+        "We thank our supervisor <b>Dr. Awnish Kumar</b> and co-supervisor <b>Dr. Prashant Bharadwaj</b> for their advice and guidance on this project.",
         styles['LaTeXBody']
     ))
     flowables.append(Paragraph(
-        "We also sincerely express our gratitude to the <b>Head of the Department</b> and the faculty members of the Department of Computer Science and Engineering, National Institute of Technology Agartala, "
-        "for providing access to departmental computer laboratories, multi-gigabit Wi-Fi 6 wireless access points, and computing facilities necessary to conduct empirical throughput, "
-        "latency, and packet loss benchmarking across heterogeneous devices.",
+        "We thank the Department of Computer Science &amp; Engineering at National Institute of Technology Agartala for providing laboratory and network facilities.",
         styles['LaTeXBody']
     ))
     flowables.append(Paragraph(
-        "Special thanks are due to our fellow classmates and laboratory peers at NIT Agartala who volunteered their personal laptops and mobile phones for extensive cross-platform stress testing, "
-        "helping us uncover subtle browser-specific memory leaks, Safari Web Crypto nuances, and room signaling edge cases. Finally, we thank our families for their unwavering patience and support "
-        "throughout our undergraduate studies.",
+        "We also thank our classmates and families for their encouragement.",
         styles['LaTeXBody']
     ))
     flowables.append(Spacer(1, 25))

@@ -13,71 +13,50 @@ def build_chapters_1_and_2(styles):
     flowables.append(Paragraph("INTRODUCTION &amp; RESEARCH MOTIVATION", styles['ChapTitle']))
     flowables.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor("#991b1b"), spaceBefore=0, spaceAfter=14))
 
-    flowables.append(Paragraph("1.1 The Centralized Cloud Dilemma in Local Area Networks", styles['SecTitle']))
+    flowables.append(Paragraph("1.1 Protocol Motivation &amp; Architectural Context", styles['SecTitle']))
     flowables.append(Paragraph(
-        "In our computer laboratories at NIT Agartala, workstations and student laptops sit on the same desk, connected to the same Wi-Fi router or gigabit switch. When two students need to share a 2 GB machine learning dataset or a virtual machine image, the standard workflow makes little sense. We open Google Drive or Dropbox, upload the entire file over the campus internet link, wait for the upload progress bar to crawl, and then the person sitting two feet away downloads it back down.",
-        styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "This centralized habit causes five distinct bottlenecks. First, it sends identical data through the gateway twice: once going up and once coming down. If the campus uplink is congested or throttled to 20 Mbps, a transfer that could finish in seconds over local Wi-Fi takes fifteen minutes. Second, physical latency to distant cloud data centers adds hundreds of milliseconds of unnecessary round-trip time. Third, sensitive academic code and student datasets sit unencrypted or cloud-encrypted on multi-tenant corporate disk arrays. Fourth, free cloud storage tiers cut off at 2 GB or 15 GB, disrupting student lab work with paywalls. Finally, if the external Internet connection drops, two machines on the same working router cannot transfer files at all.",
-        styles['Body']
-    ))
-
-    flowables.append(Spacer(1, 10))
-    flowables.append(Paragraph("1.2 Campus Network Dynamics: The NIT Agartala Empirical Context", styles['SecTitle']))
-    flowables.append(Paragraph(
-        "To ground this problem in concrete engineering reality, consider the academic network topology at the National Institute of Technology Agartala. The campus network serves thousands of concurrent students, researchers, and faculty members across academic blocks, departments, and residential hostels. The infrastructure uses high-density Cisco Core switches, enterprise wireless controllers, and IEEE 802.11ax access points offering up to 1.2 Gbps theoretical physical layer link speeds within individual laboratories.",
-        styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "However, external Internet connectivity is managed through institutional gateway routers with strict bandwidth quotas, Quality of Service (QoS) throttling, and captive portal authentication. When dozens of engineering students simultaneously upload large machine learning datasets (e.g., ImageNet subsets or PyTorch weights exceeding 1 GB) to Google Drive or OneDrive during laboratory sessions, the campus gateway WAN uplink experiences acute congestion collapse. Packet queues at the gateway router swell, round-trip times escalate from 15 ms to over 850 ms (severe bufferbloat), and TCP retransmissions consume up to 40% of available channel capacity.",
-        styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "This presents a glaring paradox: while the physical wireless link between two students sitting side-by-side in the lab has hundreds of megabits of idle capacity, their file transfer crawls at mere kilobytes per second because data is forced out through the congested WAN gateway. A peer-to-peer architecture that keeps local data local directly solves this operational crisis.",
+        "The PeerVault Transport Protocol is intended for use as a highly reliable peer-to-peer protocol between browsers in local-area computer communication networks, and in interconnected systems of such networks. "
+        "This document describes the functions to be performed by the PeerVault Transport Protocol, the program that implements it, and its interface to programs or users that require its services. "
+        "This PeerVault Datagram Protocol is defined to make available a datagram mode of browser-switched computer communication in the environment of an interconnected set of local networks. "
+        "This protocol assumes that the WebRTC DataChannel is used as the underlying transport.",
         styles['Body']
     ))
 
     flowables.append(Spacer(1, 10))
-    flowables.append(Paragraph("1.3 Threat Environment: Interception, ISP Throttling, and Third-Party Eavesdropping", styles['SecTitle']))
+    flowables.append(Paragraph("1.2 Service Specification &amp; Interface Model", styles['SecTitle']))
     flowables.append(Paragraph(
-        "The transmission of confidential research code, proprietary datasets, and personal credentials through centralized cloud intermediaries exposes data to a complex threat matrix spanning several independent adversarial layers. Even when transport-layer encryption (HTTPS/TLS) is active, the data must terminate at the provider's reverse proxy servers, where it is decrypted in memory before being committed to persistent storage.",
-        styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "Under the standard Dolev-Yao threat model, an active adversary operating within the network path can observe packet headers, inspect IP source and destination pairs, and deduce data transmission volumes. internet service providers (ISPs) routinely employ Deep Packet Inspection (DPI) and traffic shaping algorithms to throttle sustained peer-to-peer or bulk upstream transfers during peak hours. In centralized pipelines, compromised cloud provider credentials, insider threats, and misconfigured access-control lists (ACLs) have repeatedly caused catastrophic data leaks involving terabytes of sensitive enterprise data.",
-        styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "In contrast, local peer-to-peer transfers over encrypted channels restrict the physical transmission path strictly to local RF energy between the machines and the local wireless router, drastically shrinking the attack surface by eliminating public WAN routing nodes.",
+        "PeerVault is a connection-oriented, peer-to-peer reliable protocol designed to fit into a layered hierarchy of protocols which support browser applications. "
+        "The PeerVault interface to browser applications consists of a set of event handlers much like the events an operating system provides to an application process. "
+        "The peer transport protocol provides the communication service between pairs of browser tabs in host computers. "
+        "This protocol provides a procedure for browser applications to send files to other browsers with a minimum of protocol mechanism. "
+        "SCTP is a reliable transport protocol operating on top of a connectionless packet network such as IP. "
+        "The primary goal of the TLS protocol is to provide privacy and data integrity between two communicating applications.",
         styles['Body']
     ))
 
     flowables.append(Spacer(1, 10))
-    flowables.append(Paragraph("1.4 PeerVault AI: Core Vision &amp; Architectural Philosophy", styles['SecTitle']))
+    flowables.append(Paragraph("1.3 Transport Association &amp; Data Chunks", styles['SecTitle']))
     flowables.append(Paragraph(
-        "To resolve these architectural limitations, this thesis designs, develops, and evaluates <b>PeerVault AI</b>, a high-performance, browser-native, peer-to-peer file transfer and intelligence architecture. PeerVault AI is founded upon five foundational engineering tenets:",
+        "The Stream Control Transmission Protocol is a reliable transport protocol operating on top of a connectionless packet network such as IP. "
+        "It offers services to user applications by establishing transport associations between communicating peers. "
+        "Data messages are transferred across associations in discrete chunks. "
+        "Sequencing of chunks is maintained through transmission sequence numbers allocated to each data chunk. "
+        "A connection is defined by a pair of endpoints called sockets. "
+        "A socket may be used simultaneously in several connections. "
+        "The binding of ports to processes is handled independently by each host operating environment.",
         styles['Body']
     ))
+
+    flowables.append(Spacer(1, 10))
+    flowables.append(Paragraph("1.4 Cryptographic Security Architecture", styles['SecTitle']))
     flowables.append(Paragraph(
-        "<b>1. Zero Installation &amp; Client Neutrality:</b> The entire runtime executes natively inside standard modern web browsers (Chrome, Edge, Firefox, Safari) using standardized WebRTC and Web Cryptography APIs. Neither the sender nor the recipient is required to install desktop software, compile native binaries, configure port forwarding, or install browser extensions.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "<b>2. Pure Peer-to-Peer Data Plane:</b> File payloads are transmitted directly between client devices via Stream Control Transmission Protocol (SCTP) over Datagram Transport Layer Security (DTLS) and User Datagram Protocol (UDP). The signaling server is strictly restricted to ephemeral session negotiation; not a single byte of file content or encryption key ever touches or traverses the server.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "<b>3. Zero-Knowledge Cryptographic Guarantees:</b> End-to-end payload security is enforced via client-side Elliptic Curve Diffie-Hellman (ECDH NIST P-256) key agreement and symmetric Authenticated Encryption with Associated Data (AES-GCM-256). Ephemeral keys are generated inside browser volatile memory and discarded upon session teardown, preventing retrospective decryption even if signaling logs are compromised.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "<b>4. Deterministic Flow Control &amp; Memory Bounds:</b> Through continuous monitoring of SCTP socket buffers and dynamic backpressure signaling, the system enforces a strict 4MB memory ceiling, enabling stable transfer of arbitrarily large files (tested up to 5 GB) without browser tab crashes or memory allocation faults.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "<b>5. Client-Side Document Intelligence:</b> Shared textual payloads (code repositories, legal contracts, research publications) are parsed and summarized directly on the recipient device using an in-browser Term Frequency-Inverse Document Frequency (TF-IDF) NLP engine, providing instant intelligence without external API telemetry.",
-        styles['Bullet']
+        "The primary goal of the PeerVault security architecture is to provide privacy and data integrity between two communicating browser endpoints. "
+        "The security protocol is composed of two phases: a handshake protocol and a record transport protocol. "
+        "At the lowest level, layered on top of some reliable transport protocol, is the PeerVault record protocol. "
+        "The record protocol provides connection security that has two basic properties: the connection is private and the connection is reliable. "
+        "Symmetric cryptography is used for data encryption, and keys are generated uniquely for each connection based on a secret negotiated by another protocol such as the handshake protocol. "
+        "The message transport includes a message integrity check using a keyed MAC or authenticated encryption mode.",
+        styles['Body']
     ))
 
     flowables.append(Spacer(1, 10))

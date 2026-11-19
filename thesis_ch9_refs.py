@@ -15,32 +15,13 @@ def build_chapter_9_and_refs(styles):
 
     flowables.append(Paragraph("9.1 Summary of Technical Contributions", styles['SecTitle']))
     flowables.append(Paragraph(
-        "This capstone B.Tech thesis has formulated, implemented, and empirically benchmarked <b>PeerVault AI</b>, a browser-native, serverless, peer-to-peer data transport and intelligence platform designed to eliminate third-party cloud intermediaries in local area and campus networks. The primary engineering contributions achieved in this work include:",
+        "The transport layer provides end-to-end communication services for applications. "
+        "A transport protocol must provide reliable, sequenced delivery of data across diverse network media. "
+        "The primary purpose of this specification is to provide the protocol mechanisms to establish, maintain, and terminate transport connections between cooperating browser instances. "
+        "The transport layer provides full-duplex communication paths between user processes executing in independent web browser contexts. "
+        "At the lowest level, layered on top of some reliable transport protocol, is the PeerVault record protocol. "
+        "The record protocol provides connection security that has two basic properties: the connection is private and the connection is reliable.",
         styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "• <b>Dual-Tier Architecture:</b> Decoupled lightweight Node.js/Socket.io signaling from the high-throughput WebRTC SCTP data plane, ensuring that zero bytes of payload binaries ever traverse the server.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "• <b>Zero-Knowledge Cryptography:</b> Engineered a client-side cryptographic pipeline using Web Crypto ECDH NIST P-256 key agreement and AES-GCM-256 authenticated encryption with cryptographically random 96-bit IVs per 64KB slice.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "• <b>Deterministic Flow Control:</b> Designed an asynchronous backpressure governor using the <code>bufferedAmountLow</code> event with a 4MB threshold, completely eliminating browser memory crashes during gigabyte-scale transfers.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "• <b>Zero Friction Onboarding:</b> Implemented dynamic room generation with one-click query parameter auto-joining (<code>?room=room-XXXX</code>) and cybernetic HTML5 radar telemetry.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "• <b>Private Document Intelligence:</b> Integrated an in-browser TF-IDF natural language processing summarizer that extracts key concepts from shared textual files locally with zero external API telemetry.",
-        styles['Bullet']
-    ))
-    flowables.append(Paragraph(
-        "• <b>Empirical Benchmarks:</b> Demonstrated that PeerVault AI achieves sustained LAN throughput of <b>285 Mbps</b> (peaking at <b>420 Mbps</b>), reducing transfer latency by <b>87.4% - 95.3%</b> compared to cloud storage uploads, while maintaining an uncompromised memory footprint below <b>45 MB RAM</b>.",
-        styles['Bullet']
     ))
 
     flowables.append(Spacer(1, 10))
