@@ -1,13 +1,31 @@
 # thesis_styles.py
-# ReportLab style definitions and custom canvas for PeerVault AI Capstone Thesis
+# LaTeX-matched academic styling for NIT Agartala B.Tech Thesis
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.units import inch
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfgen import canvas
-from reportlab.platypus import Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable, Preformatted
+from reportlab.platypus import Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable, Image
 
-class NumberedCanvas(canvas.Canvas):
+def int_to_roman(n):
+    val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+    syb = ["m", "cm", "d", "cd", "c", "xc", "l", "xl", "x", "ix", "v", "iv", "i"]
+    roman_num = ""
+    i = 0
+    while n > 0:
+        for _ in range(n // val[i]):
+            roman_num += syb[i]
+            n -= val[i]
+        i += 1
+    return roman_num
+
+class LaTeXNumberedCanvas(canvas.Canvas):
+    """
+    Implements standard LaTeX academic book/report numbering:
+    - Page 1 & 2: Cover & Submission page (no page numbers, no header)
+    - Page 3 to 17: Roman numerals at bottom center (iii, iv, v, ... xvii)
+    - Page 18+: Arabic numerals at bottom center (1, 2, 3, ...), with running header and top horizontal rule
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._saved_page_states = []
@@ -20,73 +38,340 @@ class NumberedCanvas(canvas.Canvas):
         num_pages = len(self._saved_page_states)
         for state in self._saved_page_states:
             self.__dict__.update(state)
-            self.draw_page_decorations(num_pages)
+            self.draw_latex_decorations(num_pages)
             super().showPage()
         super().save()
 
-    def draw_page_decorations(self, total_pages):
-        # Preliminary pages (1 to 4: Title, Declaration, Certificate, Acknowledgments) don't have header/footer
-        if self._pageNumber <= 4:
+    def draw_latex_decorations(self, total_pages):
+        # Determine prelim offset: Chapter 1 begins at page 17
+        prelim_count = 14  # Pages 1 to 14 are preliminaries (Chapter 1 begins at page 15)
+
+        # Cover (1) and Inner Cover (2): no headers, no page numbers
+        if self._pageNumber <= 2:
             return
 
         self.saveState()
-        self.setFont("Helvetica-Bold", 7.5)
-        self.setFillColor(colors.HexColor("#475569"))
+        self.setFont("Times-Roman", 10)
+        self.setFillColor(colors.black)
+        self.setStrokeColor(colors.HexColor("#333333"))
+        self.setLineWidth(0.5)
 
-        # Running Header
-        self.drawString(54, 755, "NIT AGARTALA  |  DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING  |  B.TECH THESIS")
-        self.setStrokeColor(colors.HexColor("#cbd5e1"))
-        self.setLineWidth(0.6)
-        self.line(54, 747, 558, 747)
+        if self._pageNumber <= prelim_count:
+            # Preliminary pages (Roman numerals)
+            roman_str = int_to_roman(self._pageNumber)
+            # Bottom Center
+            self.drawCentredString(306, 45, roman_str)
+        else:
+            # Main matter (Arabic numerals: Page 1, 2, 3...)
+            arabic_num = self._pageNumber - prelim_count
+            
+            # Running Header with Top Rule
+            self.line(72, 735, 540, 735)
+            self.setFont("Times-Italic", 9.5)
+            # Top header text
+            self.drawRightString(540, 742, "PEERVAULT AI: B.TECH CAPSTONE THESIS")
+            
+            # Bottom Center Arabic Page Number
+            self.setFont("Times-Roman", 10)
+            self.drawCentredString(306, 45, str(arabic_num))
 
-        # Running Footer
-        self.line(54, 45, 558, 45)
-        self.setFont("Helvetica", 7.5)
-        self.drawString(54, 32, "PeerVault AI: End-to-End Encrypted WebRTC LAN File Transfer & Intelligence Architecture")
-        page_str = f"Page {self._pageNumber} of {total_pages}"
-        self.drawRightString(558, 32, page_str)
         self.restoreState()
 
 def get_thesis_styles():
     styles = getSampleStyleSheet()
 
-    c_primary = colors.HexColor("#0f172a")  # Deep Navy / Slate
-    c_accent = colors.HexColor("#991b1b")   # Academic Crimson
-    c_gold = colors.HexColor("#b45309")     # Amber / Gold
-    c_dark = colors.HexColor("#1e293b")     # Body Charcoal
-    c_muted = colors.HexColor("#64748b")    # Slate Muted
-    c_code_bg = colors.HexColor("#f8fafc")  # Subtle code background
-    c_border = colors.HexColor("#e2e8f0")
+    # Base Fonts
+    c_dark = colors.HexColor("#111827")
+    c_crimson = colors.HexColor("#991b1b")
+    c_blue = colors.HexColor("#1e3a8a")
 
-    custom = {
-        'CoverInst': ParagraphStyle('CoverInst', fontName='Helvetica-Bold', fontSize=14, leading=18, alignment=1, textColor=c_primary, spaceAfter=4),
-        'CoverDept': ParagraphStyle('CoverDept', fontName='Helvetica', fontSize=10.5, leading=15, alignment=1, textColor=c_muted, spaceAfter=24),
-        'CoverTitle': ParagraphStyle('CoverTitle', fontName='Helvetica-Bold', fontSize=20, leading=25, alignment=1, textColor=c_accent, spaceAfter=10),
-        'CoverSub': ParagraphStyle('CoverSub', fontName='Helvetica', fontSize=11, leading=16, alignment=1, textColor=c_dark, spaceAfter=24),
-        'CoverMetaHeader': ParagraphStyle('CoverMetaHeader', fontName='Helvetica-Bold', fontSize=9.5, leading=13, textColor=c_primary),
-        'CoverMetaVal': ParagraphStyle('CoverMetaVal', fontName='Helvetica', fontSize=9, leading=13, textColor=c_dark),
-        'CoverFoot': ParagraphStyle('CoverFoot', fontName='Helvetica', fontSize=8.5, leading=12, alignment=1, textColor=c_muted),
+    # Cover Page Styles
+    styles.add(ParagraphStyle(
+        name='LaTeXCoverTitle',
+        fontName='Times-Bold',
+        fontSize=18,
+        leading=24,
+        alignment=1, # Center
+        textColor=c_dark,
+        spaceAfter=15
+    ))
 
-        'ChapNumber': ParagraphStyle('ChapNumber', fontName='Helvetica-Bold', fontSize=12, leading=16, textColor=c_accent, spaceBefore=10, spaceAfter=2, keepWithNext=True),
-        'ChapTitle': ParagraphStyle('ChapTitle', fontName='Helvetica-Bold', fontSize=17, leading=22, textColor=c_primary, spaceBefore=2, spaceAfter=14, keepWithNext=True),
-        'SecTitle': ParagraphStyle('SecTitle', fontName='Helvetica-Bold', fontSize=12, leading=16, textColor=c_accent, spaceBefore=14, spaceAfter=6, keepWithNext=True),
-        'SubSecTitle': ParagraphStyle('SubSecTitle', fontName='Helvetica-Bold', fontSize=10, leading=14, textColor=c_gold, spaceBefore=10, spaceAfter=4, keepWithNext=True),
+    styles.add(ParagraphStyle(
+        name='LaTeXCoverSub',
+        fontName='Times-Roman',
+        fontSize=12,
+        leading=17,
+        alignment=1,
+        textColor=c_dark,
+        spaceAfter=10
+    ))
 
-        'Body': ParagraphStyle('Body', fontName='Helvetica', fontSize=9.5, leading=14.5, textColor=c_dark, spaceAfter=7, alignment=4),
-        'BodyBold': ParagraphStyle('BodyBold', fontName='Helvetica-Bold', fontSize=9.5, leading=14.5, textColor=c_dark, spaceAfter=7),
-        'Bullet': ParagraphStyle('Bullet', fontName='Helvetica', fontSize=9, leading=13.5, textColor=c_dark, leftIndent=14, spaceAfter=3),
-        'Callout': ParagraphStyle('Callout', fontName='Helvetica-Oblique', fontSize=9, leading=13.5, textColor=colors.HexColor("#334155"), leftIndent=16, rightIndent=16, spaceBefore=6, spaceAfter=8),
+    styles.add(ParagraphStyle(
+        name='LaTeXCoverMembers',
+        fontName='Times-Bold',
+        fontSize=11,
+        leading=16,
+        alignment=1,
+        textColor=c_dark,
+        spaceAfter=6
+    ))
 
-        'CodeBlock': ParagraphStyle('CodeBlock', fontName='Courier', fontSize=7.5, leading=10.5, textColor=c_primary, backColor=c_code_bg, borderPadding=5, spaceBefore=4, spaceAfter=7),
-        'TableHead': ParagraphStyle('TableHead', fontName='Helvetica-Bold', fontSize=8.5, leading=11, alignment=1, textColor=c_primary),
-        'TableCell': ParagraphStyle('TableCell', fontName='Helvetica', fontSize=8, leading=11, textColor=c_dark),
-        'TableCellBold': ParagraphStyle('TableCellBold', fontName='Helvetica-Bold', fontSize=8, leading=11, textColor=c_dark),
+    styles.add(ParagraphStyle(
+        name='LaTeXCoverFaculty',
+        fontName='Times-Roman',
+        fontSize=11,
+        leading=15,
+        alignment=1,
+        textColor=c_dark,
+        spaceAfter=4
+    ))
 
-        'QTitle': ParagraphStyle('QTitle', fontName='Helvetica-Bold', fontSize=9.5, leading=14, textColor=c_primary, spaceBefore=10, spaceAfter=3, keepWithNext=True),
-        'AnsText': ParagraphStyle('AnsText', fontName='Helvetica', fontSize=9, leading=13.5, textColor=c_dark, leftIndent=10, spaceAfter=7),
+    styles.add(ParagraphStyle(
+        name='LaTeXCoverDept',
+        fontName='Times-Bold',
+        fontSize=10.5,
+        leading=15,
+        alignment=1,
+        textColor=c_dark
+    ))
 
-        'TOCItem': ParagraphStyle('TOCItem', fontName='Helvetica', fontSize=9, leading=14, textColor=c_dark),
-        'TOCPage': ParagraphStyle('TOCPage', fontName='Helvetica-Bold', fontSize=9, leading=14, alignment=2, textColor=c_accent),
-        'TOCChap': ParagraphStyle('TOCChap', fontName='Helvetica-Bold', fontSize=9.5, leading=15, textColor=c_primary),
-    }
-    return custom
+    # Preliminaries Heading
+    styles.add(ParagraphStyle(
+        name='LaTeXPrelimTitle',
+        fontName='Times-Bold',
+        fontSize=16,
+        leading=22,
+        alignment=1, # Center
+        textColor=c_dark,
+        spaceAfter=16
+    ))
+
+    # Dedication
+    styles.add(ParagraphStyle(
+        name='LaTeXDedication',
+        fontName='Times-Italic',
+        fontSize=11,
+        leading=18,
+        alignment=4, # Justified
+        textColor=c_dark,
+        spaceAfter=12
+    ))
+
+    # Epigraph Quote
+    styles.add(ParagraphStyle(
+        name='LaTeXQuote',
+        fontName='Times-BoldItalic',
+        fontSize=13,
+        leading=20,
+        alignment=1,
+        textColor=c_dark,
+        spaceAfter=10
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXQuoteAuthor',
+        fontName='Times-Roman',
+        fontSize=11,
+        leading=16,
+        alignment=1,
+        textColor=c_dark
+    ))
+
+    # Main Chapters
+    styles.add(ParagraphStyle(
+        name='LaTeXChapterNum',
+        fontName='Times-Bold',
+        fontSize=16,
+        leading=22,
+        alignment=2, # Right-aligned
+        textColor=c_dark,
+        spaceAfter=4
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXChapterTitle',
+        fontName='Times-Bold',
+        fontSize=16,
+        leading=22,
+        alignment=2, # Right-aligned
+        textColor=c_dark,
+        spaceAfter=20
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXSecTitle',
+        fontName='Times-Bold',
+        fontSize=13,
+        leading=18,
+        alignment=0, # Left
+        textColor=c_dark,
+        spaceBefore=12,
+        spaceAfter=6
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXSubSecTitle',
+        fontName='Times-Bold',
+        fontSize=11.5,
+        leading=16,
+        alignment=0,
+        textColor=c_dark,
+        spaceBefore=8,
+        spaceAfter=4
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXBody',
+        fontName='Times-Roman',
+        fontSize=10.5,
+        leading=15,
+        alignment=4, # Justified
+        textColor=c_dark,
+        spaceAfter=8
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXBodyBold',
+        fontName='Times-Bold',
+        fontSize=10.5,
+        leading=15,
+        alignment=4,
+        textColor=c_dark,
+        spaceAfter=6
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXBullet',
+        fontName='Times-Roman',
+        fontSize=10.5,
+        leading=15,
+        alignment=4,
+        leftIndent=15,
+        textColor=c_dark,
+        spaceAfter=4
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXCode',
+        fontName='Courier',
+        fontSize=8.5,
+        leading=12,
+        textColor=colors.HexColor("#1e293b"),
+        spaceBefore=4,
+        spaceAfter=6
+    ))
+
+    # TOC
+    styles.add(ParagraphStyle(
+        name='LaTeXTOCChap',
+        fontName='Times-Bold',
+        fontSize=10.5,
+        leading=15,
+        textColor=c_dark
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXTOCSec',
+        fontName='Times-Roman',
+        fontSize=10,
+        leading=14,
+        leftIndent=15,
+        textColor=c_dark
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXTOCSubSec',
+        fontName='Times-Roman',
+        fontSize=9.5,
+        leading=13,
+        leftIndent=30,
+        textColor=c_dark
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXTOCPage',
+        fontName='Times-Roman',
+        fontSize=10,
+        leading=14,
+        alignment=2,
+        textColor=c_dark
+    ))
+
+    # Tables
+    styles.add(ParagraphStyle(
+        name='LaTeXTableHead',
+        fontName='Times-Bold',
+        fontSize=9.5,
+        leading=13,
+        textColor=c_dark
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXTableCell',
+        fontName='Times-Roman',
+        fontSize=9,
+        leading=12.5,
+        textColor=c_dark
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXTableCellBold',
+        fontName='Times-Bold',
+        fontSize=9,
+        leading=12.5,
+        textColor=c_dark
+    ))
+
+    # Viva Voce
+    styles.add(ParagraphStyle(
+        name='LaTeXQTitle',
+        fontName='Times-Bold',
+        fontSize=10.5,
+        leading=14.5,
+        textColor=c_dark,
+        spaceBefore=7,
+        spaceAfter=2
+    ))
+
+    styles.add(ParagraphStyle(
+        name='LaTeXAnsText',
+        fontName='Times-Roman',
+        fontSize=10,
+        leading=14,
+        alignment=4,
+        leftIndent=12,
+        textColor=c_dark,
+        spaceAfter=6
+    ))
+
+    # Standard Aliases mapped to LaTeX typography
+    def add_or_update(name, parent_name):
+        if name in styles:
+            s = styles[name]
+            p = styles[parent_name]
+            for attr in ['fontName', 'fontSize', 'leading', 'textColor', 'alignment', 'spaceBefore', 'spaceAfter', 'leftIndent', 'rightIndent']:
+                if hasattr(p, attr):
+                    setattr(s, attr, getattr(p, attr))
+        else:
+            styles.add(ParagraphStyle(name=name, parent=styles[parent_name]))
+
+    add_or_update('ChapNumber', 'LaTeXChapterNum')
+    add_or_update('ChapTitle', 'LaTeXChapterTitle')
+    add_or_update('SecTitle', 'LaTeXSecTitle')
+    add_or_update('SubSecTitle', 'LaTeXSubSecTitle')
+    add_or_update('Body', 'LaTeXBody')
+    add_or_update('BodyBold', 'LaTeXBodyBold')
+    add_or_update('Bullet', 'LaTeXBullet')
+    add_or_update('CodeBlock', 'LaTeXCode')
+    add_or_update('TableHead', 'LaTeXTableHead')
+    add_or_update('TableCell', 'LaTeXTableCell')
+    add_or_update('TableCellBold', 'LaTeXTableCellBold')
+    add_or_update('QTitle', 'LaTeXQTitle')
+    add_or_update('AnsText', 'LaTeXAnsText')
+    add_or_update('Callout', 'LaTeXBody')
+    if 'Callout' in styles:
+        styles['Callout'].fontName = 'Times-Italic'
+        styles['Callout'].leftIndent = 15
+        styles['Callout'].rightIndent = 15
+
+    return styles

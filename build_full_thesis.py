@@ -7,7 +7,7 @@ import re
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate
 
-from thesis_styles import NumberedCanvas, get_thesis_styles
+from thesis_styles import LaTeXNumberedCanvas, get_thesis_styles
 from thesis_prelims import build_preliminaries
 from thesis_ch1_ch2 import build_chapters_1_and_2
 from thesis_ch3_ch4 import build_chapters_3_and_4
@@ -46,8 +46,8 @@ def compile_pdf(output_pdf_path):
     print("Building Chapter 9 & References...")
     story.extend(build_chapter_9_and_refs(styles))
 
-    print("Compiling PDF with NumberedCanvas...")
-    doc.build(story, canvasmaker=NumberedCanvas)
+    print("Compiling PDF with LaTeXNumberedCanvas...")
+    doc.build(story, canvasmaker=LaTeXNumberedCanvas)
     print(f"Compilation complete: {output_pdf_path}")
 
 def count_pdf_pages(pdf_path):

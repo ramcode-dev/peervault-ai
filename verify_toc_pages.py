@@ -1,6 +1,6 @@
 # verify_toc_pages.py
 from reportlab.platypus import Flowable, Paragraph, SimpleDocTemplate
-from thesis_styles import get_thesis_styles, NumberedCanvas
+from thesis_styles import get_thesis_styles, LaTeXNumberedCanvas
 from thesis_prelims import build_preliminaries
 from thesis_ch1_ch2 import build_chapters_1_and_2
 from thesis_ch3_ch4 import build_chapters_3_and_4
@@ -39,7 +39,7 @@ def verify():
     story.extend(wrap(build_chapter_9_and_refs(styles)))
 
     doc = SimpleDocTemplate('verify_temp.pdf', leftMargin=54, rightMargin=54, topMargin=54, bottomMargin=54)
-    doc.build(story, canvasmaker=NumberedCanvas)
+    doc.build(story, canvasmaker=LaTeXNumberedCanvas)
     
     for k, v in sorted(reg.items(), key=lambda x: x[1]):
         print(f'{k:35} -> Page {v}')

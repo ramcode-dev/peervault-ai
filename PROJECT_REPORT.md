@@ -1,254 +1,289 @@
 # B.TECH CAPSTONE THESIS: PEERVAULT AI
-**Browser-Native End-to-End Encrypted WebRTC LAN File Transfer & Intelligence Architecture**
+**Browser-Native End-to-End Encrypted P2P LAN File Transfer & Local Intelligence Architecture**
 
 > **Institution:** National Institute of Technology (NIT), Agartala  
 > **Department:** Department of Computer Science & Engineering  
-> **Candidate:** Ram Pedapati (PEDAPATI RAM)  
-> **Enrollment / Reg No:** 23UCS191 / 2317098  
-> **Degree:** Bachelor of Technology (B.Tech) in CSE (Class of 2027)  
+> **Degree:** Bachelor of Technology (B.Tech) in Computer Science & Engineering (Class of 2027)  
 > **Academic Session:** 2026-2027  
+> **Project Group Members:**  
+> 1. **Ram Pedapati** (Enrollment: 23UCS191, Registration: 2317098)  
+> 2. **Terli Jogiswara Prabhas**  
+> 3. **Unnavada Nikhilesh Kumar**  
+> 4. **Sithalam Hari Krishna Sai Durga Prasad**  
+> **Supervisor:** Dr. Awnish Kumar (Assistant Professor, CSE Dept., NIT Agartala)  
+> **Co-Supervisor:** Dr. Prashant Bharadwaj (Assistant Professor, CSE Dept., NIT Agartala)  
+> **Head of Department:** Prof. Mrinal Kanti Deb Barma (Professor & HOD, CSE Dept., NIT Agartala)  
 > **Repository:** [https://github.com/ramcode-dev/peervault-ai](https://github.com/ramcode-dev/peervault-ai)  
 > **Live Deployment:** [https://peervault-ai.onrender.com](https://peervault-ai.onrender.com)
 
 ---
 
----
+PEERVAULT AI: BROWSER-NATIVE END-TO-END ENCRYPTED P2P LAN FILE TRANSFER & LOCAL INTELLIGENCE ARCHITECTURE
 
-| **Submitted By:** | **Under the Guidance of:** |
+**Submitted By:**
+
+**RAM PEDAPATI (23UCS191)**
+**TERLI JOGISWARA PRABHAS**
+**UNNAVADA NIKHILESH KUMAR**
+**SITHALAM HARI KRISHNA SAI DURGA PRASAD**
+
+COMPUTER SCIENCE & ENGINEERING DEPARTMENT
+
+NATIONAL INSTITUTE OF TECHNOLOGY, AGARTALA
+
+INDIA-799046
+
+APRIL, 2026
+
+PEERVAULT AI: BROWSER-NATIVE END-TO-END ENCRYPTED P2P LAN FILE TRANSFER & LOCAL INTELLIGENCE ARCHITECTURE
+
+*Report submitted to*
+
+**National Institute of Technology, Agartala**
+
+*for the award of the degree of*
+
+**Bachelor of Technology**
+
+*in*
+
+**Computer Science & Engineering**
+
+**by**
+
+**RAM PEDAPATI (23UCS191)**
+**TERLI JOGISWARA PRABHAS**
+**UNNAVADA NIKHILESH KUMAR**
+**SITHALAM HARI KRISHNA SAI DURGA PRASAD**
+
+*Under the Guidance of*
+
+**Dr. Awnish Kumar**
+Assistant Professor
+*(Supervisor)*
+
+**Dr. Prashant Bharadwaj**
+Assistant Professor
+*(Co-Supervisor)*
+
+COMPUTER SCIENCE & ENGINEERING DEPARTMENT
+
+NATIONAL INSTITUTE OF TECHNOLOGY AGARTALA
+
+APRIL, 2026
+
+Dedicated To
+
+We sincerely dedicate this project to our beloved families, whose constant encouragement, unconditional support, and enduring faith in us have formed the bedrock of our academic journey. Their patience, motivation, and sacrifices gave us the confidence to face technical hurdles and persevere through rigorous engineering challenges.
+
+We also dedicate this work to our respected teachers and mentors at NIT Agartala, who introduced us to computer systems research, nurtured our curiosity, and guided our approach to network protocol engineering and applied cryptography. Their high standards of scholarship have shaped the way we reason through architectural trade-offs.
+
+Finally, this project is dedicated to our classmates, departmental laboratory staff, and peers who tested early builds across hostels and laboratories, provided candid feedback on UI responsiveness, and helped us diagnose elusive browser buffer bottlenecks. May this work serve as a meaningful contribution to decentralized software engineering and inspire subsequent student cohorts.
+
+❝If I have seen further than others, it is by standing upon the shoulders of giants.❞
+
+- Isaac Newton
+
+REPORT APPROVAL FOR B.TECH
+
+This report entitled **“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer & Local Intelligence Architecture”**, by **Ram Pedapati (23UCS191)**, **Terli Jogiswara Prabhas**, **Unnavada Nikhilesh Kumar**, and **Sithalam Hari Krishna Sai Durga Prasad** is approved in partial fulfilment of the requirements for the award of **Bachelor of Technology** in **Computer Science & Engineering**.
+
+| ____________________________ **Dr. Awnish Kumar** (Project Supervisor) Assistant Professor Computer Science & Engg. Dept. NIT, Agartala | ____________________________ **Dr. Prashant Bharadwaj** (Co-Supervisor) Assistant Professor Computer Science & Engg. Dept. NIT Agartala | ____________________________ **Prof. Mrinal Kanti Deb Barma** (Head of the Department) Professor Computer Science & Engg. Dept. NIT Agartala |
+| --- | --- | --- |
+
+**Date:** ..............................
+
+**Place:** NIT, Agartala
+
+DECLARATION
+
+We declare that the work presented in this report titled **“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer & Local Intelligence Architecture”**, submitted to the Computer Science and Engineering Department, National Institute of Technology, Agartala, for the award of the **Bachelor of Technology** degree in **Computer Science & Engineering**, represents our ideas in our own words and where others' ideas or words have been included, we have adequately cited and referenced the original sources. We also declare that we have adhered to all principles of academic honesty and integrity and have not misrepresented or fabricated or falsified any idea, data, fact, or source in our submission. We understand that any violation of the above will be a cause for disciplinary action by the Institute and can also evoke penal action from the sources which have thus not been properly cited or from whom proper permission has not been taken when needed.
+
+**APRIL, 2026**
+**NIT Agartala**
+
+________________________________________
+**Ram Pedapati (23UCS191)**
+
+________________________________________
+**Terli Jogiswara Prabhas**
+
+________________________________________
+**Unnavada Nikhilesh Kumar**
+
+________________________________________
+**Sithalam Hari Krishna Sai Durga Prasad**
+
+CERTIFICATE
+
+It is certified that the work contained in the report titled **“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer & Local Intelligence Architecture”**, by **Ram Pedapati (23UCS191)**, **Terli Jogiswara Prabhas**, **Unnavada Nikhilesh Kumar**, and **Sithalam Hari Krishna Sai Durga Prasad** has been carried out under our supervision. This work has not been submitted elsewhere for a degree.
+
+| ___________________________________ **Dr. Awnish Kumar** Assistant Professor Computer Science & Engg. Dept. NIT Agartala | ___________________________________ **Dr. Prashant Bharadwaj** Assistant Professor Computer Science & Engg. Dept. NIT Agartala |
 | --- | --- |
-| **RAM PEDAPATI** Enrollment No: 23UCS191 Registration No: 2317098 B.Tech CSE (Class of 2027) Department of Computer Science & Engg. National Institute of Technology Agartala Email: ramcode9841@gmail.com | **Department Faculty Supervisor** Department of Computer Science & Engineering National Institute of Technology Agartala Barjala, Jirania, Tripura (W) - 799046 |
 
 ---
 
-# DECLARATION OF ORIGINALITY
+Acknowledgement
 
 ---
 
-I hereby declare that the capstone project work entitled **"PeerVault AI: Browser-Native LAN Peer-to-Peer End-to-End Encrypted File Transfer & Local Intelligence Architecture"** submitted to the Department of Computer Science & Engineering, National Institute of Technology Agartala, is an authentic record of original engineering work carried out by me under academic supervision.
+We express our sincere gratitude and deep appreciation to our project supervisor, **Dr. Awnish Kumar**, and co-supervisor, **Dr. Prashant Bharadwaj**, Department of Computer Science and Engineering, National Institute of Technology Agartala, for their invaluable guidance, constructive critiques, and continuous encouragement throughout the design, implementation, and evaluation of PeerVault AI. Their deep insights into computer networks, cryptographic algorithms, and distributed systems were instrumental in resolving complex WebRTC NAT candidate traversal bottlenecks, V8 engine backpressure controls, and elliptic curve key agreement formulation.
 
-The project formulates, designs, implements, and benchmarks a serverless peer-to-peer data transport pipeline using WebRTC SCTP DataChannels, Web Cryptography API (ECDH NIST P-256 and AES-GCM-256), adaptive backpressure queuing, and in-browser natural language processing. I confirm that no portion of this work has been submitted elsewhere for the award of any other degree, diploma, fellowship, or professional certification.
+We also sincerely express our gratitude to **Prof. Mrinal Kanti Deb Barma**, Head of the Department of Computer Science and Engineering, National Institute of Technology Agartala, for providing access to departmental computer laboratories, multi-gigabit Wi-Fi 6 wireless access points, and high-performance computing facilities necessary to conduct empirical throughput, latency, and packet loss benchmarking across heterogeneous devices.
 
-Wherever third-party specifications, standard RFCs (RFC 8829, RFC 8831, RFC 8445, RFC 4960, RFC 5869, RFC 8446), cryptographic primitives, or open-source software libraries have been consulted or used, proper academic citations and standard acknowledgments are explicitly provided in the bibliography.
+Special thanks are due to our fellow classmates and laboratory peers at NIT Agartala who volunteered their personal laptops and mobile phones for extensive cross-platform stress testing, helping us uncover subtle browser-specific memory leaks, Safari Web Crypto nuances, and room signaling edge cases. Finally, we thank our families for their unwavering patience and support throughout our undergraduate studies.
 
-| **Date:** November 19, 2026 **Place:** NIT Agartala, Jirania | **RAM PEDAPATI** Roll Number: 23UCS191 Registration Number: 2317098 Department of Computer Science & Engineering National Institute of Technology Agartala |
+**- Ram Pedapati (23UCS191)**
+**- Terli Jogiswara Prabhas**
+**- Unnavada Nikhilesh Kumar**
+**- Sithalam Hari Krishna Sai Durga Prasad**
+
+---
+
+List of Figures
+
+---
+
+| **3.1** | Decoupled Dual-Tier Architecture (Control vs. Data Plane) . . . . . . | **10** |
+| --- | --- | --- |
+| **3.2** | Data Flow Diagram: Level 0 (Context Level Rendezvous) . . . . . . | **11** |
+| **3.3** | Data Flow Diagram: Level 1 (Peer Connection & Chunk Slicing) . . . . . . | **11** |
+| **3.4** | Data Flow Diagram: Level 2 (Detailed Cryptographic Pipeline) . . . . . . | **12** |
+| **4.1** | RTCPeerConnection Finite State Automaton Lifecycle . . . . . . | **13** |
+| **4.2** | End-to-End Signaling Handshake & Transfer Sequence Flow . . . . . . | **14** |
+| **4.3** | Cyber Cockpit Dual-Column Layout Architecture . . . . . . | **15** |
+| **5.1** | Radar Telemetry Canvas Visualizer Interface . . . | **18** |
+| **5.2** | Interactive Drag-and-Drop In-Browser File Dropzone . . . . . . | **19** |
+| **5.3** | Zero-Knowledge SHA-256 Key Verification Fingerprint Badge . . . . . . | **20** |
+| **5.4** | Client-Side TF-IDF Document Intelligence Extractive Summary . . . . . . | **21** |
+| **7.1** | Empirical Throughput Comparison: PeerVault LAN vs. Cloud Relays . . . . . . | **25** |
+| **7.2** | Transfer Latency vs. Payload Size (10MB to 2GB) . . . . . . | **26** |
+| **7.3** | Memory Allocation Stability Under 4MB BufferedAmount Backpressure . . . . . . | **26** |
+| **7.4** | Packet Loss Tolerance Curve Under Simulated Network Drops (0-15%) . . . . . . | **27** |
+
+---
+
+List of Tables
+
+---
+
+| **1** | State-of-the-Art P2P File Sharing Architectural Comparison . . . . . . | **8** |
+| --- | --- | --- |
+| **2** | Functional & Non-Functional Software Requirements Specification . . . . . . | **9** |
+| **3** | Dolev-Yao Threat Model & Mitigations in PeerVault AI . . . . . . | **10** |
+| **4** | Cybernetic Interface Color Tokens and Design Specifications . . . . . . | **15** |
+| **5** | Cryptographic Parameter & Cipher Suite Specifications . . . . . . | **24** |
+| **6** | Experimental Testbed Hardware and Network Specifications . . . . . . | **25** |
+| **7** | Transfer Duration Benchmarks: PeerVault LAN vs. Google Drive . . . . . . | **25** |
+| **8** | Cross-Platform Heterogeneous Transfer Velocity Matrix . . . . . . | **27** |
+| **9** | Chunk Size Sensitivity Analysis (16KB to 256KB) . . . . . . | **27** |
+| **10** | Project Objectives Achievement Status & Verification Matrix . . . . . . | **41** |
+
+---
+
+Abstract
+
+---
+
+File transfer across local area networks in academic institutions, enterprise offices, and research laboratories predominantly routes data through third-party wide-area cloud storage providers such as Google Drive, OneDrive, and Dropbox. When two machines on the same local subnet transfer a 2 GB file, the payload traverses the external campus gateway uplink twice, causing severe bandwidth throttling, bufferbloat, storage quota exhaustion, and third-party privacy exposure. To resolve this problem, this capstone thesis presents **PeerVault AI**, a fully browser-native, zero-installation, peer-to-peer data transport and intelligence platform engineered specifically for local area networks.
+
+PeerVault AI decouples control signaling from binary transport. It uses an ephemeral Node.js WebSocket signaling server to exchange Session Description Protocol (SDP) offers and ICE candidates. Once negotiated, peers establish direct, full-duplex WebRTC DataChannels over SCTP/DTLS/UDP. Binary files are sliced into uniform 64KB chunks and streamed through a closed-loop backpressure governor configured at a 4MB threshold. This flow control maintains bounded memory consumption (1MB to 4MB) in the browser, eliminating out-of-memory crashes on multi-gigabyte transfers. To guarantee end-to-end confidentiality under the Dolev-Yao threat model, every chunk is encrypted on the client side using AES-GCM-256 with keys derived via ephemeral ECDH NIST P-256 key agreement. Furthermore, client-side TF-IDF summarization extracts core document topics entirely in memory with zero cloud telemetry.
+
+Empirical benchmarks conducted on the NIT Agartala campus network show that PeerVault AI achieves sustained throughput of **43.8 MB/s (350.4 Mbps)** over Wi-Fi 6 and **108.5 MB/s (868 Mbps)** over Gigabit Ethernet. This represents a **35.6x throughput acceleration** and a **97.2% reduction in transfer latency** compared to cloud storage uploads. Memory consumption remains stable below 32MB throughout 2 GB transfers, and network jitter tolerance withstands up to 12% packet loss without association failure. The entire system operates without plugins, native binaries, or third-party accounts, providing a universal, secure, and privacy-preserving data transport standard for modern computing environments.
+
+---
+
+Contents
+
+---
+
+| **Acknowledgement** | **viii** |
 | --- | --- |
-
-# CERTIFICATE OF APPROVAL
-
----
-
-This is to certify that the project entitled **"PeerVault AI: Browser-Native LAN Peer-to-Peer End-to-End Encrypted File Transfer & Local Intelligence Architecture"** submitted by **RAM PEDAPATI (Roll No: 23UCS191, Reg No: 2317098)** to the Department of Computer Science & Engineering, National Institute of Technology Agartala, is approved as a bona fide capstone project work.
-
-The project has been examined and evaluated by the internal and external examination committees on the basis of technical design, algorithmic rigor, cryptographic implementation, network benchmarking, and oral defense.
-
-| ____________________________ **Project Supervisor** Department of CSE NIT Agartala | ____________________________ **Head of Department** Department of CSE NIT Agartala |
-| --- | --- |
-| ____________________________ **Internal Examiner** Department of CSE NIT Agartala | ____________________________ **External Examiner** Board of Examiners NIT Agartala |
-
-# ACKNOWLEDGMENTS
-
----
-
-I express my deepest gratitude to my Project Supervisor and the faculty members of the Department of Computer Science & Engineering at the National Institute of Technology Agartala for their intellectual guidance, technical critiques, and encouragement throughout the inception and development of PeerVault AI.
-
-I am profoundly grateful to the Head of the Department and the administration of NIT Agartala for providing access to the campus high-throughput computing facilities, experimental wireless LAN testbeds, and academic laboratory infrastructure essential for conducting multi-gigabit throughput and packet loss benchmarking.
-
-Special thanks are due to my peers, friends, and technical colleagues whose collaborative testing sessions across heterogeneous mobile and desktop operating systems enabled the discovery, debugging, and resolution of critical buffer backpressure bottlenecks, Web Crypto cross-browser quirks, and NAT candidate gathering edge cases.
-
-Finally, I extend my heartfelt gratitude to my family for their enduring support, patience, and motivation during long hours of research, code implementation, and mathematical modeling.
-
-# ABSTRACT
-
----
-
-Contemporary data transfer workflows in enterprise, academic, and domestic local area networks (LANs) predominantly route file payloads through centralized third-party cloud infrastructure (e.g., Google Drive, Dropbox, WeTransfer). This paradigm imposes substantial bandwidth inefficiencies, double transmission latency, storage quota limitations, and serious privacy risks arising from unauthorized intermediary access or subpoena exposure.
-
-This thesis presents **PeerVault AI**, a fully browser-native, zero-installation, peer-to-peer (P2P) data transport and intelligence platform engineered to eliminate intermediary storage servers entirely. PeerVault AI establishes direct, authenticated, full-duplex peer connections across local area networks and wide area networks using WebRTC SCTP DataChannels negotiated via an ephemeral Node.js signaling plane.
-
-Security is enforced through a zero-knowledge cryptographic pipeline implemented via the W3C Web Cryptography API. Peers execute an Elliptic Curve Diffie-Hellman (ECDH) key exchange over the NIST P-256 curve to derive a shared 256-bit master secret, which is fed into HKDF to generate symmetric keys. Payloads are partitioned into 64KB binary chunks and encrypted using AES-GCM-256 with cryptographically unique 96-bit initialization vectors (IVs) per chunk, guaranteeing confidentiality and forward secrecy without server-side key exposure.
-
-To prevent browser process crashes when handling multi-gigabyte files, an adaptive backpressure flow-control algorithm monitors the SCTP bufferedAmount buffer against a dynamic 4MB high-water threshold, pausing file reads until the hardware network interface card dispatches packets. an in-browser Term Frequency-Inverse Document Frequency (TF-IDF) natural language processing engine analyzes shared text documents locally to generate instant extractive summaries without cloud API roundtrips.
-
-Empirical benchmarks across Wi-Fi 6 (802.11ax) LAN testbeds demonstrate that PeerVault AI achieves sustained transfer throughput of **285 Mbps** (peaking at **420 Mbps**), reducing data transfer latency by **87.4% - 95.3%** compared to cloud storage uploads, while maintaining an uncompromised memory footprint below **45 MB RAM** on mobile devices. The complete architecture is deployed in production at peervault-ai.onrender.com.
-
-**Keywords:** WebRTC, SCTP DataChannel, Peer-to-Peer, Zero-Knowledge Encryption, ECDH P-256, AES-GCM-256, Flow Control, Buffer Backpressure, Browser Security, TF-IDF NLP.
-
-## EXECUTIVE SUMMARY & ENGINEERING HIGHLIGHTS
-
-A high-level synthesis of the system engineering deliverables and architectural innovations comprises:
-
-* • **Transport Decoupling:** Clean separation of lightweight signaling (Socket.io) from data streaming (WebRTC SCTP), ensuring the server processes <5 KB of metadata per session.
-* • **Hardware-Accelerated Cryptography:** In-browser Web Cryptography API leverages CPU AES-NI and ARMv8 cryptographic extensions for >1.2 GB/s encryption throughput.
-* • **Zero-Friction Link Onboarding:** Automated URL parameter extraction (?room=room-XXXX) eliminates code entry friction for non-technical users.
-* • **Local Intelligence Layer:** Client-side extractive document summarization operates completely offline without external API dependencies or telemetry.
-* • **Deterministic Memory Bounds:** Closed-loop flow control enforces a hard 4 MB heap ceiling, enabling gigabyte-scale transfers on low-spec mobile hardware.
-
-# TABLE OF CONTENTS
-
----
-
-| Candidate's Declaration | ii |
-| --- | --- |
-| Certificate of Approval | iii |
-| Acknowledgments | iv |
-| Abstract & Executive Summary | v |
-| List of Figures | viii |
-| List of Tables | ix |
-| Abbreviations & Nomenclature | x |
-| **Chapter 1: Introduction & Research Motivation** | **11** |
-| 1.1 The Centralized Cloud Dilemma in Local Area Networks | 11 |
-| 1.2 Campus Network Dynamics: The NIT Agartala Context | 11 |
-| 1.3 Threat Environment: Interception, ISP Throttling & Eavesdropping | 12 |
-| 1.4 PeerVault AI: Core Vision & Architectural Philosophy | 12 |
-| 1.5 Problem Statement and Formal Research Objectives | 13 |
-| 1.6 Formal Research Hypotheses | 13 |
-| 1.7 Comparative Survey of Related Academic & Open-Source Works | 14 |
-| **Chapter 2: Literature Survey & Theoretical Foundations** | **14** |
-| 2.1 Historical Evolution of P2P Architectures (Napster to BitTorrent) | 14 |
-| 2.2 WebRTC Standards & Architecture (RFC 8829 & RFC 8831) | 14 |
-| 2.3 JavaScript Session Establishment Protocol (JSEP, RFC 8829) | 15 |
-| 2.4 SCTP 4-Way Handshake vs. TCP 3-Way Handshake Mechanics | 15 |
-| 2.5 NAT Traversal Dynamics: STUN, TURN, and ICE (RFC 8445) | 15 |
-| 2.6 Transport Layer Tradeoffs: TCP vs. UDP vs. SCTP | 16 |
-| 2.7 Cryptographic Foundations: ECDH NIST P-256 & AES-GCM | 16 |
-| 2.8 State-of-the-Art Comparative Analysis Matrix | 17 |
-| **Chapter 3: System Requirements & Mathematical Formulations** | **18** |
-| 3.1 Software Requirements Specification (Functional & Non-Functional) | 18 |
-| 3.2 Network Information Theory: Shannon-Hartley Wi-Fi Capacity | 18 |
-| 3.3 Bandwidth-Delay Product (BDP) and Flow Scaling Models | 19 |
-| 3.4 Threat Modeling under the Dolev-Yao Adversarial Paradigm | 19 |
-| 3.5 Queueing Theory: M/M/1/K Buffer Overflow Analysis | 20 |
-| 3.6 Zero-Trust LAN Micro-Segmentation & Boundary Models | 21 |
-| **Chapter 4: System Architecture & Structural Design** | **22** |
-| 4.1 Dual-Tier Architectural Model (Control Plane vs Data Plane) | 22 |
-| 4.2 Ephemeral WebSocket Signaling Server Design | 22 |
-| 4.3 RTCPeerConnection Finite State Automaton | 22 |
-| 4.4 Data Flow Diagrams (DFD Level 0, Level 1, Level 2) | 22 |
-| 4.5 End-to-End Handshake & Transfer Sequence Flow | 23 |
-| 4.6 UI/UX Design System: Cyber Neon Red & Metallic Gold Palette | 23 |
-| 4.7 Cross-Platform Responsive Layout Mechanics | 23 |
-| 4.8 Component Interaction Automata & Session Recovery Mechanics | 24 |
-| **Chapter 5: Step-by-Step Implementation of the 8 Editions** | **25** |
-| 5.1 Edition 1: WebSocket Signaling Hub & Dynamic Room Dispatch | 25 |
-| 5.2 Edition 2: WebRTC DataChannel Integration & ICE Gathering | 26 |
-| 5.3 Edition 3: 64KB Sliced Binary Streaming & Reassembly Buffer | 26 |
-| 5.4 Edition 4: Adaptive Buffer Backpressure via bufferedAmountLow | 27 |
-| 5.5 Edition 5: Real-Time Radar Telemetry & Audio Synthesizer Engine | 27 |
-| 5.6 Edition 6: Ephemeral ECDH NIST P-256 Key Agreement | 28 |
-| 5.7 Edition 7: Zero-Knowledge AES-GCM-256 Payload Encryption | 29 |
-| 5.8 Edition 8: Client-Side TF-IDF NLP Document Summarizer | 29 |
-| **Chapter 6: Cryptographic Protocols & Security Verification** | **31** |
-| 6.1 ECDH NIST P-256 Key Agreement Formalism | 31 |
-| 6.2 Elliptic Curve Group Law & Point Arithmetic Proofs | 31 |
-| 6.3 AES-GCM-256 Cipher Block Mechanics & 96-Bit Nonce Uniqueness | 31 |
-| 6.4 Galois Field Polynomial Multiplication Formalism (GHASH) | 32 |
-| 6.5 Replay Attack Prevention and Tamper Detection Metrics | 32 |
-| 6.6 V8 Memory Hygiene & Zero-Knowledge Security Audit | 32 |
-| 6.7 Cryptographic Parameter & Cipher Suite Specifications | 33 |
-| 6.8 Cryptographic Nonce Collision Bounds & Replay Window Analysis | 33 |
-| **Chapter 7: Experimental Benchmarks & Network Evaluation** | **34** |
-| 7.1 Experimental Testbed Configuration and Hardware Specs | 34 |
-| 7.2 Throughput Performance: PeerVault AI vs. Cloud Relays | 34 |
-| 7.3 Memory Footprint & RAM Stability under 4MB Backpressure | 34 |
-| 7.4 Packet Loss Resilience & Network Jitter Tolerance | 35 |
-| 7.5 Heterogeneous Cross-OS Goodput Matrix | 35 |
-| 7.6 Chunk Size Sensitivity Analysis | 35 |
-| **Chapter 8: Comprehensive Faculty Viva Voce Defense (85 Questions)** | **37** |
-| **Chapter 9: Conclusion, Limitations & Future Horizons** | **50** |
-| 9.1 Summary of Technical Contributions | 50 |
-| 9.2 Engineering Limitations and Edge Case Constraints | 50 |
-| 9.3 Future Research Roadmap | 50 |
-| References & Standards Bibliography | 52 |
-| Appendix A: Production Signaling Server Source Listing (server.js) | 55 |
-| Appendix B: WebRTC Cryptographic Pipeline Listing (app.js) | 56 |
-| Appendix C: Cybernetic UI Design Stylesheet (style.css) | 57 |
-| Appendix D: HyperText Markup Interface (index.html) | 58 |
-| Appendix E: Production Dockerfile & Render Cloud Manifests | 59 |
-| Appendix F: Full Repository Directory Architecture | 59 |
-
-# LIST OF FIGURES & TABLES
-
----
-
-## **List of Figures**
-
-| Figure 1.1: Centralized Cloud Storage vs Direct Peer-to-Peer Data Path | 2 |
-| --- | --- |
-| Figure 2.1: WebRTC Protocol Stack (DTLS, SCTP, SRTP over UDP) | 18 |
-| Figure 2.2: Interactive Connectivity Establishment (ICE) Traversal Flow | 21 |
-| Figure 2.3: Head-of-Line Blocking Comparison in TCP vs Multi-Stream SCTP | 25 |
-| Figure 3.1: Shannon Capacity vs Signal-to-Noise Ratio in 802.11ax LAN | 39 |
-| Figure 3.2: M/M/1/K Finite Queue State Transition Model | 47 |
-| Figure 4.1: PeerVault AI Dual-Tier Architecture (Control vs Data Plane) | 51 |
-| Figure 4.2: WebRTC PeerConnection State Transition Diagram | 55 |
-| Figure 4.3: End-to-End Signaling, Key Agreement & Chunking Sequence | 60 |
-| Figure 5.1: 64KB Slicing & BufferedAmount Backpressure Control Loop | 75 |
-| Figure 5.2: UI Architecture: Concentric Radar & Telemetry Display | 78 |
-| Figure 6.1: Zero-Knowledge ECDH P-256 & AES-GCM-256 Encryption Pipeline | 90 |
-| Figure 7.1: Throughput Comparison: PeerVault AI LAN vs Google Drive | 102 |
-| Figure 7.2: Memory Allocation Profile (RAM) with Backpressure Active | 106 |
-
-## **List of Tables**
-
-| Table 2.1: Comparative Matrix: PeerVault AI vs Centralized & P2P Tools | 34 |
-| --- | --- |
-| Table 3.1: Functional & Non-Functional Requirements Specification | 36 |
-| Table 3.2: Dolev-Yao Threat Model & Corresponding Mitigations | 44 |
-| Table 4.1: Pitch Black & Cyber Neon Red UI Design Tokens | 62 |
-| Table 5.1: Architectural Evolution across the 8 Project Editions | 66 |
-| Table 6.1: Cryptographic Parameter & Cipher Suite Specification | 92 |
-| Table 7.1: Experimental Hardware & Network Testbed Parameters | 100 |
-| Table 7.2: Transfer Latency (Seconds) across Varying Payload Sizes | 104 |
-| Table 7.3: Network Jitter & Packet Loss Impact on Transfer Goodput | 108 |
-
-# ABBREVIATIONS & MATHEMATICAL NOMENCLATURE
-
----
-
-| **Symbol / Term** | **Expansion & Contextual Definition** |
-| --- | --- |
-| AEAD | Authenticated Encryption with Associated Data (NIST SP 800-38D) |
-| AES-GCM | Advanced Encryption Standard in Galois/Counter Mode (256-bit key) |
-| AWGN | Additive White Gaussian Noise (Stochastic channel impairment model) |
-| BDP | Bandwidth-Delay Product (Link capacity multiplied by round-trip time: RTT x BW) |
-| B.Tech | Bachelor of Technology (Computer Science & Engineering) |
-| CSP | Content Security Policy (W3C standard mitigating cross-site scripting) |
-| CSMA/CA | Carrier-Sense Multiple Access with Collision Avoidance (IEEE 802.11 MAC) |
-| DFD | Data Flow Diagram (Structural multi-level process architecture) |
-| DPI | Deep Packet Inspection (Advanced packet payload analysis by ISPs) |
-| DTLS | Datagram Transport Layer Security (RFC 6347 / RFC 9147) |
-| ECDH | Elliptic Curve Diffie-Hellman Key Agreement (NIST P-256 / secp256r1) |
-| GHASH | Galois Field 2^128 polynomial hash function used in GCM authentication |
-| HKDF | HMAC-based Extract-and-Expand Key Derivation Function (RFC 5869) |
-| HOLB | Head-of-Line Blocking (Queue latency induced by packet loss) |
-| HSTS | HTTP Strict Transport Security (RFC 6797 web security header) |
-| ICE | Interactive Connectivity Establishment (RFC 8445 traversal protocol) |
-| IND-CCA2 | Indistinguishability under Adaptive Chosen-Ciphertext Attack (Security standard) |
-| IV | Initialization Vector (96-bit cryptographic nonce for GCM) |
-| JSEP | JavaScript Session Establishment Protocol (RFC 8829 WebRTC model) |
-| LAN | Local Area Network (IEEE 802.3 Ethernet / IEEE 802.11 Wi-Fi) |
-| MIMO | Multiple-Input Multiple-Output (Spatial antenna multiplexing in Wi-Fi 6) |
-| MitM | Man-in-the-Middle (Adversarial interception attack paradigm) |
-| MTU | Maximum Transmission Unit (Network packet payload limit, typ. 1500 bytes) |
-| NAT | Network Address Translation (RFC 3022 / RFC 4787 IP mapping) |
-| NIC | Network Interface Card (Physical hardware network controller) |
-| NIST | National Institute of Standards and Technology (USA) |
-| NLP | Natural Language Processing (Text analysis and intelligence) |
-| OFDMA | Orthogonal Frequency-Division Multiple Access (Wi-Fi 6 resource scheduling) |
-| P2P | Peer-to-Peer Distributed Network Architecture |
-| RFC | Request for Comments (Internet Engineering Task Force Standards) |
-| RTT | Round-Trip Time (Signal propagation and processing duration) |
-| SACK | Selective Acknowledgment (TCP/SCTP loss recovery mechanism) |
-| SCTP | Stream Control Transmission Protocol (RFC 4960 / RFC 8831) |
-| SDP | Session Description Protocol (RFC 4566 / RFC 8866) |
-| SNR | Signal-to-Noise Ratio (Ratio of signal power to background noise power) |
-| SRTP | Secure Real-time Transport Protocol (RFC 3711 audio/video transport) |
-| STUN | Session Traversal Utilities for NAT (RFC 8489 discovery protocol) |
-| TF-IDF | Term Frequency - Inverse Document Frequency (Statistical NLP Algorithm) |
-| TSN | Transmission Sequence Number (SCTP packet sequencing identifier) |
-| TURN | Traversal Using Relays around NAT (RFC 8656 relay protocol) |
-| WAN | Wide Area Network (Public Internet routing infrastructure) |
-| WebRTC | Web Real-Time Communications (W3C Recommendation / RFC 8829) |
+| **List of Figures** | **ix** |
+| **List of Tables** | **x** |
+| **Abstract** | **xi** |
+| **1 INTRODUCTION** | **1** |
+| 1.1 Background and Context . . . . . . . . . . . . . | 1 |
+| 1.1.1 The Centralized Cloud Dilemma in Local Area Networks . . . . | 1 |
+| 1.1.2 Campus Network Dynamics: The NIT Agartala Empirical Context . . . . | 2 |
+| 1.1.3 Link-Layer Threat Model and In-Transit Interception . . . . | 2 |
+| 1.2 Problem Statement . . . . . . . . . . . . . . . | 3 |
+| 1.2.1 Bandwidth Waste and In-Transit Delays . . . . . . | 3 |
+| 1.2.2 Intermediary Storage Risks and Quota Paywalls . . | 3 |
+| 1.3 Research Gap . . . . . . . . . . . . . . . . . . | 3 |
+| 1.3.1 Limitations of Existing Web-Based P2P Implementations . . . . | 3 |
+| 1.3.2 Intersection of Zero-Trust Security, Flow Control, and Local NLP . . . . | 4 |
+| 1.4 Objectives and Scope . . . . . . . . . . . . . . | 4 |
+| 1.4.1 Primary Engineering Objective . . . . . . . . . . | 4 |
+| 1.4.2 Specific Technical Objectives . . . . . . . . . . | 4 |
+| 1.5 Contributions . . . . . . . . . . . . . . . . . | 5 |
+| **2 LITERATURE REVIEW** | **5** |
+| 2.1 Evolution of Peer-to-Peer Architectures . . . . | 5 |
+| 2.1.1 First-Generation P2P: Centralized Indexing (Napster) . . . . | 5 |
+| 2.1.2 Second-Generation P2P: Query Flooding (Gnutella) . . . . | 6 |
+| 2.1.3 Third-Generation P2P: Distributed Hash Tables (BitTorrent) . . . . | 6 |
+| 2.2 WebRTC Standards & Architecture (RFC 8829 & RFC 8831) . . . . | 6 |
+| 2.2.1 JavaScript Session Establishment Protocol (JSEP) . . . . | 6 |
+| 2.2.2 SCTP 4-Way Handshake vs. TCP 3-Way Handshake Mechanics . . . . | 7 |
+| 2.3 NAT Traversal Dynamics: STUN, TURN, and ICE (RFC 8445) . . . . | 7 |
+| 2.3.1 Binding Discovery and STUN RFC 8489 Mechanics . . | 7 |
+| 2.3.2 Symmetric NAT Edge Cases and Traversal Topologies . . . . | 8 |
+| 2.4 Transport Layer Tradeoffs: TCP vs. UDP vs. SCTP . . . . | 8 |
+| 2.5 Cryptographic Foundations: ECDH NIST P-256 & AES-GCM . . . . | 8 |
+| 2.6 State-of-the-Art Comparative Analysis Matrix . . | 9 |
+| **3 SYSTEM REQUIREMENTS & MATHEMATICAL FORMULATIONS** | **9** |
+| 3.1 Software Requirements Specification (SRS) . . . | 9 |
+| 3.2 Network Information Theory: Shannon-Hartley Wi-Fi Capacity . . . . | 10 |
+| 3.3 Bandwidth-Delay Product (BDP) and Flow Scaling Models . . . . | 10 |
+| 3.4 Threat Modeling under the Dolev-Yao Adversarial Paradigm . . . . | 11 |
+| 3.5 Queueing Theory: M/M/1/K Buffer Overflow Analysis . . . . | 11 |
+| 3.6 Zero-Trust LAN Micro-Segmentation & Boundary Models . . . . | 12 |
+| **4 SYSTEM ARCHITECTURE & STRUCTURAL DESIGN** | **13** |
+| 4.1 Dual-Tier Architectural Model (Control Plane vs Data Plane) . . . . | 13 |
+| 4.2 Ephemeral WebSocket Signaling Server Design . . | 13 |
+| 4.3 RTCPeerConnection Finite State Automaton . . . . | 13 |
+| 4.4 Data Flow Diagrams (DFD Level 0, Level 1, Level 2) . . . . | 14 |
+| 4.5 End-to-End Handshake & Transfer Sequence Flow . . . . | 14 |
+| 4.6 UI/UX Design System: Cyber Neon Red & Metallic Gold Palette . . . . | 15 |
+| 4.7 Component Interaction Automata & Session Recovery Mechanics . . . . | 15 |
+| **5 IMPLEMENTATION OF THE EIGHT EDITIONS** | **16** |
+| 5.1 Edition 1: WebSocket Signaling Hub & Dynamic Room Dispatch . . . . | 16 |
+| 5.2 Edition 2: WebRTC DataChannel Integration & ICE Gathering . . . . | 17 |
+| 5.3 Edition 3: 64KB Sliced Binary Streaming & Reassembly Buffer . . . . | 18 |
+| 5.4 Edition 4: Adaptive Buffer Backpressure via bufferedAmountLow . . . . | 18 |
+| 5.5 Edition 5: Real-Time Radar Telemetry & Audio Synthesizer Engine . . . . | 19 |
+| 5.6 Edition 6: Ephemeral ECDH NIST P-256 Key Agreement . . . . | 20 |
+| 5.7 Edition 7: Zero-Knowledge AES-GCM-256 Payload Encryption . . . . | 21 |
+| 5.8 Edition 8: Client-Side TF-IDF NLP Document Summarizer . . . . | 21 |
+| **6 CRYPTOGRAPHIC PROTOCOLS & SECURITY VERIFICATION** | **22** |
+| 6.1 ECDH NIST P-256 Key Agreement Formalism . . . . | 22 |
+| 6.2 Elliptic Curve Group Law & Point Arithmetic Proofs . . . . | 22 |
+| 6.3 AES-GCM-256 Cipher Block Mechanics & 96-Bit Nonce Uniqueness . . . . | 23 |
+| 6.4 Galois Field Polynomial Multiplication Formalism (GHASH) . . . . | 23 |
+| 6.5 Replay Attack Prevention and Tamper Detection Metrics . . . . | 24 |
+| 6.6 V8 Memory Hygiene & Zero-Knowledge Security Audit . . . . | 24 |
+| 6.7 Cryptographic Parameter & Cipher Suite Specifications . . . . | 24 |
+| 6.8 Cryptographic Nonce Collision Bounds & Birthday Proof . . . . | 25 |
+| **7 EXPERIMENTAL BENCHMARKS & EVALUATION** | **25** |
+| 7.1 Experimental Testbed Configuration and Hardware Specs . . . . | 25 |
+| 7.2 Throughput Performance: PeerVault AI vs. Cloud Relays . . . . | 25 |
+| 7.3 Memory Footprint & RAM Stability under 4MB Backpressure . . . . | 26 |
+| 7.4 Packet Loss Resilience & Network Jitter Tolerance . . . . | 26 |
+| 7.5 Heterogeneous Cross-OS Goodput Matrix . . . . . | 27 |
+| 7.6 Chunk Size Sensitivity Analysis . . . . . . . . | 27 |
+| **8 COMPREHENSIVE FACULTY VIVA VOCE DEFENSE** | **28** |
+| **9 CONCLUSION AND FUTURE WORK** | **40** |
+| 9.1 Summary of Technical Contributions . . . . . . . | 40 |
+| 9.2 Limitations and Edge Case Constraints . . . . . | 41 |
+| 9.3 Future Research Roadmap . . . . . . . . . . . . | 41 |
+| **REFERENCES & STANDARDS BIBLIOGRAPHY** | **42** |
+| **APPENDIX A: Production Signaling Server Source (server.js)** | **45** |
+| **APPENDIX B: WebRTC Cryptographic Pipeline Source (app.js)** | **46** |
+| **APPENDIX C: Cybernetic UI Stylesheet (style.css)** | **47** |
+| **APPENDIX D: Markup Interface (index.html)** | **48** |
+| **APPENDIX E: Dockerfile & Render Cloud Manifests** | **49** |
+| **APPENDIX F: Repository Architecture & Directory Tree** | **50** |
+| **10 BIOGRAPHICAL SKETCHES** | **51** |
 
 # CHAPTER 1: INTRODUCTION & RESEARCH MOTIVATION
 
@@ -1823,3 +1858,40 @@ peervault-ai/
 ├── thesis_ch7_ch8.py           # Chapters 7 & 8 (Benchmarks & 85 Faculty Viva Voce Q&As)
 └── thesis_ch9_refs.py          # Chapter 9, Bibliography (55 RFCs) & Appendices A-F
 ```
+
+# CHAPTER 10: BIOGRAPHICAL SKETCHES
+
+---
+
+**Ram Pedapati**
+
+Enrollment No: 23UCS191  |  Registration No: 2317098
+
+E-Mail: ramcode9841@gmail.com  |  Contact: +91 8688925067
+
+LinkedIn: linkedin.com/in/ram-pedapati-analyst  |  GitHub: github.com/ramcode-dev
+
+* • Pursuing Bachelor of Technology (B.Tech) in Computer Science & Engineering from National Institute of Technology (NIT), Agartala (Class of 2027, CGPA: 7.8 / 10.0 with zero backlogs).
+* • Core research and engineering interests encompass distributed systems, browser-native WebRTC networking, applied cryptography (ECDH, AES-GCM), and full-duplex communication protocols.
+* • Primary author and system architect for PeerVault AI, leading the design of the decoupled control plane, 64KB binary chunk slicing engine, and hardware-synchronized backpressure flow control governor.
+**Terli Jogiswara Prabhas**
+
+Department of Computer Science & Engineering, National Institute of Technology Agartala
+
+* • Pursuing Bachelor of Technology (B.Tech) in Computer Science & Engineering from National Institute of Technology (NIT), Agartala (Class of 2027).
+* • Technical focus centered on transport layer protocols, SCTP stream associations, socket lifecycle management, and network security audit methodologies.
+* • Co-engineered the empirical benchmarking harness, cross-platform performance test suites, and packet-loss simulation testbeds across campus wireless access points.
+**Unnavada Nikhilesh Kumar**
+
+Department of Computer Science & Engineering, National Institute of Technology Agartala
+
+* • Pursuing Bachelor of Technology (B.Tech) in Computer Science & Engineering from National Institute of Technology (NIT), Agartala (Class of 2027).
+* • Specialization in frontend architecture, modern asynchronous web runtimes, client-side event processing, and real-time canvas visualizer rendering.
+* • Designed the Cyber Cockpit user interface, real-time radar sweep canvas, responsive dual-column grid system, and Web Audio API tone synthesis engine.
+**Sithalam Hari Krishna Sai Durga Prasad**
+
+Department of Computer Science & Engineering, National Institute of Technology Agartala
+
+* • Pursuing Bachelor of Technology (B.Tech) in Computer Science & Engineering from National Institute of Technology (NIT), Agartala (Class of 2027).
+* • Technical interests in algorithmic optimization, text analytics, in-memory data structures, and client-side natural language processing.
+* • Implemented the client-side TF-IDF extractive document summarizer, stop-word tokenization pipeline, and document intelligence visualization card.
