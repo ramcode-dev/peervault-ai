@@ -6,13 +6,12 @@
 > **Degree:** Bachelor of Technology (B.Tech) in Computer Science & Engineering (Class of 2027)  
 > **Academic Session:** 2026-2027  
 > **Project Group Members:**  
-> 1. **Ram Pedapati** (Enrollment: 23UCS191, Registration: 2317098)  
-> 2. **Terli Jogiswara Prabhas**  
-> 3. **Unnavada Nikhilesh Kumar**  
-> 4. **Sithalam Hari Krishna Sai Durga Prasad**  
+> 1. **Ram Pedapati** (Enrollment: 23UCS191)  
+> 2. **Terli Jogiswara Prabhas** (Enrollment: 23UCS180)  
+> 3. **Unnavada Nikhilesh Kumar** (Enrollment: 23UCS177)  
+> 4. **Sithalam Hari Krishna Sai Durga Prasad** (Enrollment: 23UCS178)  
 > **Supervisor:** Dr. Awnish Kumar (Assistant Professor, CSE Dept., NIT Agartala)  
 > **Co-Supervisor:** Dr. Prashant Bharadwaj (Assistant Professor, CSE Dept., NIT Agartala)  
-> **Head of Department:** Prof. Mrinal Kanti Deb Barma (Professor & HOD, CSE Dept., NIT Agartala)  
 > **Repository:** [https://github.com/ramcode-dev/peervault-ai](https://github.com/ramcode-dev/peervault-ai)  
 > **Live Deployment:** [https://peervault-ai.onrender.com](https://peervault-ai.onrender.com)
 
@@ -23,9 +22,9 @@ PEERVAULT AI: BROWSER-NATIVE END-TO-END ENCRYPTED P2P LAN FILE TRANSFER & LOCAL 
 **Submitted By:**
 
 **RAM PEDAPATI (23UCS191)**
-**TERLI JOGISWARA PRABHAS**
-**UNNAVADA NIKHILESH KUMAR**
-**SITHALAM HARI KRISHNA SAI DURGA PRASAD**
+**TERLI JOGISWARA PRABHAS (23UCS180)**
+**UNNAVADA NIKHILESH KUMAR (23UCS177)**
+**SITHALAM HARI KRISHNA SAI DURGA PRASAD (23UCS178)**
 
 COMPUTER SCIENCE & ENGINEERING DEPARTMENT
 
@@ -52,9 +51,9 @@ PEERVAULT AI: BROWSER-NATIVE END-TO-END ENCRYPTED P2P LAN FILE TRANSFER & LOCAL 
 **by**
 
 **RAM PEDAPATI (23UCS191)**
-**TERLI JOGISWARA PRABHAS**
-**UNNAVADA NIKHILESH KUMAR**
-**SITHALAM HARI KRISHNA SAI DURGA PRASAD**
+**TERLI JOGISWARA PRABHAS (23UCS180)**
+**UNNAVADA NIKHILESH KUMAR (23UCS177)**
+**SITHALAM HARI KRISHNA SAI DURGA PRASAD (23UCS178)**
 
 *Under the Guidance of*
 
@@ -86,9 +85,9 @@ Finally, this project is dedicated to our classmates, departmental laboratory st
 
 REPORT APPROVAL FOR B.TECH
 
-This report entitled **“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer & Local Intelligence Architecture”**, by **Ram Pedapati (23UCS191)**, **Terli Jogiswara Prabhas**, **Unnavada Nikhilesh Kumar**, and **Sithalam Hari Krishna Sai Durga Prasad** is approved in partial fulfilment of the requirements for the award of **Bachelor of Technology** in **Computer Science & Engineering**.
+This report entitled **“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer & Local Intelligence Architecture”**, by **Ram Pedapati (23UCS191)**, **Terli Jogiswara Prabhas (23UCS180)**, **Unnavada Nikhilesh Kumar (23UCS177)**, and **Sithalam Hari Krishna Sai Durga Prasad (23UCS178)** is approved in partial fulfilment of the requirements for the award of **Bachelor of Technology** in **Computer Science & Engineering**.
 
-| ____________________________ **Dr. Awnish Kumar** (Project Supervisor) Assistant Professor Computer Science & Engg. Dept. NIT, Agartala | ____________________________ **Dr. Prashant Bharadwaj** (Co-Supervisor) Assistant Professor Computer Science & Engg. Dept. NIT Agartala | ____________________________ **Prof. Mrinal Kanti Deb Barma** (Head of the Department) Professor Computer Science & Engg. Dept. NIT Agartala |
+| ____________________________ **Dr. Awnish Kumar** (Project Supervisor) Assistant Professor Computer Science & Engg. Dept. NIT, Agartala | ____________________________ **Dr. Prashant Bharadwaj** (Co-Supervisor) Assistant Professor Computer Science & Engg. Dept. NIT Agartala | ____________________________ **Head of the Department** Department of Computer Science & Engineering National Institute of Technology Agartala |
 | --- | --- | --- |
 
 **Date:** ..............................
@@ -106,17 +105,17 @@ ________________________________________
 **Ram Pedapati (23UCS191)**
 
 ________________________________________
-**Terli Jogiswara Prabhas**
+**Terli Jogiswara Prabhas (23UCS180)**
 
 ________________________________________
-**Unnavada Nikhilesh Kumar**
+**Unnavada Nikhilesh Kumar (23UCS177)**
 
 ________________________________________
-**Sithalam Hari Krishna Sai Durga Prasad**
+**Sithalam Hari Krishna Sai Durga Prasad (23UCS178)**
 
 CERTIFICATE
 
-It is certified that the work contained in the report titled **“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer & Local Intelligence Architecture”**, by **Ram Pedapati (23UCS191)**, **Terli Jogiswara Prabhas**, **Unnavada Nikhilesh Kumar**, and **Sithalam Hari Krishna Sai Durga Prasad** has been carried out under our supervision. This work has not been submitted elsewhere for a degree.
+It is certified that the work contained in the report titled **“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer & Local Intelligence Architecture”**, by **Ram Pedapati (23UCS191)**, **Terli Jogiswara Prabhas (23UCS180)**, **Unnavada Nikhilesh Kumar (23UCS177)**, and **Sithalam Hari Krishna Sai Durga Prasad (23UCS178)** has been carried out under our supervision. This work has not been submitted elsewhere for a degree.
 
 | ___________________________________ **Dr. Awnish Kumar** Assistant Professor Computer Science & Engg. Dept. NIT Agartala | ___________________________________ **Dr. Prashant Bharadwaj** Assistant Professor Computer Science & Engg. Dept. NIT Agartala |
 | --- | --- |
@@ -129,14 +128,14 @@ Acknowledgement
 
 We express our sincere gratitude and deep appreciation to our project supervisor, **Dr. Awnish Kumar**, and co-supervisor, **Dr. Prashant Bharadwaj**, Department of Computer Science and Engineering, National Institute of Technology Agartala, for their invaluable guidance, constructive critiques, and continuous encouragement throughout the design, implementation, and evaluation of PeerVault AI. Their deep insights into computer networks, cryptographic algorithms, and distributed systems were instrumental in resolving complex WebRTC NAT candidate traversal bottlenecks, V8 engine backpressure controls, and elliptic curve key agreement formulation.
 
-We also sincerely express our gratitude to **Prof. Mrinal Kanti Deb Barma**, Head of the Department of Computer Science and Engineering, National Institute of Technology Agartala, for providing access to departmental computer laboratories, multi-gigabit Wi-Fi 6 wireless access points, and high-performance computing facilities necessary to conduct empirical throughput, latency, and packet loss benchmarking across heterogeneous devices.
+We also sincerely express our gratitude to the **Head of the Department** and the faculty members of the Department of Computer Science and Engineering, National Institute of Technology Agartala, for providing access to departmental computer laboratories, multi-gigabit Wi-Fi 6 wireless access points, and computing facilities necessary to conduct empirical throughput, latency, and packet loss benchmarking across heterogeneous devices.
 
 Special thanks are due to our fellow classmates and laboratory peers at NIT Agartala who volunteered their personal laptops and mobile phones for extensive cross-platform stress testing, helping us uncover subtle browser-specific memory leaks, Safari Web Crypto nuances, and room signaling edge cases. Finally, we thank our families for their unwavering patience and support throughout our undergraduate studies.
 
 **- Ram Pedapati (23UCS191)**
-**- Terli Jogiswara Prabhas**
-**- Unnavada Nikhilesh Kumar**
-**- Sithalam Hari Krishna Sai Durga Prasad**
+**- Terli Jogiswara Prabhas (23UCS180)**
+**- Unnavada Nikhilesh Kumar (23UCS177)**
+**- Sithalam Hari Krishna Sai Durga Prasad (23UCS178)**
 
 ---
 
@@ -1865,33 +1864,24 @@ peervault-ai/
 
 **Ram Pedapati**
 
-Enrollment No: 23UCS191  |  Registration No: 2317098
+Enrollment No: 23UCS191
 
-E-Mail: ramcode9841@gmail.com  |  Contact: +91 8688925067
+Department of Computer Science & Engineering, National Institute of Technology Agartala
 
-LinkedIn: linkedin.com/in/ram-pedapati-analyst  |  GitHub: github.com/ramcode-dev
-
-* • Pursuing Bachelor of Technology (B.Tech) in Computer Science & Engineering from National Institute of Technology (NIT), Agartala (Class of 2027, CGPA: 7.8 / 10.0 with zero backlogs).
-* • Core research and engineering interests encompass distributed systems, browser-native WebRTC networking, applied cryptography (ECDH, AES-GCM), and full-duplex communication protocols.
-* • Primary author and system architect for PeerVault AI, leading the design of the decoupled control plane, 64KB binary chunk slicing engine, and hardware-synchronized backpressure flow control governor.
 **Terli Jogiswara Prabhas**
 
+Enrollment No: 23UCS180
+
 Department of Computer Science & Engineering, National Institute of Technology Agartala
 
-* • Pursuing Bachelor of Technology (B.Tech) in Computer Science & Engineering from National Institute of Technology (NIT), Agartala (Class of 2027).
-* • Technical focus centered on transport layer protocols, SCTP stream associations, socket lifecycle management, and network security audit methodologies.
-* • Co-engineered the empirical benchmarking harness, cross-platform performance test suites, and packet-loss simulation testbeds across campus wireless access points.
 **Unnavada Nikhilesh Kumar**
 
+Enrollment No: 23UCS177
+
 Department of Computer Science & Engineering, National Institute of Technology Agartala
 
-* • Pursuing Bachelor of Technology (B.Tech) in Computer Science & Engineering from National Institute of Technology (NIT), Agartala (Class of 2027).
-* • Specialization in frontend architecture, modern asynchronous web runtimes, client-side event processing, and real-time canvas visualizer rendering.
-* • Designed the Cyber Cockpit user interface, real-time radar sweep canvas, responsive dual-column grid system, and Web Audio API tone synthesis engine.
 **Sithalam Hari Krishna Sai Durga Prasad**
 
-Department of Computer Science & Engineering, National Institute of Technology Agartala
+Enrollment No: 23UCS178
 
-* • Pursuing Bachelor of Technology (B.Tech) in Computer Science & Engineering from National Institute of Technology (NIT), Agartala (Class of 2027).
-* • Technical interests in algorithmic optimization, text analytics, in-memory data structures, and client-side natural language processing.
-* • Implemented the client-side TF-IDF extractive document summarizer, stop-word tokenization pipeline, and document intelligence visualization card.
+Department of Computer Science & Engineering, National Institute of Technology Agartala

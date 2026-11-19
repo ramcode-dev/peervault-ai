@@ -25,9 +25,9 @@ def build_preliminaries(styles):
     flowables.append(Paragraph("<b>Submitted By:</b>", styles['LaTeXCoverFaculty']))
     members_text = (
         "<b>RAM PEDAPATI (23UCS191)</b><br/>"
-        "<b>TERLI JOGISWARA PRABHAS</b><br/>"
-        "<b>UNNAVADA NIKHILESH KUMAR</b><br/>"
-        "<b>SITHALAM HARI KRISHNA SAI DURGA PRASAD</b>"
+        "<b>TERLI JOGISWARA PRABHAS (23UCS180)</b><br/>"
+        "<b>UNNAVADA NIKHILESH KUMAR (23UCS177)</b><br/>"
+        "<b>SITHALAM HARI KRISHNA SAI DURGA PRASAD (23UCS178)</b>"
     )
     flowables.append(Paragraph(members_text, styles['LaTeXCoverMembers']))
     flowables.append(Spacer(1, 25))
@@ -120,7 +120,7 @@ def build_preliminaries(styles):
 
     approval_text = (
         "This report entitled <b>“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer &amp; Local Intelligence Architecture”</b>, "
-        "by <b>Ram Pedapati (23UCS191)</b>, <b>Terli Jogiswara Prabhas</b>, <b>Unnavada Nikhilesh Kumar</b>, and <b>Sithalam Hari Krishna Sai Durga Prasad</b> "
+        "by <b>Ram Pedapati (23UCS191)</b>, <b>Terli Jogiswara Prabhas (23UCS180)</b>, <b>Unnavada Nikhilesh Kumar (23UCS177)</b>, and <b>Sithalam Hari Krishna Sai Durga Prasad (23UCS178)</b> "
         "is approved in partial fulfilment of the requirements for the award of <b>Bachelor of Technology</b> in <b>Computer Science &amp; Engineering</b>."
     )
     flowables.append(Paragraph(approval_text, styles['LaTeXBody']))
@@ -131,7 +131,7 @@ def build_preliminaries(styles):
         [
             Paragraph("____________________________<br/><b>Dr. Awnish Kumar</b><br/>(Project Supervisor)<br/>Assistant Professor<br/>Computer Science &amp; Engg. Dept.<br/>NIT, Agartala", styles['LaTeXTableCell']),
             Paragraph("____________________________<br/><b>Dr. Prashant Bharadwaj</b><br/>(Co-Supervisor)<br/>Assistant Professor<br/>Computer Science &amp; Engg. Dept.<br/>NIT Agartala", styles['LaTeXTableCell']),
-            Paragraph("____________________________<br/><b>Prof. Mrinal Kanti Deb Barma</b><br/>(Head of the Department)<br/>Professor<br/>Computer Science &amp; Engg. Dept.<br/>NIT Agartala", styles['LaTeXTableCell'])
+            Paragraph("____________________________<br/><b>Head of the Department</b><br/>Department of Computer Science &amp; Engineering<br/>National Institute of Technology Agartala", styles['LaTeXTableCell'])
         ]
     ]
     t_sig = Table(sig_data, colWidths=[155, 155, 160])
@@ -173,11 +173,11 @@ def build_preliminaries(styles):
         "________________________________________<br/>"
         "<b>Ram Pedapati (23UCS191)</b><br/><br/>"
         "________________________________________<br/>"
-        "<b>Terli Jogiswara Prabhas</b><br/><br/>"
+        "<b>Terli Jogiswara Prabhas (23UCS180)</b><br/><br/>"
         "________________________________________<br/>"
-        "<b>Unnavada Nikhilesh Kumar</b><br/><br/>"
+        "<b>Unnavada Nikhilesh Kumar (23UCS177)</b><br/><br/>"
         "________________________________________<br/>"
-        "<b>Sithalam Hari Krishna Sai Durga Prasad</b>"
+        "<b>Sithalam Hari Krishna Sai Durga Prasad (23UCS178)</b>"
     )
     flowables.append(Paragraph(member_sigs, styles['LaTeXTableCell']))
     flowables.append(PageBreak())
@@ -191,7 +191,7 @@ def build_preliminaries(styles):
 
     cert_text = (
         "It is certified that the work contained in the report titled <b>“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer &amp; Local Intelligence Architecture”</b>, "
-        "by <b>Ram Pedapati (23UCS191)</b>, <b>Terli Jogiswara Prabhas</b>, <b>Unnavada Nikhilesh Kumar</b>, and <b>Sithalam Hari Krishna Sai Durga Prasad</b> "
+        "by <b>Ram Pedapati (23UCS191)</b>, <b>Terli Jogiswara Prabhas (23UCS180)</b>, <b>Unnavada Nikhilesh Kumar (23UCS177)</b>, and <b>Sithalam Hari Krishna Sai Durga Prasad (23UCS178)</b> "
         "has been carried out under our supervision. This work has not been submitted elsewhere for a degree."
     )
     flowables.append(Paragraph(cert_text, styles['LaTeXBody']))
@@ -227,8 +227,8 @@ def build_preliminaries(styles):
         styles['LaTeXBody']
     ))
     flowables.append(Paragraph(
-        "We also sincerely express our gratitude to <b>Prof. Mrinal Kanti Deb Barma</b>, Head of the Department of Computer Science and Engineering, National Institute of Technology Agartala, "
-        "for providing access to departmental computer laboratories, multi-gigabit Wi-Fi 6 wireless access points, and high-performance computing facilities necessary to conduct empirical throughput, "
+        "We also sincerely express our gratitude to the <b>Head of the Department</b> and the faculty members of the Department of Computer Science and Engineering, National Institute of Technology Agartala, "
+        "for providing access to departmental computer laboratories, multi-gigabit Wi-Fi 6 wireless access points, and computing facilities necessary to conduct empirical throughput, "
         "latency, and packet loss benchmarking across heterogeneous devices.",
         styles['LaTeXBody']
     ))
@@ -242,9 +242,9 @@ def build_preliminaries(styles):
 
     ack_members = (
         "<b>- Ram Pedapati (23UCS191)</b><br/>"
-        "<b>- Terli Jogiswara Prabhas</b><br/>"
-        "<b>- Unnavada Nikhilesh Kumar</b><br/>"
-        "<b>- Sithalam Hari Krishna Sai Durga Prasad</b>"
+        "<b>- Terli Jogiswara Prabhas (23UCS180)</b><br/>"
+        "<b>- Unnavada Nikhilesh Kumar (23UCS177)</b><br/>"
+        "<b>- Sithalam Hari Krishna Sai Durga Prasad (23UCS178)</b>"
     )
     flowables.append(Paragraph(ack_members, styles['LaTeXTableCell']))
     flowables.append(PageBreak())
