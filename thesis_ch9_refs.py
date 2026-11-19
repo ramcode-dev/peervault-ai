@@ -471,7 +471,6 @@ def build_chapter_9_and_refs(styles):
 
     flowables.append(Paragraph("<b>Ram Pedapati</b>", styles['BodyBold']))
     flowables.append(Paragraph("Enrollment No: 23UCS191", styles['TableCellBold']))
-    flowables.append(Paragraph("Department of Computer Science &amp; Engineering, National Institute of Technology Agartala", styles['TableCell']))
     flowables.append(Spacer(1, 15))
 
     flowables.append(Paragraph("<b>Terli Jogiswara Prabhas</b>", styles['BodyBold']))
