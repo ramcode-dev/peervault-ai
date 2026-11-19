@@ -43,8 +43,8 @@ class LaTeXNumberedCanvas(canvas.Canvas):
         super().save()
 
     def draw_latex_decorations(self, total_pages):
-        # Determine prelim offset: Chapter 1 begins at page 17
-        prelim_count = 14  # Pages 1 to 14 are preliminaries (Chapter 1 begins at page 15)
+        # Determine prelim offset: Chapter 1 begins at page 14
+        prelim_count = 13  # Pages 1 to 13 are preliminaries (Chapter 1 begins at page 14)
 
         # Cover (1) and Inner Cover (2): no headers, no page numbers
         if self._pageNumber <= 2:

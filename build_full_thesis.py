@@ -58,7 +58,7 @@ def count_pdf_pages(pdf_path):
     return len(matches)
 
 if __name__ == "__main__":
-    out_pdf = "PeerVault_AI_Project_Report.pdf"
+    out_pdf = "PeerVault_Report.pdf"
     compile_pdf(out_pdf)
     pages = count_pdf_pages(out_pdf)
     print(f"\n==========================================")

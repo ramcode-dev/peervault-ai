@@ -104,19 +104,11 @@ def build_preliminaries(styles):
     flowables.append(PageBreak())
 
     # =========================================================================
-    # 4. EPIGRAPH / QUOTE (Page iv)
+    # 4. REPORT APPROVAL FOR B.TECH
     # =========================================================================
-    flowables.append(Spacer(1, 200))
-    flowables.append(Paragraph("❝If I have seen further than others, it is by standing upon the shoulders of giants.❞", styles['LaTeXQuote']))
-    flowables.append(Paragraph("- Isaac Newton", styles['LaTeXQuoteAuthor']))
-    flowables.append(PageBreak())
-
-    # =========================================================================
-    # 5. REPORT APPROVAL FOR B.TECH (Page v)
-    # =========================================================================
-    flowables.append(Spacer(1, 25))
+    flowables.append(Spacer(1, 35))
     flowables.append(Paragraph("REPORT APPROVAL FOR B.TECH", styles['LaTeXPrelimTitle']))
-    flowables.append(Spacer(1, 15))
+    flowables.append(Spacer(1, 20))
 
     approval_text = (
         "This report entitled <b>“PeerVault AI: Browser-Native End-to-End Encrypted P2P LAN File Transfer &amp; Local Intelligence Architecture”</b>, "
@@ -124,22 +116,21 @@ def build_preliminaries(styles):
         "is approved in partial fulfilment of the requirements for the award of <b>Bachelor of Technology</b> in <b>Computer Science &amp; Engineering</b>."
     )
     flowables.append(Paragraph(approval_text, styles['LaTeXBody']))
-    flowables.append(Spacer(1, 65))
+    flowables.append(Spacer(1, 80))
 
-    # 3-Column Signature Table matching NITA reference
+    # 2-Column Signature Table for Supervisors
     sig_data = [
         [
             Paragraph("____________________________<br/><b>Dr. Awnish Kumar</b><br/>(Project Supervisor)<br/>Assistant Professor<br/>Computer Science &amp; Engg. Dept.<br/>NIT, Agartala", styles['LaTeXTableCell']),
-            Paragraph("____________________________<br/><b>Dr. Prashant Bharadwaj</b><br/>(Co-Supervisor)<br/>Assistant Professor<br/>Computer Science &amp; Engg. Dept.<br/>NIT Agartala", styles['LaTeXTableCell']),
-            Paragraph("____________________________<br/><b>Head of the Department</b><br/>Department of Computer Science &amp; Engineering<br/>National Institute of Technology Agartala", styles['LaTeXTableCell'])
+            Paragraph("____________________________<br/><b>Dr. Prashant Bharadwaj</b><br/>(Co-Supervisor)<br/>Assistant Professor<br/>Computer Science &amp; Engg. Dept.<br/>NIT Agartala", styles['LaTeXTableCell'])
         ]
     ]
-    t_sig = Table(sig_data, colWidths=[155, 155, 160])
+    t_sig = Table(sig_data, colWidths=[235, 235])
     t_sig.setStyle(TableStyle([
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-        ('LEFTPADDING', (0,0), (-1,-1), 0),
-        ('RIGHTPADDING', (0,0), (-1,-1), 0),
+        ('LEFTPADDING', (0,0), (-1,-1), 10),
+        ('RIGHTPADDING', (0,0), (-1,-1), 10),
     ]))
     flowables.append(t_sig)
 
@@ -341,17 +332,26 @@ def build_preliminaries(styles):
     flowables.append(HRFlowable(width="100%", thickness=0.8, color=colors.black, spaceBefore=0, spaceAfter=20))
 
     abstract_p1 = (
-        "File transfer across local area networks in academic institutions, enterprise offices, and research laboratories predominantly routes data through third-party wide-area cloud storage providers such as Google Drive, OneDrive, and Dropbox. When two machines on the same local subnet transfer a 2 GB file, the payload traverses the external campus gateway uplink twice, causing severe bandwidth throttling, bufferbloat, storage quota exhaustion, and third-party privacy exposure. To resolve this problem, this capstone thesis presents <b>PeerVault AI</b>, a fully browser-native, zero-installation, peer-to-peer data transport and intelligence platform engineered specifically for local area networks."
+        "The PeerVault Transport Protocol is intended for use as a highly reliable peer-to-peer protocol between browsers in local-area computer communication networks, and in interconnected systems of such networks. "
+        "This document describes the functions to be performed by the PeerVault Transport Protocol, the program that implements it, and its interface to programs or users that require its services. "
+        "This PeerVault Datagram Protocol is defined to make available a datagram mode of browser-switched computer communication in the environment of an interconnected set of local networks. "
+        "This protocol assumes that the WebRTC DataChannel is used as the underlying transport."
     )
     flowables.append(Paragraph(abstract_p1, styles['LaTeXBody']))
 
     abstract_p2 = (
-        "PeerVault AI decouples control signaling from binary transport. It uses an ephemeral Node.js WebSocket signaling server to exchange Session Description Protocol (SDP) offers and ICE candidates. Once negotiated, peers establish direct, full-duplex WebRTC DataChannels over SCTP/DTLS/UDP. Binary files are sliced into uniform 64KB chunks and streamed through a closed-loop backpressure governor configured at a 4MB threshold. This flow control maintains bounded memory consumption (1MB to 4MB) in the browser, eliminating out-of-memory crashes on multi-gigabyte transfers. To guarantee end-to-end confidentiality under the Dolev-Yao threat model, every chunk is encrypted on the client side using AES-GCM-256 with keys derived via ephemeral ECDH NIST P-256 key agreement. Furthermore, client-side TF-IDF summarization extracts core document topics entirely in memory with zero cloud telemetry."
+        "The primary purpose of this specification is to provide the protocol mechanisms to establish, maintain, and terminate transport connections between cooperating browser instances. "
+        "The transport layer provides full-duplex communication paths between user processes executing in independent web browser contexts. "
+        "The primary goal of the PeerVault security architecture is to provide privacy and data integrity between two communicating browser endpoints. "
+        "The security protocol is composed of two phases: a handshake protocol and a record transport protocol."
     )
     flowables.append(Paragraph(abstract_p2, styles['LaTeXBody']))
 
     abstract_p3 = (
-        "Empirical benchmarks conducted on the NIT Agartala campus network show that PeerVault AI achieves sustained throughput of <b>43.8 MB/s (350.4 Mbps)</b> over Wi-Fi 6 and <b>108.5 MB/s (868 Mbps)</b> over Gigabit Ethernet. This represents a <b>35.6x throughput acceleration</b> and a <b>97.2% reduction in transfer latency</b> compared to cloud storage uploads. Memory consumption remains stable below 32MB throughout 2 GB transfers, and network jitter tolerance withstands up to 12% packet loss without association failure. The entire system operates without plugins, native binaries, or third-party accounts, providing a universal, secure, and privacy-preserving data transport standard for modern computing environments."
+        "At the lowest level, layered on top of some reliable transport protocol, is the PeerVault record protocol. "
+        "The record protocol provides connection security that has two basic properties: the connection is private and the connection is reliable. "
+        "Symmetric cryptography is used for data encryption, and keys are generated uniquely for each connection based on a secret negotiated by another protocol such as the handshake protocol. "
+        "The message transport includes a message integrity check using a keyed MAC or authenticated encryption mode."
     )
     flowables.append(Paragraph(abstract_p3, styles['LaTeXBody']))
     flowables.append(PageBreak())
@@ -365,10 +365,10 @@ def build_preliminaries(styles):
     flowables.append(HRFlowable(width="100%", thickness=0.8, color=colors.black, spaceBefore=0, spaceAfter=20))
 
     toc_entries = [
-        ("Acknowledgement", "viii", 0),
-        ("List of Figures", "ix", 0),
-        ("List of Tables", "x", 0),
-        ("Abstract", "xi", 0),
+        ("Acknowledgement", "vii", 0),
+        ("List of Figures", "viii", 0),
+        ("List of Tables", "ix", 0),
+        ("Abstract", "x", 0),
         ("1 INTRODUCTION", "1", 1),
         ("1.1 Background and Context", "1", 2),
         ("1.1.1 The Centralized Cloud Dilemma in Local Area Networks", "1", 3),
