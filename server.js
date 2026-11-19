@@ -216,6 +216,24 @@ io.on('connection', (socket) => {
     });
   });
 
+  // ── Leave room ──────────────────────────────────────────────────────────
+  socket.on('leave-room', (data) => {
+    const { roomId } = data || {};
+    if (!roomId) return;
+    socket.leave(roomId);
+    if (rooms[roomId]) {
+      delete rooms[roomId][socket.id];
+      if (Object.keys(rooms[roomId]).length === 0) {
+        delete rooms[roomId];
+        console.log(`${ts()} [ROOM] Room "${roomId}" removed (empty after leave)`);
+      } else {
+        io.to(roomId).emit('user-disconnected', { socketId: socket.id, peerName });
+      }
+    }
+    currentRoom = null;
+    console.log(`${ts()} [ROOM LEAVE] ${peerName} (${socket.id}) left room: ${roomId}`);
+  });
+
   // ── Edition 2 — WebRTC Signaling relay ──────────────────────────────────
   socket.on('signal-offer', (data) => {
     const { targetSocketId, offer, sdp } = data;

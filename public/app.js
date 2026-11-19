@@ -307,15 +307,19 @@
   // Key exchange state
   let keyExchangeDone = false;
 
+  // ICE candidate queue — holds candidates that arrive before remote description is set
+  let pendingIceCandidates = [];
+
   // File transfer state
   let selectedFile = null;
   let sendingFile = false;
   let receivingFile = false;
-  let recvMeta = null; // { name, size, totalChunks }
+  let recvMeta = null; // { name, size, totalChunks, encrypted }
   let recvChunks = []; // array of ArrayBuffers
   let recvChunkCount = 0;
   let recvBytesReceived = 0;
   let recvStartTime = null;
+  let sendAborted = false; // flag to cancel in-flight send
 
   /* =============================================
      SOCKET.IO SETUP
@@ -501,9 +505,30 @@
     }
   }
 
+  // Helper: flush queued ICE candidates after setRemoteDescription
+  async function flushPendingIceCandidates() {
+    if (!peerConnection || pendingIceCandidates.length === 0) return;
+    logEvent(`Flushing ${pendingIceCandidates.length} queued ICE candidates...`, 'webrtc');
+    for (const candidate of pendingIceCandidates) {
+      try {
+        await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+      } catch (e) {
+        logEvent(`Queued ICE candidate error: ${e.message}`, 'error');
+      }
+    }
+    pendingIceCandidates = [];
+  }
+
   socket.on('signal-offer', async (data) => {
     logEvent(`Received SDP Offer from: ${data.senderSocketId}`, 'webrtc');
-    if (!remotePeerId) remotePeerId = data.senderSocketId;
+    // Set remotePeerId BEFORE creating peer connection so ICE candidates go to right peer
+    remotePeerId = data.senderSocketId;
+
+    if (peerConnection) {
+      logEvent('Already have a peer connection. Closing old one before answering new offer.', 'warn');
+      closePeerConnection();
+      remotePeerId = data.senderSocketId; // re-set after close resets it
+    }
 
     await initiatePeerConnection(false);
     // Accept both 'sdp' and 'offer' keys from server for compatibility
@@ -513,6 +538,7 @@
     await peerConnection.setLocalDescription(answer);
     socket.emit('signal-answer', { targetSocketId: data.senderSocketId, sdp: answer });
     logEvent('Sent SDP Answer to peer.', 'webrtc');
+    await flushPendingIceCandidates();
   });
 
   socket.on('signal-answer', async (data) => {
@@ -521,12 +547,19 @@
       // Accept both 'sdp' and 'answer' keys from server for compatibility
       const remoteSDP = data.sdp || data.answer;
       await peerConnection.setRemoteDescription(new RTCSessionDescription(remoteSDP));
+      await flushPendingIceCandidates();
     }
   });
 
   socket.on('ice-candidate', async (data) => {
     logEvent(`Received ICE candidate from: ${data.senderSocketId}`, 'webrtc');
     if (peerConnection) {
+      // Queue candidate if remote description not yet set
+      if (!peerConnection.remoteDescription || !peerConnection.remoteDescription.type) {
+        logEvent('Remote description not set yet — queuing ICE candidate.', 'warn');
+        pendingIceCandidates.push(data.candidate);
+        return;
+      }
       try {
         await peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
       } catch (e) {
@@ -542,6 +575,8 @@
     remotePeerId = null;
     keyExchangeDone = false;
     sharedAESKey = null;
+    pendingIceCandidates = [];
+    sendAborted = true; // cancel any in-flight send
     setP2PConnected(false);
     setE2EEActive(false);
     peerKeySection.style.display = 'none';
@@ -577,7 +612,7 @@
   function setupControlChannel(channel) {
     channel.onopen = () => {
       logEvent('Control DataChannel opened. Initiating ECDH key exchange...', 'crypto');
-      // Send our public key
+      // Send our public key to peer
       channel.send(JSON.stringify({
         type: 'ecdh-key',
         publicKey: myPublicKeyJWK,
@@ -590,23 +625,34 @@
       try { msg = JSON.parse(event.data); } catch (_) { return; }
 
       if (msg.type === 'ecdh-key') {
+        // Received peer's public key — derive shared secret
         logEvent(`Received peer's ECDH public key. Deriving shared AES-GCM-256 key...`, 'crypto');
         try {
           await deriveSharedKey(msg.publicKey);
           keyExchangeDone = true;
-          // Send a confirmation ack
-          channel.send(JSON.stringify({ type: 'ecdh-ack', name: myName || peerNameInput.value.trim() }));
+          // Send our public key back as ack so BOTH sides can derive
+          channel.send(JSON.stringify({
+            type: 'ecdh-ack',
+            publicKey: myPublicKeyJWK,
+            name: myName || peerNameInput.value.trim(),
+          }));
+          logEvent('E2EE key exchange complete. AES-GCM-256 session active.', 'crypto');
         } catch (e) {
           logEvent(`Key derivation failed: ${e.message}`, 'error');
         }
       } else if (msg.type === 'ecdh-ack') {
-        // Key exchange confirmed by peer
+        // Peer confirmed with their public key — derive shared secret if not already done
         if (!keyExchangeDone && msg.publicKey) {
-          // shouldn't happen but guard
-        }
-        logEvent(`Peer confirmed key exchange. E2EE session established.`, 'crypto');
-        if (!keyExchangeDone) {
-          keyExchangeDone = true;
+          logEvent('Received ecdh-ack with peer public key. Deriving shared key...', 'crypto');
+          try {
+            await deriveSharedKey(msg.publicKey);
+            keyExchangeDone = true;
+            logEvent('E2EE key exchange complete (ack path). AES-GCM-256 session active.', 'crypto');
+          } catch (e) {
+            logEvent(`Key derivation failed (ack): ${e.message}`, 'error');
+          }
+        } else {
+          logEvent('Peer confirmed key exchange.', 'crypto');
         }
       } else if (msg.type === 'chat') {
         appendChatMessage(msg.text, msg.senderName || 'Peer', false);
@@ -748,6 +794,7 @@
     recvChunks = [];
     recvChunkCount = 0;
     recvBytesReceived = 0;
+    recvBytesReceived = 0;
 
     logEvent(`File "${fileName}" (${formatBytes(fileSize)}) saved. Auto-download triggered.`, 'success');
   }
@@ -791,8 +838,12 @@
   /* =============================================
      FILE TRANSFER — SENDING (Ed 3+4+7)
      ============================================= */
-  // Drop zone
+  // Drop zone — click and touch support
   dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('touchend', (e) => {
+    e.preventDefault(); // prevent ghost click double-trigger
+    fileInput.click();
+  });
 
   dropZone.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -835,8 +886,19 @@
     sendFile(selectedFile);
   });
 
+  // Helper: read a specific slice of a File as ArrayBuffer without loading it all
+  function readFileSlice(file, start, end) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsArrayBuffer(file.slice(start, end));
+    });
+  }
+
   async function sendFile(file) {
     sendingFile = true;
+    sendAborted = false;
     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
     const isEncrypted = keyExchangeDone && sharedAESKey;
 
@@ -862,13 +924,25 @@
     const startTime = Date.now();
     let bytesSent = 0;
 
-    // Read and send chunks
-    const arrayBuffer = await file.arrayBuffer();
-
+    // Read and send chunks one at a time (memory-safe, works on mobile)
     for (let i = 0; i < totalChunks; i++) {
+      if (sendAborted) {
+        logEvent('File send aborted.', 'warn');
+        sendingFile = false;
+        return;
+      }
+
       const start = i * CHUNK_SIZE;
       const end = Math.min(start + CHUNK_SIZE, file.size);
-      const chunk = arrayBuffer.slice(start, end);
+
+      let chunk;
+      try {
+        chunk = await readFileSlice(file, start, end);
+      } catch (e) {
+        logEvent(`File read error on chunk ${i}: ${e.message}`, 'error');
+        sendingFile = false;
+        return;
+      }
 
       // Encrypt chunk only if key is ready
       let payload;
@@ -880,13 +954,13 @@
         return;
       }
 
-      // Throttle if buffer is filling up
+      // Throttle if buffer is filling up (backpressure)
       while (fileChannel.bufferedAmount > 16 * 1024 * 1024) {
         await new Promise((r) => setTimeout(r, 50));
       }
 
       fileChannel.send(payload);
-      bytesSent += chunk.byteLength;
+      bytesSent += (end - start);
 
       // Update progress
       const pct = Math.round(((i + 1) / totalChunks) * 100);
@@ -900,8 +974,8 @@
       transferETA.textContent = `ETA: ${formatETA(remaining)}`;
       transferBytes.textContent = `${formatBytes(bytesSent)} / ${formatBytes(file.size)}`;
 
-      // Yield every 16 chunks to keep UI responsive
-      if (i % 16 === 0) await new Promise((r) => setTimeout(r, 0));
+      // Yield every 8 chunks to keep UI responsive
+      if (i % 8 === 0) await new Promise((r) => setTimeout(r, 0));
     }
 
     // Send done signal
@@ -912,7 +986,7 @@
     sendingFile = false;
 
     const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
-    logEvent(`File "${file.name}" sent successfully in ${totalTime}s. All ${totalChunks} chunks encrypted & transferred.`, 'success');
+    logEvent(`File "${file.name}" sent in ${totalTime}s. All ${totalChunks} chunks ${isEncrypted ? 'encrypted &' : ''} transferred.`, 'success');
   }
 
   /* =============================================
@@ -1004,14 +1078,19 @@
       aiResultSection.style.display = '';
 
       aiResultBox.innerHTML = '';
-      (data.summary || []).forEach((sentence) => {
+      // server returns { summary: string, sentences: string[] }
+      const sentences = data.sentences && data.sentences.length > 0
+        ? data.sentences
+        : [data.summary].filter(Boolean);
+
+      sentences.forEach((sentence) => {
         const span = document.createElement('span');
         span.className = 'summary-sentence';
         span.textContent = sentence;
         aiResultBox.appendChild(span);
       });
 
-      aiMeta.textContent = `${data.sentenceCount || '?'} source sentences → ${(data.summary || []).length} key sentences extracted in ${data.processingTime || '?'}ms`;
+      aiMeta.textContent = `${data.inputLength || '?'} chars → ${sentences.length} key sentence${sentences.length !== 1 ? 's' : ''} extracted · ${data.algorithm || 'TF-IDF Extractive'}`;
       logEvent(`AI summarization complete. ${(data.summary || []).length} sentences extracted.`, 'success');
     } catch (err) {
       aiLoading.style.display = 'none';
