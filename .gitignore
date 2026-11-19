@@ -15,6 +15,10 @@ yarn-error.log*
 # Environment local overrides
 .env.local
 
+# Python cache
+__pycache__/
+*.pyc
+
 # IDE settings
 .vscode/
 .idea/
