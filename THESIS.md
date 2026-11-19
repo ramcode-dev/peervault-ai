@@ -135,22 +135,22 @@ List of Figures
 
 ---
 
-| **3.1** | Decoupled Dual-Tier Architecture (Control vs. Data Plane) . . . . . . | **10** |
+| **3.1** | Decoupled Dual-Tier Architecture (Control vs. Data Plane) | **10** |
 | --- | --- | --- |
-| **3.2** | Data Flow Diagram: Level 0 (Context Level Rendezvous) . . . . . . | **11** |
-| **3.3** | Data Flow Diagram: Level 1 (Peer Connection & Chunk Slicing) . . . . . . | **11** |
-| **3.4** | Data Flow Diagram: Level 2 (Detailed Cryptographic Pipeline) . . . . . . | **12** |
-| **4.1** | RTCPeerConnection Finite State Automaton Lifecycle . . . . . . | **13** |
-| **4.2** | End-to-End Signaling Handshake & Transfer Sequence Flow . . . . . . | **14** |
-| **4.3** | Cyber Cockpit Dual-Column Layout Architecture . . . . . . | **15** |
-| **5.1** | Radar Telemetry Canvas Visualizer Interface . . . | **18** |
-| **5.2** | Interactive Drag-and-Drop In-Browser File Dropzone . . . . . . | **19** |
-| **5.3** | Zero-Knowledge SHA-256 Key Verification Fingerprint Badge . . . . . . | **20** |
-| **5.4** | Client-Side TF-IDF Document Intelligence Extractive Summary . . . . . . | **21** |
-| **7.1** | Empirical Throughput Comparison: PeerVault LAN vs. Cloud Relays . . . . . . | **25** |
-| **7.2** | Transfer Latency vs. Payload Size (10MB to 2GB) . . . . . . | **26** |
-| **7.3** | Memory Allocation Stability Under 4MB BufferedAmount Backpressure . . . . . . | **26** |
-| **7.4** | Packet Loss Tolerance Curve Under Simulated Network Drops (0-15%) . . . . . . | **27** |
+| **3.2** | Data Flow Diagram: Level 0 (Context Level Rendezvous) | **11** |
+| **3.3** | Data Flow Diagram: Level 1 (Peer Connection & Chunk Slicing) | **11** |
+| **3.4** | Data Flow Diagram: Level 2 (Detailed Cryptographic Pipeline) | **12** |
+| **4.1** | RTCPeerConnection Finite State Automaton Lifecycle | **13** |
+| **4.2** | End-to-End Signaling Handshake & Transfer Sequence Flow | **14** |
+| **4.3** | Cyber Cockpit Dual-Column Layout Architecture | **15** |
+| **5.1** | Radar Telemetry Canvas Visualizer Interface | **18** |
+| **5.2** | Interactive Drag-and-Drop In-Browser File Dropzone | **19** |
+| **5.3** | Zero-Knowledge SHA-256 Key Verification Fingerprint Badge | **20** |
+| **5.4** | Client-Side TF-IDF Document Intelligence Extractive Summary | **21** |
+| **7.1** | Empirical Throughput Comparison: PeerVault LAN vs. Cloud Relays | **25** |
+| **7.2** | Transfer Latency vs. Payload Size (10MB to 2GB) | **26** |
+| **7.3** | Memory Allocation Stability Under 4MB BufferedAmount Backpressure | **26** |
+| **7.4** | Packet Loss Tolerance Curve Under Simulated Network Drops (0-15%) | **27** |
 
 ---
 
@@ -158,17 +158,17 @@ List of Tables
 
 ---
 
-| **1** | State-of-the-Art P2P File Sharing Architectural Comparison . . . . . . | **8** |
+| **1** | State-of-the-Art P2P File Sharing Architectural Comparison | **8** |
 | --- | --- | --- |
-| **2** | Functional & Non-Functional Software Requirements Specification . . . . . . | **9** |
-| **3** | Dolev-Yao Threat Model & Mitigations in PeerVault AI . . . . . . | **10** |
-| **4** | Cybernetic Interface Color Tokens and Design Specifications . . . . . . | **15** |
-| **5** | Cryptographic Parameter & Cipher Suite Specifications . . . . . . | **24** |
-| **6** | Experimental Testbed Hardware and Network Specifications . . . . . . | **25** |
-| **7** | Transfer Duration Benchmarks: PeerVault LAN vs. Google Drive . . . . . . | **25** |
-| **8** | Cross-Platform Heterogeneous Transfer Velocity Matrix . . . . . . | **27** |
-| **9** | Chunk Size Sensitivity Analysis (16KB to 256KB) . . . . . . | **27** |
-| **10** | Project Objectives Achievement Status & Verification Matrix . . . . . . | **41** |
+| **2** | Functional & Non-Functional Software Requirements Specification | **9** |
+| **3** | Dolev-Yao Threat Model & Mitigations in PeerVault AI | **10** |
+| **4** | Cybernetic Interface Color Tokens and Design Specifications | **15** |
+| **5** | Cryptographic Parameter & Cipher Suite Specifications | **24** |
+| **6** | Experimental Testbed Hardware and Network Specifications | **25** |
+| **7** | Transfer Duration Benchmarks: PeerVault LAN vs. Google Drive | **25** |
+| **8** | Cross-Platform Heterogeneous Transfer Velocity Matrix | **27** |
+| **9** | Chunk Size Sensitivity Analysis (16KB to 256KB) | **27** |
+| **10** | Project Objectives Achievement Status & Verification Matrix | **41** |
 
 ---
 
@@ -194,79 +194,79 @@ Contents
 | **List of Tables** | **ix** |
 | **Abstract** | **x** |
 | **1 INTRODUCTION** | **1** |
-| 1.1 Background and Context . . . . . . . . . . . . . | 1 |
-| 1.1.1 The Centralized Cloud Dilemma in Local Area Networks . . . . | 1 |
-| 1.1.2 Campus Network Dynamics: The NIT Agartala Empirical Context . . . . | 2 |
-| 1.1.3 Link-Layer Threat Model and In-Transit Interception . . . . | 2 |
-| 1.2 Problem Statement . . . . . . . . . . . . . . . | 3 |
-| 1.2.1 Bandwidth Waste and In-Transit Delays . . . . . . | 3 |
-| 1.2.2 Intermediary Storage Risks and Quota Paywalls . . | 3 |
-| 1.3 Research Gap . . . . . . . . . . . . . . . . . . | 3 |
-| 1.3.1 Limitations of Existing Web-Based P2P Implementations . . . . | 3 |
-| 1.3.2 Intersection of Zero-Trust Security, Flow Control, and Local NLP . . . . | 4 |
-| 1.4 Objectives and Scope . . . . . . . . . . . . . . | 4 |
-| 1.4.1 Primary Engineering Objective . . . . . . . . . . | 4 |
-| 1.4.2 Specific Technical Objectives . . . . . . . . . . | 4 |
-| 1.5 Contributions . . . . . . . . . . . . . . . . . | 5 |
+| 1.1 Background and Context | 1 |
+| 1.1.1 The Centralized Cloud Dilemma in Local Area Networks | 1 |
+| 1.1.2 Campus Network Dynamics: The NIT Agartala Empirical Context | 2 |
+| 1.1.3 Link-Layer Threat Model and In-Transit Interception | 2 |
+| 1.2 Problem Statement | 3 |
+| 1.2.1 Bandwidth Waste and In-Transit Delays | 3 |
+| 1.2.2 Intermediary Storage Risks and Quota Paywalls | 3 |
+| 1.3 Research Gap | 3 |
+| 1.3.1 Limitations of Existing Web-Based P2P Implementations | 3 |
+| 1.3.2 Intersection of Zero-Trust Security, Flow Control, and Local NLP | 4 |
+| 1.4 Objectives and Scope | 4 |
+| 1.4.1 Primary Engineering Objective | 4 |
+| 1.4.2 Specific Technical Objectives | 4 |
+| 1.5 Contributions | 5 |
 | **2 LITERATURE REVIEW** | **5** |
-| 2.1 Evolution of Peer-to-Peer Architectures . . . . | 5 |
-| 2.1.1 First-Generation P2P: Centralized Indexing (Napster) . . . . | 5 |
-| 2.1.2 Second-Generation P2P: Query Flooding (Gnutella) . . . . | 6 |
-| 2.1.3 Third-Generation P2P: Distributed Hash Tables (BitTorrent) . . . . | 6 |
-| 2.2 WebRTC Standards & Architecture (RFC 8829 & RFC 8831) . . . . | 6 |
-| 2.2.1 JavaScript Session Establishment Protocol (JSEP) . . . . | 6 |
-| 2.2.2 SCTP 4-Way Handshake vs. TCP 3-Way Handshake Mechanics . . . . | 7 |
-| 2.3 NAT Traversal Dynamics: STUN, TURN, and ICE (RFC 8445) . . . . | 7 |
-| 2.3.1 Binding Discovery and STUN RFC 8489 Mechanics . . | 7 |
-| 2.3.2 Symmetric NAT Edge Cases and Traversal Topologies . . . . | 8 |
-| 2.4 Transport Layer Tradeoffs: TCP vs. UDP vs. SCTP . . . . | 8 |
-| 2.5 Cryptographic Foundations: ECDH NIST P-256 & AES-GCM . . . . | 8 |
-| 2.6 State-of-the-Art Comparative Analysis Matrix . . | 9 |
+| 2.1 Evolution of Peer-to-Peer Architectures | 5 |
+| 2.1.1 First-Generation P2P: Centralized Indexing (Napster) | 5 |
+| 2.1.2 Second-Generation P2P: Query Flooding (Gnutella) | 6 |
+| 2.1.3 Third-Generation P2P: Distributed Hash Tables (BitTorrent) | 6 |
+| 2.2 WebRTC Standards & Architecture (RFC 8829 & RFC 8831) | 6 |
+| 2.2.1 JavaScript Session Establishment Protocol (JSEP) | 6 |
+| 2.2.2 SCTP 4-Way Handshake vs. TCP 3-Way Handshake Mechanics | 7 |
+| 2.3 NAT Traversal Dynamics: STUN, TURN, and ICE (RFC 8445) | 7 |
+| 2.3.1 Binding Discovery and STUN RFC 8489 Mechanics | 7 |
+| 2.3.2 Symmetric NAT Edge Cases and Traversal Topologies | 8 |
+| 2.4 Transport Layer Tradeoffs: TCP vs. UDP vs. SCTP | 8 |
+| 2.5 Cryptographic Foundations: ECDH NIST P-256 & AES-GCM | 8 |
+| 2.6 State-of-the-Art Comparative Analysis Matrix | 9 |
 | **3 SYSTEM REQUIREMENTS & MATHEMATICAL FORMULATIONS** | **9** |
-| 3.1 Software Requirements Specification (SRS) . . . | 9 |
-| 3.2 Network Information Theory: Shannon-Hartley Wi-Fi Capacity . . . . | 10 |
-| 3.3 Bandwidth-Delay Product (BDP) and Flow Scaling Models . . . . | 10 |
-| 3.4 Threat Modeling under the Dolev-Yao Adversarial Paradigm . . . . | 11 |
-| 3.5 Queueing Theory: M/M/1/K Buffer Overflow Analysis . . . . | 11 |
-| 3.6 Zero-Trust LAN Micro-Segmentation & Boundary Models . . . . | 12 |
+| 3.1 Software Requirements Specification (SRS) | 9 |
+| 3.2 Network Information Theory: Shannon-Hartley Wi-Fi Capacity | 10 |
+| 3.3 Bandwidth-Delay Product (BDP) and Flow Scaling Models | 10 |
+| 3.4 Threat Modeling under the Dolev-Yao Adversarial Paradigm | 11 |
+| 3.5 Queueing Theory: M/M/1/K Buffer Overflow Analysis | 11 |
+| 3.6 Zero-Trust LAN Micro-Segmentation & Boundary Models | 12 |
 | **4 SYSTEM ARCHITECTURE & STRUCTURAL DESIGN** | **13** |
-| 4.1 Dual-Tier Architectural Model (Control Plane vs Data Plane) . . . . | 13 |
-| 4.2 Ephemeral WebSocket Signaling Server Design . . | 13 |
-| 4.3 RTCPeerConnection Finite State Automaton . . . . | 13 |
-| 4.4 Data Flow Diagrams (DFD Level 0, Level 1, Level 2) . . . . | 14 |
-| 4.5 End-to-End Handshake & Transfer Sequence Flow . . . . | 14 |
-| 4.6 UI/UX Design System: Cyber Neon Red & Metallic Gold Palette . . . . | 15 |
-| 4.7 Component Interaction Automata & Session Recovery Mechanics . . . . | 15 |
+| 4.1 Dual-Tier Architectural Model (Control Plane vs Data Plane) | 13 |
+| 4.2 Ephemeral WebSocket Signaling Server Design | 13 |
+| 4.3 RTCPeerConnection Finite State Automaton | 13 |
+| 4.4 Data Flow Diagrams (DFD Level 0, Level 1, Level 2) | 14 |
+| 4.5 End-to-End Handshake & Transfer Sequence Flow | 14 |
+| 4.6 UI/UX Design System: Cyber Neon Red & Metallic Gold Palette | 15 |
+| 4.7 Component Interaction Automata & Session Recovery Mechanics | 15 |
 | **5 IMPLEMENTATION OF THE EIGHT EDITIONS** | **16** |
-| 5.1 Edition 1: WebSocket Signaling Hub & Dynamic Room Dispatch . . . . | 16 |
-| 5.2 Edition 2: WebRTC DataChannel Integration & ICE Gathering . . . . | 17 |
-| 5.3 Edition 3: 64KB Sliced Binary Streaming & Reassembly Buffer . . . . | 18 |
-| 5.4 Edition 4: Adaptive Buffer Backpressure via bufferedAmountLow . . . . | 18 |
-| 5.5 Edition 5: Real-Time Radar Telemetry & Audio Synthesizer Engine . . . . | 19 |
-| 5.6 Edition 6: Ephemeral ECDH NIST P-256 Key Agreement . . . . | 20 |
-| 5.7 Edition 7: Zero-Knowledge AES-GCM-256 Payload Encryption . . . . | 21 |
-| 5.8 Edition 8: Client-Side TF-IDF NLP Document Summarizer . . . . | 21 |
+| 5.1 Edition 1: WebSocket Signaling Hub & Dynamic Room Dispatch | 16 |
+| 5.2 Edition 2: WebRTC DataChannel Integration & ICE Gathering | 17 |
+| 5.3 Edition 3: 64KB Sliced Binary Streaming & Reassembly Buffer | 18 |
+| 5.4 Edition 4: Adaptive Buffer Backpressure via bufferedAmountLow | 18 |
+| 5.5 Edition 5: Real-Time Radar Telemetry & Audio Synthesizer Engine | 19 |
+| 5.6 Edition 6: Ephemeral ECDH NIST P-256 Key Agreement | 20 |
+| 5.7 Edition 7: Zero-Knowledge AES-GCM-256 Payload Encryption | 21 |
+| 5.8 Edition 8: Client-Side TF-IDF NLP Document Summarizer | 21 |
 | **6 CRYPTOGRAPHIC PROTOCOLS & SECURITY VERIFICATION** | **22** |
-| 6.1 ECDH NIST P-256 Key Agreement Formalism . . . . | 22 |
-| 6.2 Elliptic Curve Group Law & Point Arithmetic Proofs . . . . | 22 |
-| 6.3 AES-GCM-256 Cipher Block Mechanics & 96-Bit Nonce Uniqueness . . . . | 23 |
-| 6.4 Galois Field Polynomial Multiplication Formalism (GHASH) . . . . | 23 |
-| 6.5 Replay Attack Prevention and Tamper Detection Metrics . . . . | 24 |
-| 6.6 V8 Memory Hygiene & Zero-Knowledge Security Audit . . . . | 24 |
-| 6.7 Cryptographic Parameter & Cipher Suite Specifications . . . . | 24 |
-| 6.8 Cryptographic Nonce Collision Bounds & Birthday Proof . . . . | 25 |
+| 6.1 ECDH NIST P-256 Key Agreement Formalism | 22 |
+| 6.2 Elliptic Curve Group Law & Point Arithmetic Proofs | 22 |
+| 6.3 AES-GCM-256 Cipher Block Mechanics & 96-Bit Nonce Uniqueness | 23 |
+| 6.4 Galois Field Polynomial Multiplication Formalism (GHASH) | 23 |
+| 6.5 Replay Attack Prevention and Tamper Detection Metrics | 24 |
+| 6.6 V8 Memory Hygiene & Zero-Knowledge Security Audit | 24 |
+| 6.7 Cryptographic Parameter & Cipher Suite Specifications | 24 |
+| 6.8 Cryptographic Nonce Collision Bounds & Birthday Proof | 25 |
 | **7 EXPERIMENTAL BENCHMARKS & EVALUATION** | **25** |
-| 7.1 Experimental Testbed Configuration and Hardware Specs . . . . | 25 |
-| 7.2 Throughput Performance: PeerVault AI vs. Cloud Relays . . . . | 25 |
-| 7.3 Memory Footprint & RAM Stability under 4MB Backpressure . . . . | 26 |
-| 7.4 Packet Loss Resilience & Network Jitter Tolerance . . . . | 26 |
-| 7.5 Heterogeneous Cross-OS Goodput Matrix . . . . . | 27 |
-| 7.6 Chunk Size Sensitivity Analysis . . . . . . . . | 27 |
+| 7.1 Experimental Testbed Configuration and Hardware Specs | 25 |
+| 7.2 Throughput Performance: PeerVault AI vs. Cloud Relays | 25 |
+| 7.3 Memory Footprint & RAM Stability under 4MB Backpressure | 26 |
+| 7.4 Packet Loss Resilience & Network Jitter Tolerance | 26 |
+| 7.5 Heterogeneous Cross-OS Goodput Matrix | 27 |
+| 7.6 Chunk Size Sensitivity Analysis | 27 |
 | **8 COMPREHENSIVE FACULTY VIVA VOCE DEFENSE** | **28** |
 | **9 CONCLUSION AND FUTURE WORK** | **40** |
-| 9.1 Summary of Technical Contributions . . . . . . . | 40 |
-| 9.2 Limitations and Edge Case Constraints . . . . . | 41 |
-| 9.3 Future Research Roadmap . . . . . . . . . . . . | 41 |
+| 9.1 Summary of Technical Contributions | 40 |
+| 9.2 Limitations and Edge Case Constraints | 41 |
+| 9.3 Future Research Roadmap | 41 |
 | **REFERENCES & STANDARDS BIBLIOGRAPHY** | **42** |
 | **APPENDIX A: Production Signaling Server Source (server.js)** | **45** |
 | **APPENDIX B: WebRTC Cryptographic Pipeline Source (app.js)** | **46** |
@@ -350,9 +350,7 @@ Third-generation protocols centered around BitTorrent (2003) and Kademlia Distri
 
 ## 2.2 WebRTC Standards & Architecture (RFC 8829 & RFC 8831)
 
-The standardization of Web Real-Time Communications (WebRTC) by the World Wide Web Consortium (W3C) and the Internet Engineering Task Force (IETF) marked a historic milestone in distributed systems. For the first time, web browsers gained native capabilities to establish direct peer-to-peer communication channels without requiring third-party plugins, binary executables, or Java applets.
-
-The WebRTC protocol suite is defined across several landmark RFCs: RFC 8829 specifies the JavaScript Session Establishment Protocol (JSEP), which codifies the Offer/Answer signaling state machine; RFC 8831 specifies the WebRTC Data Channel, which standardizes non-media data exchange; and RFC 8261 specifies Datagram Transport Layer Security (DTLS) encapsulation of Stream Control Transmission Protocol (SCTP) over User Datagram Protocol (UDP).
+Web Real-Time Communications (WebRTC) provides direct peer-to-peer data channels between web browsers without external plugins or native binaries. The protocol suite is defined across three foundational RFCs: RFC 8829 specifies the JavaScript Session Establishment Protocol (JSEP) for offer and answer negotiation; RFC 8831 specifies the WebRTC Data Channel; and RFC 8261 specifies Datagram Transport Layer Security (DTLS) encapsulation of Stream Control Transmission Protocol (SCTP) over User Datagram Protocol (UDP).
 
 Unlike audio/video tracks that use the Real-time Transport Protocol (RTP/SRTP), the WebRTC DataChannel stack uses SCTP layered over DTLS/UDP. This architectural layering provides critical advantages:
 
@@ -412,7 +410,7 @@ Selecting an appropriate transport-layer substrate is critical for bulk file str
 
 ## 2.7 Cryptographic Foundations: ECDH NIST P-256 & AES-GCM-256
 
-While WebRTC enforces transport-layer DTLS encryption between peer endpoints, relying solely on transport encryption leaves a critical security gap: any compromised relay or man-in-the-middle vector could potentially intercept raw frames. To provide absolute **zero-knowledge security**, PeerVault AI layers an application-tier cryptographic envelope on top of the DataChannel.
+WebRTC provides transport-layer DTLS encryption between endpoints. To ensure that data remains confidential even when traversing untrusted relays, PeerVault adds an application-layer cryptographic envelope on top of the DataChannel.
 
 Peers execute an Elliptic Curve Diffie-Hellman (ECDH) key exchange over the NIST P-256 elliptic curve (defined by the equation y^2 = x^3 - 3x + b mod p). Each client generates an ephemeral keypair inside the browser's hardware-accelerated Web Cryptography API sandbox. The derived 256-bit shared master secret is passed into an HMAC-based Extract-and-Expand Key Derivation Function (HKDF) to yield symmetric encryption keys.
 

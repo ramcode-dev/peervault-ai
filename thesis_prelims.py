@@ -251,18 +251,17 @@ def build_preliminaries(styles):
 
     fig_data = []
     for f_num, f_title, f_page in figures:
-        dots = ". " * int((50 - len(f_title)) / 2)
-        if len(dots) < 6: dots = ". . . . . ."
         fig_data.append([
             Paragraph(f"<b>{f_num}</b>", styles['LaTeXTableCellBold']),
-            Paragraph(f"{f_title} {dots}", styles['LaTeXTableCell']),
+            Paragraph(f"{f_title}", styles['LaTeXTableCell']),
             Paragraph(f"<b>{f_page}</b>", styles['LaTeXTableCellBold'])
         ])
     t_fig = Table(fig_data, colWidths=[35, 395, 40])
     t_fig.setStyle(TableStyle([
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('TOPPADDING', (0,0), (-1,-1), 3),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 3),
+        ('TOPPADDING', (0,0), (-1,-1), 4),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
+        ('LINEBELOW', (0,0), (-1,-1), 0.3, colors.HexColor("#E5E7EB")),
     ]))
     flowables.append(t_fig)
     flowables.append(PageBreak())
@@ -290,18 +289,17 @@ def build_preliminaries(styles):
 
     tab_data = []
     for t_num, t_title, t_page in tables:
-        dots = ". " * int((50 - len(t_title)) / 2)
-        if len(dots) < 6: dots = ". . . . . ."
         tab_data.append([
             Paragraph(f"<b>{t_num}</b>", styles['LaTeXTableCellBold']),
-            Paragraph(f"{t_title} {dots}", styles['LaTeXTableCell']),
+            Paragraph(f"{t_title}", styles['LaTeXTableCell']),
             Paragraph(f"<b>{t_page}</b>", styles['LaTeXTableCellBold'])
         ])
     t_tab = Table(tab_data, colWidths=[35, 395, 40])
     t_tab.setStyle(TableStyle([
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('TOPPADDING', (0,0), (-1,-1), 3),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 3),
+        ('TOPPADDING', (0,0), (-1,-1), 4),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
+        ('LINEBELOW', (0,0), (-1,-1), 0.3, colors.HexColor("#E5E7EB")),
     ]))
     flowables.append(t_tab)
     flowables.append(PageBreak())
@@ -453,18 +451,14 @@ def build_preliminaries(styles):
             ])
         elif level == 2:
             # Section
-            dots = ". " * int((52 - len(title)) / 2)
-            if len(dots) < 4: dots = ". . . ."
             t_data.append([
-                Paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;{title} {dots}", styles['LaTeXTOCSec']),
+                Paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;{title}", styles['LaTeXTOCSec']),
                 Paragraph(f"{pg}", styles['LaTeXTOCPage'])
             ])
         elif level == 3:
             # Subsection
-            dots = ". " * int((56 - len(title)) / 2)
-            if len(dots) < 4: dots = ". . . ."
             t_data.append([
-                Paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{title} {dots}", styles['LaTeXTOCSubSec']),
+                Paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{title}", styles['LaTeXTOCSubSec']),
                 Paragraph(f"{pg}", styles['LaTeXTOCPage'])
             ])
 

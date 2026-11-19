@@ -145,11 +145,9 @@ def build_chapters_1_and_2(styles):
     flowables.append(Spacer(1, 10))
     flowables.append(Paragraph("2.2 WebRTC Standards &amp; Architecture (RFC 8829 &amp; RFC 8831)", styles['SecTitle']))
     flowables.append(Paragraph(
-        "The standardization of Web Real-Time Communications (WebRTC) by the World Wide Web Consortium (W3C) and the Internet Engineering Task Force (IETF) marked a historic milestone in distributed systems. For the first time, web browsers gained native capabilities to establish direct peer-to-peer communication channels without requiring third-party plugins, binary executables, or Java applets.",
-        styles['Body']
-    ))
-    flowables.append(Paragraph(
-        "The WebRTC protocol suite is defined across several landmark RFCs: RFC 8829 specifies the JavaScript Session Establishment Protocol (JSEP), which codifies the Offer/Answer signaling state machine; RFC 8831 specifies the WebRTC Data Channel, which standardizes non-media data exchange; and RFC 8261 specifies Datagram Transport Layer Security (DTLS) encapsulation of Stream Control Transmission Protocol (SCTP) over User Datagram Protocol (UDP).",
+        "Web Real-Time Communications (WebRTC) provides direct peer-to-peer data channels between web browsers without external plugins or native binaries. "
+        "The protocol suite is defined across three foundational RFCs: RFC 8829 specifies the JavaScript Session Establishment Protocol (JSEP) for offer and answer negotiation; "
+        "RFC 8831 specifies the WebRTC Data Channel; and RFC 8261 specifies Datagram Transport Layer Security (DTLS) encapsulation of Stream Control Transmission Protocol (SCTP) over User Datagram Protocol (UDP).",
         styles['Body']
     ))
     flowables.append(Paragraph(
@@ -243,7 +241,8 @@ def build_chapters_1_and_2(styles):
     flowables.append(Spacer(1, 10))
     flowables.append(Paragraph("2.7 Cryptographic Foundations: ECDH NIST P-256 &amp; AES-GCM-256", styles['SecTitle']))
     flowables.append(Paragraph(
-        "While WebRTC enforces transport-layer DTLS encryption between peer endpoints, relying solely on transport encryption leaves a critical security gap: any compromised relay or man-in-the-middle vector could potentially intercept raw frames. To provide absolute <b>zero-knowledge security</b>, PeerVault AI layers an application-tier cryptographic envelope on top of the DataChannel.",
+        "WebRTC provides transport-layer DTLS encryption between endpoints. "
+        "To ensure that data remains confidential even when traversing untrusted relays, PeerVault adds an application-layer cryptographic envelope on top of the DataChannel.",
         styles['Body']
     ))
     flowables.append(Paragraph(
