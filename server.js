@@ -82,7 +82,22 @@ app.use(
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// Anti-caching headers so client updates reflect immediately on all browsers/devices
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
+
+app.use(
+  express.static(path.join(__dirname, 'public'), {
+    etag: false,
+    maxAge: 0,
+    lastModified: false,
+  })
+);
 
 // ─── REST Endpoints ─────────────────────────────────────────────────────────
 
